@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace Rezepte.Models;
 
-namespace Rezepte.Models;
-
-[Table("products")]
-public class Product
+public class ProductUpdateDto
 {
     public Guid Id { get; set; }
     
-    public string Name { get; set; }
+    public string? Name { get; set; }
     
     public decimal? Kcal { get; set; }
     
@@ -22,8 +19,4 @@ public class Product
     public decimal? Sugar { get; set; }
     
     public decimal? Salt { get; set; }
-    
-    public DateTime CreatedAt { get; set; }
-    
-    public DateTime? ModifiedAt { get; set; }
 }

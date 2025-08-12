@@ -14,11 +14,15 @@ public static class ProductUnitQuery
 
     public static ProductUnit? GetProductUnit(AppDbContext dbContext, Guid id)
     {
-        return dbContext.ProductUnits.FirstOrDefault(unit => unit.Id == id);
+        return dbContext.ProductUnits
+            .Include(unit => unit.RecipeProduct )
+            .FirstOrDefault(unit => unit.Id == id);
     }
 
     public static ProductUnit? GetProductUnitByProductId(AppDbContext dbContext, Guid productId)
     {
-        return dbContext.ProductUnits.FirstOrDefault(unit => unit.ProductId == productId);
+        return dbContext.ProductUnits
+            .Include(unit => unit.RecipeProduct )
+            .FirstOrDefault(unit => unit.ProductId == productId);
     }
 }

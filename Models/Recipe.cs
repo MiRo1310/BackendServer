@@ -14,11 +14,10 @@ public class Recipe
     public DateTime CreatedAt { get; set; }
     
     public DateTime? ModifiedAt { get; set; }
-    
-    public ICollection<RecipeHeaders>? Headers { get; set; }
-    
-    public ICollection<RecipeProduct>? RecipeProducts { get; set; }
-    
-    
-    public ICollection<RecipeImage>? RecipeImages { get; set; }
+
+    public ICollection<RecipeHeaders> Headers { get; set; } = [];
+
+    public ICollection<RecipeProduct> RecipeProducts { get; set; } = [];
+
+    public ICollection<RecipeImage> RecipeImages { get; set; } = [];
 }

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Routing.Constraints;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Rezepte.Models;
 
-public class ProductCategories
+[Table("productCategories")]
+public class ProductCategory
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

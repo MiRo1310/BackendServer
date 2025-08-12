@@ -19,7 +19,7 @@ public class ProductUnit
     
     public DateTime? ModifiedAt { get; set; }
     
-    public Product? Product { get; set; }
+    public Product Product { get; set; }
     
-    public RecipeProduct? RecipeProduct { get; set; }
+    public RecipeProduct RecipeProduct { get; set; }
 }

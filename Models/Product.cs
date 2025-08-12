@@ -26,6 +26,10 @@ public class Product
     public DateTime CreatedAt { get; set; }
     
     public DateTime? ModifiedAt { get; set; }
-   
-    public ICollection<ProductUnit>? ProductUnits { get; set; }
+    
+    public decimal Amount { get; set; }
+    
+    public string Unit { get; set; }
+
+    public ICollection<ProductUnit> ProductUnits { get; set; } = [];
 }

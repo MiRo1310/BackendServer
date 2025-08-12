@@ -16,5 +16,5 @@ public class RecipeTextAreas
     
     public DateTime ModifiedAt { get; set; }
     
-    public Recipe? Recipe { get; set; }
+    public Recipe Recipe { get; set; }
 }

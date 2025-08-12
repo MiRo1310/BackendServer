@@ -18,6 +18,5 @@ public class RecipeHeaders
     
     public DateTime ModifiedAt { get; set; }
     
-    [ForeignKey("recipeId")]
-    public Recipe? Recipe { get; set; }
+    public Recipe Recipe { get; set; }
 }

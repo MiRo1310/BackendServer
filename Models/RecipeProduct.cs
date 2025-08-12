@@ -28,10 +28,10 @@ public class RecipeProduct
     public decimal Factor { get; set; }
     
     public Recipe? Recipe { get; set; }
-    
-    public ICollection<ProductUnit> ProductUnits { get; set; }
-    
-    public ICollection<RecipeTextAreas> RecipeTextAreas { get; set; }
-    
-    public ICollection<RecipeHeaderProducts> RecipeHeaderProducts { get; set; }
+
+    public ICollection<ProductUnit> ProductUnits { get; set; } = [];
+
+    public ICollection<RecipeTextAreas> RecipeTextAreas { get; set; } = [];
+
+    public ICollection<RecipeHeaderProducts> RecipeHeaderProducts { get; set; } = [];
 }

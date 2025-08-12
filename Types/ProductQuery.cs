@@ -16,6 +16,8 @@ public static class ProductQuery
 
     public static Product? GetProduct(AppDbContext dbContext, Guid id)
     {
-        return dbContext.Products.FirstOrDefault(product => product.Id == id);
+        return dbContext.Products
+            .Include(product => product.ProductUnits )
+            .FirstOrDefault(product => product.Id == id);
     }
 }

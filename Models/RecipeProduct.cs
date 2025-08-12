@@ -1,5 +1,8 @@
-﻿namespace Rezepte.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Rezepte.Models;
+
+[Table("recipesProducts")]
 public class RecipeProduct
 {
     public Guid Id { get; set; }
@@ -23,4 +26,12 @@ public class RecipeProduct
     public DateTime ModifiedAt { get; set; }
     
     public decimal Factor { get; set; }
+    
+    public Recipe? Recipe { get; set; }
+    
+    public ICollection<ProductUnit> ProductUnits { get; set; }
+    
+    public ICollection<RecipeTextAreas> RecipeTextAreas { get; set; }
+    
+    public ICollection<RecipeHeaderProducts> RecipeHeaderProducts { get; set; }
 }

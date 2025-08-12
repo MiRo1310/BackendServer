@@ -1,4 +1,6 @@
-﻿namespace Rezepte.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Rezepte.Models;
 
 public class RecipeTextAreas
 {
@@ -13,4 +15,6 @@ public class RecipeTextAreas
     public DateTime CreatedAt { get; set; }
     
     public DateTime ModifiedAt { get; set; }
+    
+    public Recipe? Recipe { get; set; }
 }

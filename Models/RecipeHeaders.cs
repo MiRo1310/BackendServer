@@ -1,4 +1,8 @@
-﻿namespace Rezepte.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Rezepte.Models;
+
+[Table("recipesHeaders")]
 
 public class RecipeHeaders
 {
@@ -13,4 +17,7 @@ public class RecipeHeaders
     public DateTime CreatedAt { get; set; }
     
     public DateTime ModifiedAt { get; set; }
+    
+    [ForeignKey("recipeId")]
+    public Recipe? Recipe { get; set; }
 }

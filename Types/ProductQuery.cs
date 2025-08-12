@@ -10,8 +10,8 @@ public static class ProductQuery
 {
     public static IQueryable<Product> GetProducts(AppDbContext dbContext)
     {
-        return dbContext.Products;
-        // .Include(product => product.ProductUnits );
+        return dbContext.Products
+        .Include(product => product.ProductUnits );
     }
 
     public static Product? GetProduct(AppDbContext dbContext, Guid id)

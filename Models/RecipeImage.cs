@@ -1,4 +1,8 @@
-﻿namespace Rezepte.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Rezepte.Models;
+
+[Table("recipeImages")]
 
 public class RecipeImage
 {
@@ -11,4 +15,6 @@ public class RecipeImage
     public DateTime CreatedAt { get; set; }
     
     public DateTime ModifiedAt { get; set; }
+    
+    public Recipe? Recipe { get; set; }
 }

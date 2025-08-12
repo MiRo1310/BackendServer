@@ -26,7 +26,6 @@ public class Product
     public DateTime CreatedAt { get; set; }
     
     public DateTime? ModifiedAt { get; set; }
-    
-    // [ForeignKey(("ProductId"))]
-    // public ICollection<ProductUnit>? ProductUnits { get; set; }
+   
+    public ICollection<ProductUnit>? ProductUnits { get; set; }
 }

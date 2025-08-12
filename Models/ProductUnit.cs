@@ -18,4 +18,8 @@ public class ProductUnit
     public DateTime CreatedAt { get; set; }
     
     public DateTime? ModifiedAt { get; set; }
+    
+    public Product? Product { get; set; }
+    
+    public RecipeProduct? RecipeProduct { get; set; }
 }

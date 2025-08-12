@@ -13,4 +13,6 @@ public class RecipeHeaderProducts
     public DateTime CreatedAt { get; set; }
     
     public DateTime ModifiedAt { get; set; }
+    
+    public RecipeProduct RecipeProduct { get; set; }
 }

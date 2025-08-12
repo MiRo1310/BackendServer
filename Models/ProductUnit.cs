@@ -1,6 +1,9 @@
-﻿namespace Rezepte.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class ProductUnits
+namespace Rezepte.Models;
+
+[Table("productUnits")]
+public class ProductUnit
 {
     public Guid Id { get; set; }
     
@@ -14,5 +17,5 @@ public class ProductUnits
     
     public DateTime CreatedAt { get; set; }
     
-    public DateTime ModifiedAt { get; set; }
+    public DateTime? ModifiedAt { get; set; }
 }

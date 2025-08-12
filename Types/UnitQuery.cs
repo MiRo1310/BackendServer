@@ -4,7 +4,7 @@ using Rezepte.Models;
 namespace Rezepte.Types;
 
 [QueryType]
-public static class UnitsQuery
+public static class UnitQuery
 {
     public static IQueryable<Unit> GetUnits(AppDbContext dbContext)
     {

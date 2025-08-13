@@ -1,6 +1,10 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using Rezepte.Data;
 
-builder.AddGraphQL().AddTypes();
+var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.AddGraphQL().AddTypes().ModifyRequestOptions(options => options.IncludeExceptionDetails = true);
 
 var app = builder.Build();
 

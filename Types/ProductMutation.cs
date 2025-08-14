@@ -5,7 +5,7 @@ namespace Rezepte.Types;
 
 [MutationType]
 
-public class ProductMutation
+public static class ProductMutation
 {
     public static Product CreateProduct(AppDbContext dbContext, ProductCreateDto dto)
     {
@@ -21,7 +21,8 @@ public class ProductMutation
             Protein = dto.Protein,
             Salt = dto.Salt,
             Sugar = dto.Sugar,
-
+            Amount = dto.Amount,
+            Unit = dto.Unit ??""
         };
 
         dbContext.Products.Add(product);

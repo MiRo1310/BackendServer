@@ -15,4 +15,6 @@ public class RecipeHeaderProducts
     public DateTime ModifiedAt { get; set; }
     
     public RecipeProduct RecipeProduct { get; set; }
+
+    public Recipe Recipe { get; set; }
 }

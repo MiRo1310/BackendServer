@@ -20,4 +20,9 @@ public class Recipe
     public ICollection<RecipeProduct> RecipeProducts { get; set; } = [];
 
     public ICollection<RecipeImage> RecipeImages { get; set; } = [];
+    
+    public ICollection<RecipeTextAreas> RecipeTextAreas { get; set; } = [];
+    
+    
+    public ICollection<RecipeHeaderProducts> RecipeHeaderProducts { get; set; } = [];
 }

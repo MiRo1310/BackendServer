@@ -2,6 +2,8 @@
 
 namespace Rezepte.Models;
 
+[Table("recipesTextAreas")]
+
 public class RecipeTextAreas
 {
     public Guid Id { get; set; }
@@ -16,5 +18,5 @@ public class RecipeTextAreas
     
     public DateTime ModifiedAt { get; set; }
     
-    public Recipe Recipe { get; set; }
+    public Recipe? Recipe { get; set; }
 }

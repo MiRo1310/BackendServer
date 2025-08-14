@@ -5,7 +5,7 @@ namespace Rezepte.Types;
 [MutationType]
 public static class RecipeMutation
 {
-    public static bool DeleteRecipe(AppDbContext dbContext, Guid id)
+    public static bool RemoveRecipe(AppDbContext dbContext, Guid id)
     {
         var recipe = dbContext.Recipes.FirstOrDefault(recipe => recipe.Id == id);
         if (recipe is null)

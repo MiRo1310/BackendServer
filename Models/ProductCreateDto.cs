@@ -17,4 +17,10 @@ public class ProductCreateDto
     public decimal? Sugar { get; set; }
     
     public decimal? Salt { get; set; }
+    
+    public decimal Amount { get; set; }
+    
+    public string? Unit { get; set; }
+    
+    
 }

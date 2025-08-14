@@ -13,13 +13,13 @@ public class Product
     
     public decimal? Fat { get; set; }
     
+    public decimal? Sugar { get; set; }
+    
     public decimal? Carbs { get; set; }
     
     public decimal? Protein { get; set; }
     
     public Guid? Category { get; set; }
-    
-    public decimal? Sugar { get; set; }
     
     public decimal? Salt { get; set; }
     
@@ -30,6 +30,6 @@ public class Product
     public decimal Amount { get; set; }
     
     public string Unit { get; set; }
-
+    
     public ICollection<ProductUnit> ProductUnits { get; set; } = [];
 }

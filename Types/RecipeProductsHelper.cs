@@ -27,7 +27,7 @@ public static class RecipeProductsHelper
                     GroupPosition = recipeProduct.GroupPosition
                 };
 
-                recipe.RecipeProducts.Add(product);
+                dbContext.RecipeProducts.Add(product);
                 continue;
             }
 

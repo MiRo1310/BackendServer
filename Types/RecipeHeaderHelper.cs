@@ -22,7 +22,7 @@ public static class RecipeHeaderHelper
                     RecipeId = recipe.Id,
                     Text = recipeHeader.Text
                 };
-                recipe.Headers.Add(header);
+                dbContext.RecipeHeaders.Add(header);
                 continue;
             }
 

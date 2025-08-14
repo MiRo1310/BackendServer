@@ -8,7 +8,7 @@ public class RecipeCreateDto
 
     public ICollection<RecipeHeaderCreateOrUpdateDto?>? RecipeHeaders { get; set; }
 
-    public ICollection<RecipeTextAreaCreateDto?>? RecipeTextAreas { get; set; }
+    public ICollection<RecipeTextAreaCreateOrUpdateDto?>? RecipeTextAreas { get; set; }
 
     public ICollection<RecipeHeaderProductCreateOrUpdateDto?>? RecipeHeaderProducts { get; set; }
 

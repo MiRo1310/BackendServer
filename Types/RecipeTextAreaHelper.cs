@@ -5,8 +5,8 @@ namespace Rezepte.Types;
 
 public static class RecipeTextAreaHelper
 {
-    public static void ProcessProducts(AppDbContext dbContext, Recipe recipe,
-        ICollection<RecipeTextAreaCreateDto?> textAreas)
+    public static void ProcessTextareas(AppDbContext dbContext, Recipe recipe,
+        ICollection<RecipeTextAreaCreateOrUpdateDto?> textAreas)
     {
         foreach (var textArea in textAreas)
         {
@@ -22,7 +22,7 @@ public static class RecipeTextAreaHelper
                     Text = textArea.Text
                 };
                 
-                recipe.RecipeTextAreas.Add(text);
+                dbContext.RecipeTextAreas.Add(text);
                 continue;
             }
 

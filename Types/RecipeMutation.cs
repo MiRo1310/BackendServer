@@ -25,7 +25,7 @@ public static class RecipeMutation
             Name = dto.Name,
             Portions = dto.Portions
         };
-       
+
         if (dto.RecipeHeaders != null)
             foreach (var recipeHeader in dto.RecipeHeaders)
             {
@@ -103,6 +103,32 @@ public static class RecipeMutation
         recipe.Name = dto.Name ?? recipe.Name;
         recipe.Portions = dto.Portions ?? recipe.Portions;
         recipe.ModifiedAt = DateTime.UtcNow;
+
+        if (dto.RecipeHeaders != null)
+            foreach (var recipeHeader in dto.RecipeHeaders)
+            {
+                if (recipeHeader.Id is null)
+                {
+                    var header = new RecipeHeader
+                    {
+                        CreatedAt = DateTime.UtcNow,
+                        Id = Guid.NewGuid(),
+                        Position = recipeHeader.Position,
+                        RecipeId = recipe.Id,
+                        Text = recipeHeader.Text
+                    };
+                    recipe.Headers.Add(header);
+                }
+
+                if (recipeHeader.Id is not null)
+                {
+                    var header = dbContext.RecipeHeaders.FirstOrDefault(header => header.Id == recipeHeader.Id);
+
+                    header.Position = recipeHeader.Position;
+                    header.Text = recipeHeader.Text;
+                    header.ModifiedAt = DateTime.UtcNow;
+                }
+            }
 
         dbContext.SaveChanges();
         return recipe;

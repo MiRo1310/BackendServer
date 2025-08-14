@@ -26,6 +26,7 @@ public static class ProductMutation
         };
 
         dbContext.Products.Add(product);
+        dbContext.SaveChanges();
         return product;
     }
 

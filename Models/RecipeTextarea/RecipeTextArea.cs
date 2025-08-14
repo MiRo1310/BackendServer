@@ -2,9 +2,9 @@
 
 namespace Rezepte.Models;
 
-[Table("recipesHeaders")]
+[Table("recipesTextAreas")]
 
-public class RecipeHeaders
+public class RecipeTextArea
 {
     public Guid Id { get; set; }
     
@@ -13,10 +13,10 @@ public class RecipeHeaders
     public string Text { get; set; }
     
     public int Position { get; set; }
-    
+
     public DateTime CreatedAt { get; set; }
     
-    public DateTime ModifiedAt { get; set; }
+    public DateTime? ModifiedAt { get; set; }
     
-    public Recipe Recipe { get; set; }
+    public Recipe? Recipe { get; set; }
 }

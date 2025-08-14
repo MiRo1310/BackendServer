@@ -12,8 +12,6 @@ public static class RecipeProductsQuery
     public static IQueryable<RecipeProduct> GetRecipeProducts(AppDbContext dbContext)
     {
         return dbContext.RecipeProducts
-            .Include(product => product.RecipeHeaderProducts)
-            .Include(product => product.RecipeTextAreas)
             .Include(product => product.ProductUnits);
     }
 }

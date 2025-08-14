@@ -1,9 +1,7 @@
 ﻿namespace Rezepte.Models;
 
-public class RecipeTextAreaCreateDto
+public class RecipeHeaderProductUpdateDto
 {
-    public Guid Id { get; set; }
-    
     public string Text { get; set; }
     
     public int Position { get; set; }

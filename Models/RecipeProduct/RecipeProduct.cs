@@ -13,7 +13,7 @@ public class RecipeProduct
     
     public string Description { get; set; }
     
-    public decimal Amount { get; set; }
+    public decimal? Amount { get; set; }
     
     public string Unit { get; set; }
     
@@ -23,15 +23,12 @@ public class RecipeProduct
     
     public DateTime CreatedAt { get; set; }
     
-    public DateTime ModifiedAt { get; set; }
+    public DateTime? ModifiedAt { get; set; }
     
-    public decimal Factor { get; set; }
+    public decimal? Factor { get; set; }
     
     public Recipe? Recipe { get; set; }
 
+    [ForeignKey("productId")]
     public ICollection<ProductUnit> ProductUnits { get; set; } = [];
-
-    public ICollection<RecipeTextAreas> RecipeTextAreas { get; set; } = [];
-
-    public ICollection<RecipeHeaderProducts> RecipeHeaderProducts { get; set; } = [];
 }

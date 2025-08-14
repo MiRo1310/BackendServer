@@ -2,19 +2,21 @@
 
 namespace Rezepte.Models;
 
-[Table("recipeImages")]
+[Table("recipesHeaders")]
 
-public class RecipeImage
+public class RecipeHeader
 {
     public Guid Id { get; set; }
     
-    public string Url {get; set;}
-    
     public Guid RecipeId { get; set; }
+    
+    public string Text { get; set; }
+    
+    public int Position { get; set; }
     
     public DateTime CreatedAt { get; set; }
     
-    public DateTime ModifiedAt { get; set; }
+    public DateTime? ModifiedAt { get; set; }
     
-    public Recipe? Recipe { get; set; }
+    public Recipe Recipe { get; set; }
 }

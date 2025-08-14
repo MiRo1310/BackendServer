@@ -6,7 +6,7 @@ public class RecipeProductsCreateDto
     
     public Guid? RecipeId { get; set; }
     
-    public Guid? ProductId { get; set; }
+    public Guid ProductId { get; set; }
     
     public string? Description { get; set; }
     
@@ -14,9 +14,9 @@ public class RecipeProductsCreateDto
     
     public string? Unit { get; set; }
     
-    public int? ProductPosition { get; set; }
+    public int ProductPosition { get; set; }
     
-    public int? GroupPosition { get; set; }
+    public int GroupPosition { get; set; }
     
     public decimal? Factor { get; set; }
 }

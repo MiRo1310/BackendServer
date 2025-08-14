@@ -11,7 +11,7 @@ public class ProductUnit
     
     public int DefaultUnit { get; set; }
     
-    public decimal Amount { get; set; }
+    public decimal? Amount { get; set; }
     
     public Guid ProductId { get; set; }
     
@@ -20,6 +20,4 @@ public class ProductUnit
     public DateTime? ModifiedAt { get; set; }
     
     public Product? Product { get; set; }
-    
-    public RecipeProduct? RecipeProduct { get; set; }
 }

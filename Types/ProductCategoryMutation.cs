@@ -24,7 +24,7 @@ public static class ProductCategoryMutation
                 Id = Guid.NewGuid(),
                 Name = dto.Name
             };
-            dbContext.Add(productCategory);
+            dbContext.ProductCategories.Add(productCategory);
             dbContext.SaveChanges();
 
             return new ResponseObject<ProductCategory>(productCategory,ErrorCode.Success,false );
@@ -45,7 +45,7 @@ public static class ProductCategoryMutation
         }
 
 
-        public static ProductCategory? UpdateProductCategory(AppDbContext dbContext, ProductCategoriesUpdateDto dto)
+        public static ProductCategory? UpdateProductCategory(AppDbContext dbContext, ProductCategoryUpdateDto dto)
         {
             var productCategory = dbContext.ProductCategories.FirstOrDefault(category => category.Id == dto.Id);
 

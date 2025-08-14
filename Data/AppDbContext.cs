@@ -14,15 +14,15 @@ public class AppDbContext:DbContext
     
     public DbSet<ProductUnit> ProductUnits { get; set; }
     
-    public DbSet<RecipeHeaderProducts> ProductHeaders { get; set; }
+    public DbSet<RecipeHeaderProduct> ProductHeaders { get; set; }
     
     public DbSet<RecipeProduct> RecipeProducts { get; set; }
     
-    public DbSet<RecipeImage> RecipeImages { get; set; }
-    
     public DbSet<ProductCategory> ProductCategories { get; set; }
     
-    public DbSet<RecipeTextAreas> RecipeTextAreas { get; set; }
+    public DbSet<RecipeTextArea> RecipeTextAreas { get; set; }
+    
+   public DbSet<RecipeHeader> RecipeHeaders { get; set; }
     
     
     

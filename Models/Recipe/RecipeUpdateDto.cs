@@ -7,13 +7,12 @@ public class RecipeUpdateDto
     public string? Name { get; set; }
 
     public int? Portions { get; set; }
-    
-    public ICollection<RecipeHeaderCreateOrUpdateDto?>? RecipeHeaders { get; set; } 
-    
-    public ICollection<RecipeTextAreaUpdateDto?>? RecipeTextAreas { get; set; }
-    
-    public ICollection<RecipeHeaderProductUpdateDto?>? RecipeHeaderProducts { get; set; }
-    
-    public ICollection<RecipeProductsUpdateDto?>? RecipeProducts { get; set; }
 
+    public ICollection<RecipeHeaderCreateOrUpdateDto?>? RecipeHeaders { get; set; }
+
+    public ICollection<RecipeTextAreaUpdateDto?>? RecipeTextAreas { get; set; }
+
+    public ICollection<RecipeHeaderProductCreateOrUpdateDto?>? RecipeHeaderProducts { get; set; }
+
+    public ICollection<RecipeProductsCreateDto?>? RecipeProducts { get; set; }
 }

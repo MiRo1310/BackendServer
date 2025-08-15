@@ -12,8 +12,8 @@ using Rezepte.Data;
 namespace Rezepte.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250815112843_CreateHundTable")]
-    partial class CreateHundTable
+    [Migration("20250815122033_RenameHundTable")]
+    partial class RenameHundTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace Rezepte.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Rezepte.Models.Hund", b =>
+            modelBuilder.Entity("Rezepte.Models.Hunde", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

@@ -4,18 +4,18 @@ namespace Rezepte.Types;
 
 [MutationType]
 
-public class RecipeTextareaMutation
+public class RecipeDescriptionMutation
 {
  public static bool RemoveTextArea(AppDbContext dbContext, Guid id)
  {
-     var textarea = dbContext.RecipeTextAreas.FirstOrDefault(textarea => textarea.Id == id);
+     var textarea = dbContext.RecipeDescriptions.FirstOrDefault(textarea => textarea.Id == id);
 
      if (textarea is null)
      {
          return false;
      }
 
-     dbContext.RecipeTextAreas.Remove(textarea);
+     dbContext.RecipeDescriptions.Remove(textarea);
      dbContext.SaveChanges();
 
      return true;

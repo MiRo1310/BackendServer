@@ -10,7 +10,7 @@ public class RecipeUpdateDto
 
     public ICollection<RecipeHeaderCreateOrUpdateDto?>? RecipeHeaders { get; set; }
 
-    public ICollection<RecipeTextAreaCreateOrUpdateDto?>? RecipeTextAreas { get; set; }
+    public ICollection<RecipeDescriptionCreateOrUpdateDto?>? RecipeTextAreas { get; set; }
 
     public ICollection<RecipeHeaderProductCreateOrUpdateDto?>? RecipeHeaderProducts { get; set; }
 

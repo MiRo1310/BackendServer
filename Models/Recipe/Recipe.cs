@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Rezepte.Models;
+namespace Rezepte.Models.Recipe;
 
-[Table("recipes")]
 public class Recipe
 {
     public Guid Id { get; set; } 
@@ -19,7 +18,7 @@ public class Recipe
   
     public ICollection<RecipeProduct> RecipeProducts { get; set; } = [];
     
-    public ICollection<RecipeTextArea> RecipeTextAreas { get; set; } = [];
+    public ICollection<RecipeDescription.RecipeDescription> RecipeTextAreas { get; set; } = [];
     
     public ICollection<RecipeHeaderProduct> RecipeHeaderProducts { get; set; } = [];
 }

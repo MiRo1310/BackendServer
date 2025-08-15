@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Rezepte.Models;
+namespace Rezepte.Models.RecipeDescription;
 
-[Table("recipesTextAreas")]
-
-public class RecipeTextArea
+public class RecipeDescription
 {
     public Guid Id { get; set; }
     
@@ -18,5 +16,5 @@ public class RecipeTextArea
     
     public DateTime? ModifiedAt { get; set; }
     
-    public Recipe? Recipe { get; set; }
+    public Recipe.Recipe? Recipe { get; set; }
 }

@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Rezepte.Models;
+namespace Rezepte.Models.Product;
 
-[Table("products")]
 public class Product
 {
     public Guid Id { get; set; }

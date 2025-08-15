@@ -27,7 +27,7 @@ public class RecipeProduct
     
     public decimal? Factor { get; set; }
     
-    public Recipe? Recipe { get; set; }
+    public Recipe.Recipe? Recipe { get; set; }
 
     [ForeignKey("productId")]
     public ICollection<ProductUnit> ProductUnits { get; set; } = [];

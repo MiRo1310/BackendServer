@@ -19,5 +19,5 @@ public class ProductUnit
     
     public DateTime? ModifiedAt { get; set; }
     
-    public Product? Product { get; set; }
+    public Product.Product? Product { get; set; }
 }

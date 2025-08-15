@@ -1,5 +1,6 @@
 ﻿using Rezepte.Data;
 using Rezepte.Models;
+using Rezepte.Models.Recipe;
 
 namespace Rezepte.Types;
 
@@ -33,7 +34,7 @@ public static class RecipeMutation
             RecipeProductsHelper.ProcessProducts(dbContext, recipe, dto.RecipeProducts);
         
         if (dto.RecipeTextAreas != null)
-            RecipeTextAreaHelper.ProcessTextareas(dbContext, recipe, dto.RecipeTextAreas);
+            RecipeDescriptionHelper.ProcessTextareas(dbContext, recipe, dto.RecipeTextAreas);
            
         if (dto.RecipeHeaderProducts != null)
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
@@ -62,7 +63,7 @@ public static class RecipeMutation
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
         
         if (dto.RecipeTextAreas is not null)
-            RecipeTextAreaHelper.ProcessTextareas(dbContext,recipe,dto.RecipeTextAreas);
+            RecipeDescriptionHelper.ProcessTextareas(dbContext,recipe,dto.RecipeTextAreas);
         
         dbContext.SaveChanges();
                

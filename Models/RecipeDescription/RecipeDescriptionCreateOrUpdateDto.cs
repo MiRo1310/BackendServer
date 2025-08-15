@@ -1,6 +1,6 @@
 ﻿namespace Rezepte.Models;
 
-public class RecipeTextAreaCreateOrUpdateDto
+public class RecipeDescriptionCreateOrUpdateDto
 {
     public Guid? Id { get; set; }
     

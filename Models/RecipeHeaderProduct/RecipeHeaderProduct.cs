@@ -17,5 +17,5 @@ public class RecipeHeaderProduct
 
     public DateTime? ModifiedAt { get; set; }
 
-    public Recipe Recipe { get; set; }
+    public Recipe.Recipe Recipe { get; set; }
 }

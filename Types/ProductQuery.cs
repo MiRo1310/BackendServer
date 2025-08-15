@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rezepte.Data;
 using Rezepte.Models;
+using Rezepte.Models.Product;
 
 namespace Rezepte.Types;
 

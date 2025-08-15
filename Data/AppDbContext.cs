@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Rezepte.Models;
+using Rezepte.Models.Product;
+using Rezepte.Models.Recipe;
+using Rezepte.Models.RecipeDescription;
 
 namespace Rezepte.Data;
 
@@ -23,7 +26,7 @@ public class AppDbContext : DbContext
 
     public DbSet<ProductCategory> ProductCategories { get; set; }
 
-    public DbSet<RecipeTextArea> RecipeTextAreas { get; set; }
+    public DbSet<RecipeDescription> RecipeDescriptions { get; set; }
 
     public DbSet<RecipeHeader> RecipeHeaders { get; set; }
 }

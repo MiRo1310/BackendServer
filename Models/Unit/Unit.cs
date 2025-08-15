@@ -2,7 +2,6 @@
 
 namespace Rezepte.Models;
 
-[Table("units")]
 public class Unit
 {
     public Guid Id { get; set; }

@@ -22,7 +22,10 @@ public class AppDbContext:DbContext
     
     public DbSet<RecipeTextArea> RecipeTextAreas { get; set; }
     
-   public DbSet<RecipeHeader> RecipeHeaders { get; set; }
+    public DbSet<RecipeHeader> RecipeHeaders { get; set; }
+    
+    
+    public DbSet<Hund> Hund { get; set; }
     
     
     

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Rezepte.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-// In Program.cs oder Startup.cs
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>

@@ -34,7 +34,7 @@ public static class RecipeMutation
             RecipeProductsHelper.ProcessProducts(dbContext, recipe, dto.RecipeProducts);
         
         if (dto.RecipeTextAreas != null)
-            RecipeDescriptionHelper.ProcessTextareas(dbContext, recipe, dto.RecipeTextAreas);
+            RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeTextAreas);
            
         if (dto.RecipeHeaderProducts != null)
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
@@ -63,7 +63,7 @@ public static class RecipeMutation
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
         
         if (dto.RecipeTextAreas is not null)
-            RecipeDescriptionHelper.ProcessTextareas(dbContext,recipe,dto.RecipeTextAreas);
+            RecipeDescriptionHelper.ProcessDescription(dbContext,recipe,dto.RecipeTextAreas);
         
         dbContext.SaveChanges();
                

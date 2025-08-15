@@ -7,7 +7,7 @@ namespace Rezepte.Types;
 
 public static class RecipeDescriptionHelper
 {
-    public static void ProcessTextareas(AppDbContext dbContext, Recipe recipe,
+    public static void ProcessDescription(AppDbContext dbContext, Recipe recipe,
         ICollection<RecipeDescriptionCreateOrUpdateDto?> textAreas)
     {
         foreach (var textArea in textAreas)
@@ -21,7 +21,8 @@ public static class RecipeDescriptionHelper
                     Id = Guid.NewGuid(),
                     RecipeId = recipe.Id,
                     Position = textArea.Position,
-                    Text = textArea.Text
+                    Text = textArea.Text,
+                    Header = textArea.Header ?? ""
                 };
                 
                 dbContext.RecipeDescriptions.Add(text);
@@ -32,6 +33,7 @@ public static class RecipeDescriptionHelper
             if (textAreaUpdate is null) continue;
 
             textAreaUpdate.Text = textArea.Text;
+            textAreaUpdate.Header = textArea.Header ?? "";
             textAreaUpdate.Position = textArea.Position;
             textAreaUpdate.ModifiedAt = DateTime.UtcNow;
         }

@@ -10,6 +10,9 @@ public class RecipeDescription
     
     public string Text { get; set; }
     
+    [Column(TypeName = "varchar(255)")]
+    public string Header { get; set; }
+    
     public int Position { get; set; }
 
     public DateTime CreatedAt { get; set; }

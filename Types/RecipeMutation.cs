@@ -27,18 +27,15 @@ public static class RecipeMutation
             Portions = dto.Portions
         };
 
-        if (dto.RecipeHeaders != null)
-            RecipeHeaderHelper.ProcessHeaders(dbContext, recipe, dto.RecipeHeaders);
-
         if (dto.RecipeProducts != null)
             RecipeProductsHelper.ProcessProducts(dbContext, recipe, dto.RecipeProducts);
-        
-        if (dto.RecipeTextAreas != null)
-            RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeTextAreas);
-           
+
+        if (dto.RecipeDescriptions != null)
+            RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeDescriptions);
+
         if (dto.RecipeHeaderProducts != null)
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
-            
+
         dbContext.Recipes.Add(recipe);
         dbContext.SaveChanges();
         return recipe;
@@ -52,21 +49,18 @@ public static class RecipeMutation
         recipe.Name = dto.Name ?? recipe.Name;
         recipe.Portions = dto.Portions ?? recipe.Portions;
         recipe.ModifiedAt = DateTime.UtcNow;
-        
-        if (dto.RecipeHeaders is not null)
-            RecipeHeaderHelper.ProcessHeaders(dbContext, recipe, dto.RecipeHeaders);
-        
+
         if (dto.RecipeProducts is not null)
             RecipeProductsHelper.ProcessProducts(dbContext, recipe, dto.RecipeProducts);
-        
+
         if (dto.RecipeHeaderProducts is not null)
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
-        
+
         if (dto.RecipeTextAreas is not null)
-            RecipeDescriptionHelper.ProcessDescription(dbContext,recipe,dto.RecipeTextAreas);
-        
+            RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeTextAreas);
+
         dbContext.SaveChanges();
-               
+
         return recipe;
     }
 }

@@ -6,9 +6,9 @@ public class RecipeUpdateDto
 
     public string? Name { get; set; }
 
-    public int? Portions { get; set; }
+    public int? Portions { get; set; } = 0;
 
-    public ICollection<RecipeDescriptionCreateOrUpdateDto?>? RecipeTextAreas { get; set; }
+    public ICollection<RecipeDescriptionCreateOrUpdateDto?>? RecipeDescriptions { get; set; }
 
     public ICollection<RecipeHeaderProductCreateOrUpdateDto?>? RecipeHeaderProducts { get; set; }
 

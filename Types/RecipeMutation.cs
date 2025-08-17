@@ -56,8 +56,8 @@ public static class RecipeMutation
         if (dto.RecipeHeaderProducts is not null)
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
 
-        if (dto.RecipeTextAreas is not null)
-            RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeTextAreas);
+        if (dto.RecipeDescriptions is not null)
+            RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeDescriptions);
 
         dbContext.SaveChanges();
 

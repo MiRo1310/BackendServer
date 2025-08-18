@@ -1,9 +1,9 @@
-﻿using Rezepte.Data;
-using Rezepte.Models;
-using Rezepte.Models.Recipe;
-using Rezepte.Models.RecipeDescription;
+﻿using BackendServer.Data;
+using BackendServer.Models;
+using BackendServer.Models.Recipe;
+using BackendServer.Models.RecipeDescription;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 public static class RecipeDescriptionHelper
 {

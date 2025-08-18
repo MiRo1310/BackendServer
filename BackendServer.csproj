@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(ImplicitUsings)' == 'enable'">
-    <Using Include="Rezepte" />
+    <Using Include="BackendServer" />
   </ItemGroup>
 
   <ItemGroup>

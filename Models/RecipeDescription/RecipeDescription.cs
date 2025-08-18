@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Rezepte.Models.RecipeDescription;
+namespace BackendServer.Models.RecipeDescription;
 
 public class RecipeDescription
 {

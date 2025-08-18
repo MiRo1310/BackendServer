@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using BackendServer.Data;
+using BackendServer.Models;
 using Microsoft.EntityFrameworkCore;
-using Rezepte.Data;
-using Rezepte.Models;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [Table("recipeProducts")]
 

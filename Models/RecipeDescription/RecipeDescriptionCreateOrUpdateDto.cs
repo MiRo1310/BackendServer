@@ -1,4 +1,4 @@
-﻿namespace Rezepte.Models;
+﻿namespace BackendServer.Models;
 
 public class RecipeDescriptionCreateOrUpdateDto
 {

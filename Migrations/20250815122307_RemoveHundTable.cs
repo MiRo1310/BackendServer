@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Rezepte.Migrations
+namespace BackendServer.Migrations
 {
     /// <inheritdoc />
     public partial class RemoveHundTable : Migration

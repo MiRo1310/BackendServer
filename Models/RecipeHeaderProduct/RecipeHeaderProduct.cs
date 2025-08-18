@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Rezepte.Models;
+namespace BackendServer.Models;
 
 [Table("recipesHeaderProducts")]
 public class RecipeHeaderProduct

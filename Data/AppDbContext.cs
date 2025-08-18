@@ -1,14 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Rezepte.Models;
-using Rezepte.Models.Product;
-using Rezepte.Models.Recipe;
-using Rezepte.Models.RecipeDescription;
+﻿using BackendServer.Models;
+using BackendServer.Models.Product;
+using BackendServer.Models.Recipe;
+using BackendServer.Models.RecipeDescription;
+using BackendServer.Models.Unit;
+using Microsoft.EntityFrameworkCore;
 
-namespace Rezepte.Data;
+namespace BackendServer.Data;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 

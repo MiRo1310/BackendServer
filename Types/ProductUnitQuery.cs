@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Rezepte.Data;
-using Rezepte.Models;
+﻿using BackendServer.Data;
+using BackendServer.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [QueryType]
 public static class ProductUnitQuery

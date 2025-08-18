@@ -1,4 +1,4 @@
-﻿namespace Rezepte.Models.Recipe;
+﻿namespace BackendServer.Models.Recipe;
 
 public class Recipe
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Rezepte.Models.Product;
+namespace BackendServer.Models.Product;
 
 public class Product
 {

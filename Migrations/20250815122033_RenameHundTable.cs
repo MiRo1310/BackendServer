@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Rezepte.Migrations
+namespace BackendServer.Migrations
 {
     /// <inheritdoc />
     public partial class RenameHundTable : Migration

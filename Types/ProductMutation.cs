@@ -1,8 +1,8 @@
-﻿using Rezepte.Data;
-using Rezepte.Models;
-using Rezepte.Models.Product;
+﻿using BackendServer.Data;
+using BackendServer.Models;
+using BackendServer.Models.Product;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [MutationType]
 public static class ProductMutation

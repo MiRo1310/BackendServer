@@ -9,4 +9,4 @@ WORKDIR /app
 COPY --from=build /app/out .
 ENV ASPNETCORE_URLS=http://0.0.0.0:5095
 EXPOSE 5095
-ENTRYPOINT ["dotnet", "Rezepte.dll"]
+ENTRYPOINT ["dotnet", "BackendServer.dll"]

@@ -1,7 +1,7 @@
-﻿using Rezepte.Data;
-using Rezepte.Models;
+﻿using BackendServer.Data;
+using BackendServer.Models;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 public static class ProductUnitHelper
 {

@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Rezepte.Data;
-using Rezepte.Models.Recipe;
+﻿using BackendServer.Data;
+using BackendServer.Models.Recipe;
+using Microsoft.EntityFrameworkCore;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [QueryType]
 public static class RecipeQuery

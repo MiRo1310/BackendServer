@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Routing.Constraints;
 
-namespace Rezepte.Models;
+namespace BackendServer.Models;
 
 [Table("productCategories")]
 public class ProductCategory

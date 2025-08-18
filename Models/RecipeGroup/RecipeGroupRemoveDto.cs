@@ -1,4 +1,4 @@
-﻿namespace Rezepte.Models.RecipeGroup;
+﻿namespace BackendServer.Models.RecipeGroup;
 
 public class RecipeGroupRemoveDto
 {

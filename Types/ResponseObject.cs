@@ -1,6 +1,6 @@
-﻿using Rezepte.Enum;
+﻿using BackendServer.Enum;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 public  class ResponseObject<T>(T? value, ErrorCode errorCode, bool isError = false  )
 {

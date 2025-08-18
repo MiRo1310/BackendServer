@@ -1,4 +1,4 @@
-﻿namespace Rezepte.Enum;
+﻿namespace BackendServer.Enum;
 
 public enum ErrorCode
 {

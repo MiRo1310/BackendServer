@@ -1,6 +1,6 @@
-﻿using Rezepte.Data;
+﻿using BackendServer.Data;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [MutationType]
 

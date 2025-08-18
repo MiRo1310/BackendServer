@@ -1,8 +1,8 @@
-﻿using Rezepte.Data;
-using Rezepte.Enum;
-using Rezepte.Models;
+﻿using BackendServer.Data;
+using BackendServer.Enum;
+using BackendServer.Models;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [MutationType]
 public static class ProductCategoryMutation

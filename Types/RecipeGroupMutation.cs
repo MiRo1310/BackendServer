@@ -1,7 +1,7 @@
-﻿using Rezepte.Data;
-using Rezepte.Models.RecipeGroup;
+﻿using BackendServer.Data;
+using BackendServer.Models.RecipeGroup;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [MutationType]
 public static class RecipeGroupMutation

@@ -22,5 +22,5 @@ public class ProductCreateDto
     
     public string? Unit { get; set; }
     
-    
+    public ICollection<ProductUnitCreateOrUpdateDto?>? ProductUnits { get; set; } = [];
 }

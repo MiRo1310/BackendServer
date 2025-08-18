@@ -20,9 +20,9 @@ public class ProductUpdateDto
     
     public decimal? Salt { get; set; }
     
-    
     public decimal? Amount { get; set; }
     
-    
     public string? Unit { get; set; }
+    
+    public ICollection<ProductUnitCreateOrUpdateDto?>? ProductUnits { get; set; } = [];
 }

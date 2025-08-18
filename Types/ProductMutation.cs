@@ -5,12 +5,11 @@ using Rezepte.Models.Product;
 namespace Rezepte.Types;
 
 [MutationType]
-
 public static class ProductMutation
 {
     public static Product CreateProduct(AppDbContext dbContext, ProductCreateDto dto)
     {
-        var product = new Product()
+        var product = new Product
         {
             CreatedAt = DateTime.UtcNow,
             Id = Guid.NewGuid(),
@@ -23,8 +22,10 @@ public static class ProductMutation
             Salt = dto.Salt,
             Sugar = dto.Sugar,
             Amount = dto.Amount,
-            Unit = dto.Unit ??""
+            Unit = dto.Unit ?? ""
         };
+
+        if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id);
 
         dbContext.Products.Add(product);
         dbContext.SaveChanges();
@@ -34,10 +35,7 @@ public static class ProductMutation
     public static Product? UpdateProduct(AppDbContext dbContext, ProductUpdateDto dto)
     {
         var product = dbContext.Products.FirstOrDefault(p => p.Id == dto.Id);
-        if (product is null)
-        {
-            return null;
-        }
+        if (product is null) return null;
         product.ModifiedAt = DateTime.UtcNow;
         product.Name = dto.Name ?? product.Name;
         product.Carbs = dto.Carbs;
@@ -47,6 +45,10 @@ public static class ProductMutation
         product.Protein = dto.Protein;
         product.Salt = dto.Salt;
         product.Sugar = dto.Sugar;
+        product.Amount = dto.Amount;
+        product.Unit = dto.Unit ?? "";
+
+        if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id);
 
         dbContext.SaveChanges();
         return product;
@@ -55,10 +57,7 @@ public static class ProductMutation
     public static bool RemoveProduct(AppDbContext dbContext, Guid id)
     {
         var product = dbContext.Products.FirstOrDefault(p => p.Id == id);
-        if (product is null)
-        {
-            return false;
-        }
+        if (product is null) return false;
 
         dbContext.Products.Remove(product);
         dbContext.SaveChanges();

@@ -9,5 +9,7 @@ public class FinanceDbContext : DbContext
     {
     }
 
-    public DbSet<Addresses> Addresses { get; set; } 
+    public DbSet<Address> Addresses { get; set; } 
+    
+    public DbSet<TravelCost> TravelCost { get; set; } 
 }

@@ -1,4 +1,6 @@
-﻿namespace BackendServer.Models.Finance;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BackendServer.Models.Finance;
 
 public class TravelCost
 {
@@ -6,10 +8,12 @@ public class TravelCost
     
     public DateOnly? Date { get; set; }
     
+    [Column(TypeName = "varchar(255)")]
     public string? Description { get; set; }
     
     public Guid? AddressId { get; set; }
     
+    [Column(TypeName = "decimal(10,2)")]
     public decimal? Price { get; set; }
     
     public DateTime CreatedAt { get; set; }

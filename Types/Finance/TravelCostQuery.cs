@@ -7,6 +7,9 @@ namespace BackendServer.Types.Finance;
 [QueryType]
 public static class TravelCostQuery
 {
+    
+    [UseSorting]
+    
     public static CalculatedTravelCost TravelCost(FinanceDbContext dbContext)
     {
         var summary = dbContext.TravelCost.Include(cost => cost.Address ).ToList();
@@ -19,4 +22,6 @@ public static class TravelCostQuery
             Total = totalPrice ?? 0
         };
     }
+    
+    
 }

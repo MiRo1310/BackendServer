@@ -48,6 +48,13 @@ public static class AddressMutation
             return false;
         }
 
+        var isUsed = dbContext.TravelCost.FirstOrDefault(cost => cost.AddressId == id);
+
+        if (isUsed is not null)
+        {
+            return false;
+        }
+
         dbContext.Addresses.Remove(address);
         dbContext.SaveChanges();
 

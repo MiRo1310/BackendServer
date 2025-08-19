@@ -22,15 +22,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddDbContext<FinanceDbContext>(options =>
     options.UseMySql(connectionStringFinance, ServerVersion.AutoDetect(connectionStringFinance)));
-using (var scope = builder.Services.BuildServiceProvider().CreateScope())
+
+if (args.Length == 0 || args[0] != "ef") 
 {
-    var financeDb = scope.ServiceProvider.GetRequiredService<FinanceDbContext>();
-    financeDb.Database.EnsureCreated();
-    var recipeDb = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    recipeDb.Database.EnsureCreated();
+    using (var scope = builder.Services.BuildServiceProvider().CreateScope())
+    {
+        var financeDb = scope.ServiceProvider.GetRequiredService<FinanceDbContext>();
+        financeDb.Database.Migrate();
+
+        var recipeDb = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        recipeDb.Database.Migrate();
+    }
 }
 
-builder.AddGraphQL().AddTypes().ModifyRequestOptions(options => options.IncludeExceptionDetails = true);
+
+builder.AddGraphQL().AddSorting().AddTypes().ModifyRequestOptions(options => options.IncludeExceptionDetails = true);
 
 var app = builder.Build();
 

@@ -4,6 +4,7 @@ using BackendServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendServer.Migrations.FinanceDb
 {
     [DbContext(typeof(FinanceDbContext))]
-    partial class FinanceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250819124913_FixTravelCostAddressRelation")]
+    partial class FixTravelCostAddressRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +32,7 @@ namespace BackendServer.Migrations.FinanceDb
                         .HasColumnType("char(36)");
 
                     b.Property<string>("City")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -38,10 +41,10 @@ namespace BackendServer.Migrations.FinanceDb
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Street")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -64,13 +67,13 @@ namespace BackendServer.Migrations.FinanceDb
                         .HasColumnType("date");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 

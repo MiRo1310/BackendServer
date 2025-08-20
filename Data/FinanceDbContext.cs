@@ -12,4 +12,6 @@ public class FinanceDbContext : DbContext
     public DbSet<Address> Addresses { get; set; } 
     
     public DbSet<TravelCost> TravelCost { get; set; } 
+    
+    public DbSet<Description> Descriptions { get; set; }
 }

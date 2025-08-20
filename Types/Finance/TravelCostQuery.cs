@@ -10,18 +10,8 @@ public static class TravelCostQuery
     
     [UseSorting]
     
-    public static CalculatedTravelCost TravelCost(FinanceDbContext dbContext)
+    public static IQueryable<TravelCost> TravelCost(FinanceDbContext dbContext)
     {
-        var summary = dbContext.TravelCost.Include(cost => cost.Address ).ToList();
-        
-        var totalPrice = summary.Sum(item => item.Price);
-
-        return new CalculatedTravelCost()
-        {
-            TravelCost = summary,
-            Total = totalPrice ?? 0
-        };
+        return  dbContext.TravelCost.Include(cost => cost.Address );
     }
-    
-    
 }

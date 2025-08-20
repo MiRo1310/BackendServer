@@ -1,28 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Rezepte.Data;
-using Rezepte.Models;
+﻿using BackendServer.Data;
+using BackendServer.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [QueryType]
 public static class ProductUnitQuery
 {
     public static IQueryable<ProductUnit> GetProductUnits(AppDbContext dbContext)
     {
-        return dbContext.ProductUnits.Include(unit => unit.RecipeProduct );
+        return dbContext.ProductUnits;
     }
 
     public static ProductUnit? GetProductUnit(AppDbContext dbContext, Guid id)
     {
         return dbContext.ProductUnits
-            .Include(unit => unit.RecipeProduct )
             .FirstOrDefault(unit => unit.Id == id);
     }
 
     public static ProductUnit? GetProductUnitByProductId(AppDbContext dbContext, Guid productId)
     {
         return dbContext.ProductUnits
-            .Include(unit => unit.RecipeProduct )
             .FirstOrDefault(unit => unit.ProductId == productId);
     }
 }

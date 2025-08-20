@@ -1,7 +1,8 @@
-﻿using Rezepte.Data;
-using Rezepte.Models;
+﻿using BackendServer.Data;
+using BackendServer.Models;
+using BackendServer.Models.Unit;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [QueryType]
 public static class UnitQuery

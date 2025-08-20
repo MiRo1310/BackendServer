@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Rezepte.Data;
-using Rezepte.Models;
+﻿using BackendServer.Data;
+using BackendServer.Models.Product;
+using Microsoft.EntityFrameworkCore;
+using BackendServer.Models;
 
-namespace Rezepte.Types;
+namespace BackendServer.Types;
 
 [QueryType]
 

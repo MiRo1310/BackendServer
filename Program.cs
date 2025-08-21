@@ -13,16 +13,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-var connectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
-var connectionStringFinance = builder.Configuration.GetConnectionString("FinanceDbConnectionString");
-
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-builder.Services.AddDbContext<FinanceDbContext>(options =>
-    options.UseMySql(connectionStringFinance, ServerVersion.AutoDetect(connectionStringFinance)));
-
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("AppDbConnectionString"),
@@ -37,8 +27,13 @@ builder.Services.AddDbContext<FinanceDbContext>(options =>
     )
 );
 
-
-builder.AddGraphQL().AddSorting().AddTypes().ModifyRequestOptions(options => options.IncludeExceptionDetails = true);
+builder.Services
+    .AddGraphQLServer()
+    .AddFiltering()
+    .AddSorting()
+    .AddTypes()
+    .ModifyCostOptions(o => o.EnforceCostLimits = false)
+    .ModifyRequestOptions(options => options.IncludeExceptionDetails = true);
 
 var app = builder.Build();
 

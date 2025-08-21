@@ -9,7 +9,7 @@ public static class AddressMutation
 {
     public static Address CreateAddress(FinanceDbContext dbContext, AddressCreateDto dto)
     {
-        var address= new Address()
+        var address = new Address()
         {
             Id = Guid.NewGuid(),
             City = dto.City,
@@ -34,7 +34,7 @@ public static class AddressMutation
         address.City = dto.City;
         address.Name = dto.Name;
         address.Street = dto.Street;
-        address.ModifiedAt= DateTime.UtcNow;
+        address.ModifiedAt = DateTime.UtcNow;
 
         dbContext.SaveChanges();
         return address;
@@ -42,18 +42,20 @@ public static class AddressMutation
 
     public static bool RemoveAddress(FinanceDbContext dbContext, Guid id)
     {
-        var address = dbContext.Addresses.FirstOrDefault(address => address.Id == id);
-        if (address is null)
-        {
-            return false;
-        }
-
         var isUsed = dbContext.TravelCost.FirstOrDefault(cost => cost.AddressId == id);
 
         if (isUsed is not null)
         {
             return false;
         }
+
+        var address = dbContext.Addresses.FirstOrDefault(address => address.Id == id);
+        if (address is null)
+        {
+            return false;
+        }
+
+
 
         dbContext.Addresses.Remove(address);
         dbContext.SaveChanges();

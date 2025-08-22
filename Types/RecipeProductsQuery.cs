@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using BackendServer.Data;
 using BackendServer.Models;
+using BackendServer.Models.RecipeProduct;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Types;

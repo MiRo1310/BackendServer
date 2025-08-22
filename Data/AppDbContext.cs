@@ -1,7 +1,9 @@
 ﻿using BackendServer.Models;
 using BackendServer.Models.Product;
+using BackendServer.Models.ProductUnit;
 using BackendServer.Models.Recipe;
 using BackendServer.Models.RecipeDescription;
+using BackendServer.Models.RecipeProduct;
 using BackendServer.Models.Unit;
 using Microsoft.EntityFrameworkCore;
 

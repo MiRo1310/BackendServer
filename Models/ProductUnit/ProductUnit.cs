@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models;
+namespace BackendServer.Models.ProductUnit;
 
 [Table("productUnits")]
 public class ProductUnit
@@ -12,7 +12,8 @@ public class ProductUnit
     public int DefaultUnit { get; set; }
     
     public decimal? Amount { get; set; }
-    
+  
+   
     public Guid ProductId { get; set; }
     
     public DateTime CreatedAt { get; set; }

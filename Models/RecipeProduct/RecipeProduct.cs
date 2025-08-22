@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models;
+namespace BackendServer.Models.RecipeProduct;
 
 [Table("recipesProducts")]
 public class RecipeProduct
@@ -30,5 +30,5 @@ public class RecipeProduct
     public Recipe.Recipe? Recipe { get; set; }
 
     [ForeignKey("productId")]
-    public ICollection<ProductUnit> ProductUnits { get; set; } = [];
+    public ICollection<ProductUnit.ProductUnit> ProductUnits { get; set; } = [];
 }

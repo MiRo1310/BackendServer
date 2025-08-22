@@ -12,7 +12,7 @@ public class Recipe
 
     public DateTime? ModifiedAt { get; set; }
 
-    public ICollection<RecipeProduct> RecipeProducts { get; set; } = [];
+    public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; set; } = [];
 
     public ICollection<RecipeDescription.RecipeDescription> RecipeDescriptions { get; set; } = [];
 

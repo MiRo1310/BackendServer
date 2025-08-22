@@ -1,6 +1,7 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models;
 using BackendServer.Models.Recipe;
+using BackendServer.Models.RecipeProduct;
 
 namespace BackendServer.Types;
 

@@ -30,5 +30,5 @@ public class Product
     
     public string? Unit { get; set; }
     
-    public ICollection<ProductUnit> ProductUnits { get; set; } = [];
+    public ICollection<ProductUnit.ProductUnit> ProductUnits { get; set; } = [];
 }

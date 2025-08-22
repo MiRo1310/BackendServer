@@ -1,5 +1,6 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models;
+using BackendServer.Models.ProductUnit;
 
 namespace BackendServer.Types;
 

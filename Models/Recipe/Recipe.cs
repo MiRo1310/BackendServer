@@ -16,5 +16,5 @@ public class Recipe
 
     public ICollection<RecipeDescription.RecipeDescription> RecipeDescriptions { get; set; } = [];
 
-    public ICollection<RecipeHeaderProduct> RecipeHeaderProducts { get; set; } = [];
+    public ICollection<RecipeProductHeader.RecipeProductHeader> RecipeHeaderProducts { get; set; } = [];
 }

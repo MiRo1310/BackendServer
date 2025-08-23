@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace BackendServer.Models.ProductUnit;
 
-namespace BackendServer.Models.ProductUnit;
-
-[Table("productUnits")]
 public class ProductUnit
 {
     public Guid Id { get; set; }
@@ -12,7 +9,6 @@ public class ProductUnit
     public int DefaultUnit { get; set; }
     
     public decimal? Amount { get; set; }
-  
    
     public Guid ProductId { get; set; }
     

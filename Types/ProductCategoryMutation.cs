@@ -1,6 +1,7 @@
 ﻿using BackendServer.Data;
 using BackendServer.Enum;
 using BackendServer.Models;
+using BackendServer.Models.ProductCategory;
 
 namespace BackendServer.Types;
 

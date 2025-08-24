@@ -1,4 +1,6 @@
-﻿namespace BackendServer.Models.RecipeProduct;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BackendServer.Models.RecipeProduct;
 
 public class RecipeProduct
 {
@@ -10,6 +12,7 @@ public class RecipeProduct
     
     public string Description { get; set; }
     
+    [Column(TypeName = "decimal(10,2)")]
     public decimal? Amount { get; set; }
     
     public string Unit { get; set; }
@@ -22,7 +25,6 @@ public class RecipeProduct
     
     public DateTime? ModifiedAt { get; set; }
     
-    public decimal? Factor { get; set; }
     
     public Recipe.Recipe? Recipe { get; set; }
     

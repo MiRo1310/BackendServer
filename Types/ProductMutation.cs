@@ -1,6 +1,7 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models;
 using BackendServer.Models.Product;
+using BackendServer.Models.ProductUnit;
 
 namespace BackendServer.Types;
 
@@ -21,11 +22,20 @@ public static class ProductMutation
             Protein = dto.Protein,
             Salt = dto.Salt,
             Sugar = dto.Sugar,
-            Amount = dto.Amount,
-            Unit = dto.Unit ?? ""
         };
+        var defaultUnit = new ProductUnit()
+        {
+            Amount = dto.Amount,
+            IsDefault = true,
+            ProductId = product.Id,
+            Unit = dto.Unit,
+            CreatedAt = DateTime.UtcNow,
+            Id = Guid.NewGuid(),
+            Faktor = 1
+        };
+        dbContext.ProductUnits.Add(defaultUnit);
 
-        if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id);
+        if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
 
         dbContext.Products.Add(product);
         dbContext.SaveChanges();
@@ -45,10 +55,17 @@ public static class ProductMutation
         product.Protein = dto.Protein;
         product.Salt = dto.Salt;
         product.Sugar = dto.Sugar;
-        product.Amount = dto.Amount;
-        product.Unit = dto.Unit ?? "";
+        
+        var defaultUnit = dbContext.ProductUnits.FirstOrDefault(unit =>
+            unit.ProductId == product.Id && unit.IsDefault == true);
+        if (defaultUnit is not null)
+        {
+            defaultUnit.Amount = dto.Amount;
+            defaultUnit.Unit = dto.Unit;
+        }
+        
 
-        if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id);
+        if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
 
         dbContext.SaveChanges();
         return product;
@@ -56,9 +73,16 @@ public static class ProductMutation
 
     public static bool RemoveProduct(AppDbContext dbContext, Guid id)
     {
+
         var product = dbContext.Products.FirstOrDefault(p => p.Id == id);
         if (product is null) return false;
-
+        var units = dbContext.ProductUnits.Where(unit => unit.ProductId == id);
+       
+            foreach (var productUnit in units)
+            {
+                dbContext.ProductUnits.Remove(productUnit);
+            }
+        
         dbContext.Products.Remove(product);
         dbContext.SaveChanges();
         return true;

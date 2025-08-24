@@ -22,7 +22,6 @@ public static class RecipeProductsHelper
                     RecipeId = recipe.Id,
                     Amount = recipeProduct.Amount,
                     Unit = recipeProduct.Unit ?? "",
-                    Factor = recipeProduct.Factor,
                     Description = recipeProduct.Description ?? "",
                     ProductId = recipeProduct.ProductId,
                     ProductPosition = recipeProduct.ProductPosition,
@@ -38,7 +37,6 @@ public static class RecipeProductsHelper
 
             productUpdate.Amount = recipeProduct.Amount;
             productUpdate.Unit = recipeProduct.Unit ?? productUpdate.Unit;
-            productUpdate.Factor = recipeProduct.Factor;
             productUpdate.Description = recipeProduct.Description ?? productUpdate.Description;
             productUpdate.ProductId = recipeProduct.ProductId;
             productUpdate.ProductPosition = recipeProduct.ProductPosition;

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250824084204_InitRecipe")]
-    partial class InitRecipe
+    [Migration("20250824130104_AddActive")]
+    partial class AddActive
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,11 +31,8 @@ namespace BackendServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<decimal?>("Amount")
-                        .HasColumnType("decimal(65,30)");
-
                     b.Property<decimal?>("Carbs")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<Guid?>("Category")
                         .HasColumnType("char(36)");
@@ -44,29 +41,26 @@ namespace BackendServer.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<decimal?>("Fat")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal?>("Kcal")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<decimal?>("Protein")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal?>("Salt")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<decimal?>("Sugar")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("Unit")
-                        .HasColumnType("longtext");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
@@ -100,14 +94,20 @@ namespace BackendServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<decimal?>("Amount")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(12,4)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DefaultUnit")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Faktor")
+                        .HasColumnType("decimal(12,4)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime(6)");
@@ -117,7 +117,7 @@ namespace BackendServer.Migrations
 
                     b.Property<string>("Unit")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
 
@@ -190,7 +190,7 @@ namespace BackendServer.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<decimal?>("Amount")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -198,9 +198,6 @@ namespace BackendServer.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<decimal?>("Factor")
-                        .HasColumnType("decimal(65,30)");
 
                     b.Property<int>("GroupPosition")
                         .HasColumnType("int");

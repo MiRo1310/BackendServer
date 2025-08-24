@@ -7,10 +7,14 @@ namespace BackendServer.Types;
 public static class ProductUnitHelper
 {
     public static void ProcessUnit(AppDbContext dbContext, ICollection<ProductUnitCreateOrUpdateDto?> productUnits,
-        Guid productId)
+        Guid productId, ProductUnit? defaultUnit)
     {
+        
         foreach (var dtoProductUnit in productUnits)
         {
+            
+            var defaultAmount = defaultUnit?.Amount??1;
+            
             if (dtoProductUnit is null) continue;
 
             if (dtoProductUnit.Id is null)
@@ -19,10 +23,11 @@ public static class ProductUnitHelper
                 {
                     Amount = dtoProductUnit.Amount,
                     CreatedAt = DateTime.UtcNow,
-                    DefaultUnit = dtoProductUnit.DefaultUnit,
                     Id = Guid.NewGuid(),
                     ProductId = productId,
-                    Unit = dtoProductUnit.Unit
+                    Unit = dtoProductUnit.Unit,
+                    Faktor = Math.Round(dtoProductUnit.Amount / defaultAmount,4)
+                    
                 };
                 dbContext.ProductUnits.Add(newUnit);
                 continue;
@@ -33,8 +38,8 @@ public static class ProductUnitHelper
 
             unit.Amount = dtoProductUnit.Amount;
             unit.ModifiedAt = DateTime.UtcNow;
-            unit.DefaultUnit = dtoProductUnit.DefaultUnit;
             unit.Unit = dtoProductUnit.Unit;
+            unit.Faktor = Math.Round(dtoProductUnit.Amount / defaultAmount, 4);
         }
     }
 }

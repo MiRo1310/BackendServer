@@ -9,8 +9,8 @@ public class RecipeProduct
     public Guid RecipeId { get; set; }
     
     public Guid ProductId { get; set; }
-    
-    public string Description { get; set; }
+
+    public string Description { get; set; } = "";
     
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Amount { get; set; }

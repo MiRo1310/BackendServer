@@ -1,4 +1,6 @@
-﻿namespace BackendServer.Models;
+﻿using BackendServer.Models.RecipeProduct;
+
+namespace BackendServer.Models.Recipe;
 
 public class RecipeUpdateDto
 {
@@ -7,7 +9,9 @@ public class RecipeUpdateDto
     public string? Name { get; set; }
 
     public int? Portions { get; set; } = 0;
-
+   
+    public Guid ActiveUnit { get; set; }
+    
     public ICollection<RecipeDescriptionCreateOrUpdateDto?>? RecipeDescriptions { get; set; }
 
     public ICollection<RecipeHeaderProductCreateOrUpdateDto?>? RecipeHeaderProducts { get; set; }

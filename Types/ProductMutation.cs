@@ -34,7 +34,7 @@ public static class ProductMutation
             Faktor = 1
         };
         dbContext.ProductUnits.Add(defaultUnit);
-
+// TODO unitVarianten dürfen nicht mehrfach vorkommen
         if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
 
         dbContext.Products.Add(product);
@@ -64,7 +64,7 @@ public static class ProductMutation
             defaultUnit.Unit = dto.Unit;
         }
         
-
+// TODO unitVarianten dürfen nicht mehrfach vorkommen
         if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
 
         dbContext.SaveChanges();

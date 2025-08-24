@@ -1,5 +1,4 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models;
 using BackendServer.Models.Recipe;
 
 namespace BackendServer.Types;
@@ -11,7 +10,7 @@ public static class RecipeMutation
     {
         var recipe = dbContext.Recipes.FirstOrDefault(recipe => recipe.Id == id);
         if (recipe is null) return false;
-
+//TODO alle RecipeProducte müssen entfernt werden 
         dbContext.Recipes.Remove(recipe);
         dbContext.SaveChanges();
         return true;
@@ -37,6 +36,9 @@ public static class RecipeMutation
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
 
         dbContext.Recipes.Add(recipe);
+        
+        UnitsHelper.SetActive(dbContext,dto.ActiveUnit);
+        
         dbContext.SaveChanges();
         return recipe;
     }
@@ -59,8 +61,10 @@ public static class RecipeMutation
         if (dto.RecipeDescriptions is not null)
             RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeDescriptions);
 
+        UnitsHelper.SetActive(dbContext,dto.ActiveUnit);
+        
         dbContext.SaveChanges();
-
+        
         return recipe;
     }
 }

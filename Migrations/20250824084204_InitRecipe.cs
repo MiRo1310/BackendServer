@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BackendServer.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitRecipe : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace BackendServer.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "productCategories",
+                name: "ProductCategories",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -26,12 +26,12 @@ namespace BackendServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_productCategories", x => x.Id);
+                    table.PrimaryKey("PK_ProductCategories", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "products",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -52,29 +52,29 @@ namespace BackendServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_products", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "recipes",
+                name: "Recipes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Portions = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Portions = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_recipes", x => x.Id);
+                    table.PrimaryKey("PK_Recipes", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "units",
+                name: "Units",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -85,12 +85,37 @@ namespace BackendServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_units", x => x.Id);
+                    table.PrimaryKey("PK_Units", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "recipesHeaderProducts",
+                name: "ProductUnits",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Unit = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DefaultUnit = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
+                    ProductId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductUnits", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductUnits_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ProductHeaders",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -103,23 +128,25 @@ namespace BackendServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_recipesHeaderProducts", x => x.Id);
+                    table.PrimaryKey("PK_ProductHeaders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_recipesHeaderProducts_recipes_RecipeId",
+                        name: "FK_ProductHeaders_Recipes_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "recipes",
+                        principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "recipesHeaders",
+                name: "RecipeDescriptions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     RecipeId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Text = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Header = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Position = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -127,18 +154,18 @@ namespace BackendServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_recipesHeaders", x => x.Id);
+                    table.PrimaryKey("PK_RecipeDescriptions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_recipesHeaders_recipes_RecipeId",
+                        name: "FK_RecipeDescriptions_Recipes_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "recipes",
+                        principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "recipesProducts",
+                name: "RecipeProducts",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
@@ -157,99 +184,45 @@ namespace BackendServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_recipesProducts", x => x.Id);
+                    table.PrimaryKey("PK_RecipeProducts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_recipesProducts_recipes_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "recipes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "recipesTextAreas",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    RecipeId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Text = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Position = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_recipesTextAreas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_recipesTextAreas_recipes_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "recipes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "productUnits",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Unit = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DefaultUnit = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
-                    ProductId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    productId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_productUnits", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_productUnits_products_ProductId",
+                        name: "FK_RecipeProducts_Products_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "products",
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_productUnits_recipesProducts_productId",
-                        column: x => x.productId,
-                        principalTable: "recipesProducts",
-                        principalColumn: "Id");
+                        name: "FK_RecipeProducts_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productUnits_productId",
-                table: "productUnits",
-                column: "productId");
+                name: "IX_ProductHeaders_RecipeId",
+                table: "ProductHeaders",
+                column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productUnits_ProductId",
-                table: "productUnits",
+                name: "IX_ProductUnits_ProductId",
+                table: "ProductUnits",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_recipesHeaderProducts_RecipeId",
-                table: "recipesHeaderProducts",
+                name: "IX_RecipeDescriptions_RecipeId",
+                table: "RecipeDescriptions",
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_recipesHeaders_RecipeId",
-                table: "recipesHeaders",
-                column: "RecipeId");
+                name: "IX_RecipeProducts_ProductId",
+                table: "RecipeProducts",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_recipesProducts_RecipeId",
-                table: "recipesProducts",
-                column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_recipesTextAreas_RecipeId",
-                table: "recipesTextAreas",
+                name: "IX_RecipeProducts_RecipeId",
+                table: "RecipeProducts",
                 column: "RecipeId");
         }
 
@@ -257,31 +230,28 @@ namespace BackendServer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "productCategories");
+                name: "ProductCategories");
 
             migrationBuilder.DropTable(
-                name: "productUnits");
+                name: "ProductHeaders");
 
             migrationBuilder.DropTable(
-                name: "recipesHeaderProducts");
+                name: "ProductUnits");
 
             migrationBuilder.DropTable(
-                name: "recipesHeaders");
+                name: "RecipeDescriptions");
 
             migrationBuilder.DropTable(
-                name: "recipesTextAreas");
+                name: "RecipeProducts");
 
             migrationBuilder.DropTable(
-                name: "units");
+                name: "Units");
 
             migrationBuilder.DropTable(
-                name: "products");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "recipesProducts");
-
-            migrationBuilder.DropTable(
-                name: "recipes");
+                name: "Recipes");
         }
     }
 }

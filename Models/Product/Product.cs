@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace BackendServer.Models.Product;
 
-namespace BackendServer.Models.Product;
-
-public class Product
+public class  Product
 {
     public Guid Id { get; set; }
     
@@ -31,4 +29,6 @@ public class Product
     public string? Unit { get; set; }
     
     public ICollection<ProductUnit.ProductUnit> ProductUnits { get; set; } = [];
+    
+    public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; set; }
 }

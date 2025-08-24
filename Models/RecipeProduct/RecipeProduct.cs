@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace BackendServer.Models.RecipeProduct;
 
-namespace BackendServer.Models.RecipeProduct;
-
-[Table("recipesProducts")]
 public class RecipeProduct
 {
     public Guid Id { get; set; }
@@ -28,7 +25,6 @@ public class RecipeProduct
     public decimal? Factor { get; set; }
     
     public Recipe.Recipe? Recipe { get; set; }
-
-    [ForeignKey("productId")]
-    public ICollection<ProductUnit.ProductUnit> ProductUnits { get; set; } = [];
+    
+    public Product.Product Product { get; set; }
 }

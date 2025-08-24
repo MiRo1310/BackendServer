@@ -22,7 +22,7 @@ namespace BackendServer.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Rezepte.Models.Product.Product", b =>
+            modelBuilder.Entity("BackendServer.Models.Product.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +70,7 @@ namespace BackendServer.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.ProductCategory", b =>
+            modelBuilder.Entity("BackendServer.Models.ProductCategory.ProductCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,10 +88,10 @@ namespace BackendServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("productCategories");
+                    b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.ProductUnit", b =>
+            modelBuilder.Entity("BackendServer.Models.ProductUnit.ProductUnit", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,19 +116,14 @@ namespace BackendServer.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid?>("productId")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("productId");
-
-                    b.ToTable("productUnits");
+                    b.ToTable("ProductUnits");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.Recipe.Recipe", b =>
+            modelBuilder.Entity("BackendServer.Models.Recipe.Recipe", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -144,15 +139,15 @@ namespace BackendServer.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("Portions")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<int?>("Portions")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.RecipeDescription.RecipeDescription", b =>
+            modelBuilder.Entity("BackendServer.Models.RecipeDescription.RecipeDescription", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,65 +180,7 @@ namespace BackendServer.Migrations
                     b.ToTable("RecipeDescriptions");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.RecipeHeader", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("RecipeId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("recipesHeaders");
-                });
-
-            modelBuilder.Entity("Rezepte.Models.RecipeHeaderProduct", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("RecipeId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("recipesHeaderProducts");
-                });
-
-            modelBuilder.Entity("Rezepte.Models.RecipeProduct", b =>
+            modelBuilder.Entity("BackendServer.Models.RecipeProduct.RecipeProduct", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -283,12 +220,43 @@ namespace BackendServer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId");
+
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("recipesProducts");
+                    b.ToTable("RecipeProducts");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.Unit", b =>
+            modelBuilder.Entity("BackendServer.Models.RecipeProductHeader.RecipeProductHeader", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("ProductHeaders");
+                });
+
+            modelBuilder.Entity("BackendServer.Models.Unit.Unit", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -309,25 +277,21 @@ namespace BackendServer.Migrations
                     b.ToTable("Units");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.ProductUnit", b =>
+            modelBuilder.Entity("BackendServer.Models.ProductUnit.ProductUnit", b =>
                 {
-                    b.HasOne("Rezepte.Models.Product.Product", "Product")
+                    b.HasOne("BackendServer.Models.Product.Product", "Product")
                         .WithMany("ProductUnits")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Rezepte.Models.RecipeProduct", null)
-                        .WithMany("ProductUnits")
-                        .HasForeignKey("productId");
-
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.RecipeDescription.RecipeDescription", b =>
+            modelBuilder.Entity("BackendServer.Models.RecipeDescription.RecipeDescription", b =>
                 {
-                    b.HasOne("Rezepte.Models.Recipe.Recipe", "Recipe")
-                        .WithMany("RecipeTextAreas")
+                    b.HasOne("BackendServer.Models.Recipe.Recipe", "Recipe")
+                        .WithMany("RecipeDescriptions")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -335,20 +299,28 @@ namespace BackendServer.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.RecipeHeader", b =>
+            modelBuilder.Entity("BackendServer.Models.RecipeProduct.RecipeProduct", b =>
                 {
-                    b.HasOne("Rezepte.Models.Recipe.Recipe", "Recipe")
-                        .WithMany("Headers")
+                    b.HasOne("BackendServer.Models.Product.Product", "Product")
+                        .WithMany("RecipeProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BackendServer.Models.Recipe.Recipe", "Recipe")
+                        .WithMany("RecipeProducts")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Product");
+
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.RecipeHeaderProduct", b =>
+            modelBuilder.Entity("BackendServer.Models.RecipeProductHeader.RecipeProductHeader", b =>
                 {
-                    b.HasOne("Rezepte.Models.Recipe.Recipe", "Recipe")
+                    b.HasOne("BackendServer.Models.Recipe.Recipe", "Recipe")
                         .WithMany("RecipeHeaderProducts")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -357,36 +329,20 @@ namespace BackendServer.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.RecipeProduct", b =>
-                {
-                    b.HasOne("Rezepte.Models.Recipe.Recipe", "Recipe")
-                        .WithMany("RecipeProducts")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("Rezepte.Models.Product.Product", b =>
+            modelBuilder.Entity("BackendServer.Models.Product.Product", b =>
                 {
                     b.Navigation("ProductUnits");
+
+                    b.Navigation("RecipeProducts");
                 });
 
-            modelBuilder.Entity("Rezepte.Models.Recipe.Recipe", b =>
+            modelBuilder.Entity("BackendServer.Models.Recipe.Recipe", b =>
                 {
-                    b.Navigation("Headers");
+                    b.Navigation("RecipeDescriptions");
 
                     b.Navigation("RecipeHeaderProducts");
 
                     b.Navigation("RecipeProducts");
-
-                    b.Navigation("RecipeTextAreas");
-                });
-
-            modelBuilder.Entity("Rezepte.Models.RecipeProduct", b =>
-                {
-                    b.Navigation("ProductUnits");
                 });
 #pragma warning restore 612, 618
         }

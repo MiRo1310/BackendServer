@@ -59,6 +59,10 @@ namespace BackendServer.Migrations
                     b.Property<decimal?>("Sugar")
                         .HasColumnType("decimal(10,2)");
 
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -142,6 +146,9 @@ namespace BackendServer.Migrations
                     b.Property<int?>("Portions")
                         .HasColumnType("int");
 
+                    b.Property<int>("TotalKcal")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
@@ -186,6 +193,9 @@ namespace BackendServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("ActiveUnitId")
+                        .HasColumnType("char(36)");
+
                     b.Property<decimal?>("Amount")
                         .HasColumnType("decimal(10,2)");
 
@@ -197,6 +207,9 @@ namespace BackendServer.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int>("GroupPosition")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Kcal")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedAt")

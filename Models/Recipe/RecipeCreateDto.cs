@@ -7,8 +7,6 @@ public class RecipeCreateDto
     public required string Name { get; set; }
 
     public int Portions { get; set; }
-    
-    public Guid ActiveUnit { get; set; }
 
     public ICollection<RecipeDescriptionCreateOrUpdateDto?>? RecipeDescriptions { get; set; }
 

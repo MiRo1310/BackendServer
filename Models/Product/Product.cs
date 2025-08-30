@@ -9,6 +9,9 @@ public class  Product
     [Column(TypeName = "varchar(36)")]
     public string Name { get; set; }
     
+    [Column(TypeName = "varchar(36)")]
+    public string Unit { get; set; }
+    
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Kcal { get; set; }
     
@@ -33,8 +36,8 @@ public class  Product
     
     public DateTime? ModifiedAt { get; set; }
    
-    
     public ICollection<ProductUnit.ProductUnit> ProductUnits { get; set; } = [];
 
+    [ForeignKey("ProductId")]
     public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; set; } = [];
 }

@@ -9,8 +9,6 @@ public class RecipeUpdateDto
     public string? Name { get; set; }
 
     public int? Portions { get; set; } = 0;
-   
-    public Guid ActiveUnit { get; set; }
     
     public ICollection<RecipeDescriptionCreateOrUpdateDto?>? RecipeDescriptions { get; set; }
 

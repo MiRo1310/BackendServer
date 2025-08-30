@@ -15,7 +15,11 @@ public class RecipeProduct
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Amount { get; set; }
     
+    public int Kcal { get; set; }
+    
     public string Unit { get; set; }
+    
+    public Guid ActiveUnitId { get; set; }
     
     public int ProductPosition { get; set; }
     
@@ -27,6 +31,6 @@ public class RecipeProduct
     
     
     public Recipe.Recipe? Recipe { get; set; }
-    
-    public Product.Product Product { get; set; }
+   
+    public Product.Product? Product { get; set; }
 }

@@ -18,5 +18,7 @@ public class RecipeProductsCreateDto
     
     public int GroupPosition { get; set; }
     
+    public Guid ActiveUnitId { get; set; }
+    
     public decimal? Factor { get; set; }
 }

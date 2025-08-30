@@ -22,6 +22,7 @@ public static class ProductMutation
             Protein = dto.Protein,
             Salt = dto.Salt,
             Sugar = dto.Sugar,
+            Unit = dto.Unit
         };
         var defaultUnit = new ProductUnit()
         {
@@ -55,6 +56,7 @@ public static class ProductMutation
         product.Protein = dto.Protein;
         product.Salt = dto.Salt;
         product.Sugar = dto.Sugar;
+        product.Unit = dto.Unit;
         
         var defaultUnit = dbContext.ProductUnits.FirstOrDefault(unit =>
             unit.ProductId == product.Id && unit.IsDefault == true);

@@ -23,7 +23,7 @@ public static class RecipeMutation
             CreatedAt = DateTime.UtcNow,
             Id = Guid.NewGuid(),
             Name = dto.Name,
-            Portions = dto.Portions
+            Portions = dto.Portions,
         };
 
         if (dto.RecipeProducts != null)
@@ -35,9 +35,9 @@ public static class RecipeMutation
         if (dto.RecipeHeaderProducts != null)
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
 
-        dbContext.Recipes.Add(recipe);
+        recipe.TotalKcal = RecipeHelper.GetTotalKcal(recipe.RecipeProducts);
         
-        UnitsHelper.SetActive(dbContext,dto.ActiveUnit);
+        dbContext.Recipes.Add(recipe);
         
         dbContext.SaveChanges();
         return recipe;
@@ -61,7 +61,7 @@ public static class RecipeMutation
         if (dto.RecipeDescriptions is not null)
             RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeDescriptions);
 
-        UnitsHelper.SetActive(dbContext,dto.ActiveUnit);
+        recipe.TotalKcal = RecipeHelper.GetTotalKcal(recipe.RecipeProducts);
         
         dbContext.SaveChanges();
         

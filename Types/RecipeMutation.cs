@@ -34,12 +34,12 @@ public static class RecipeMutation
 
         if (dto.RecipeHeaderProducts != null)
             RecipeHeaderProductsHelper.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
-
-        recipe.TotalKcal = RecipeHelper.GetTotalKcal(recipe.RecipeProducts);
         
         dbContext.Recipes.Add(recipe);
         
         dbContext.SaveChanges();
+        
+        RecipeHelper.SetTotalKcalByRecipeId(dbContext, recipe.Id);
         return recipe;
     }
 
@@ -61,9 +61,10 @@ public static class RecipeMutation
         if (dto.RecipeDescriptions is not null)
             RecipeDescriptionHelper.ProcessDescription(dbContext, recipe, dto.RecipeDescriptions);
 
-        recipe.TotalKcal = RecipeHelper.GetTotalKcal(recipe.RecipeProducts);
         
         dbContext.SaveChanges();
+        
+        RecipeHelper.SetTotalKcalByRecipeId(dbContext, dto.Id);
         
         return recipe;
     }

@@ -1,12 +1,23 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models.RecipeProduct;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Types;
 
-public class RecipeHelper
+public static class RecipeHelper
 {
-    public static int GetTotalKcal(ICollection<RecipeProduct> recipeProducts)
+    public static void SetTotalKcalByRecipeId(AppDbContext dbContext, Guid recipeId)
     {
-        return recipeProducts.Sum(rp => rp!.Kcal);
+        var recipe = dbContext.Recipes
+            .Include(r=>r.RecipeProducts)
+            .FirstOrDefault(recipe => recipe.Id == recipeId);
+        if (recipe is null)
+        {
+            return;
+        }
+
+        recipe.TotalKcal = recipe.RecipeProducts.Sum(rp => rp!.Kcal);
+
+        dbContext.SaveChanges();
     }
 }

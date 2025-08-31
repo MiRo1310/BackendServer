@@ -37,6 +37,16 @@ builder.Services
 
 var app = builder.Build();
 
+if (app.Environment.IsProduction())
+{
+    using var scope = app.Services.CreateScope();
+    var appDb = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var financeDb = scope.ServiceProvider.GetRequiredService<FinanceDbContext>();
+
+    appDb.Database.Migrate();
+    financeDb.Database.Migrate();
+}
+
 app.UseCors();
 app.MapGraphQL();
 

@@ -1,10 +1,9 @@
 ﻿using BackendServer.Data;
-
 namespace BackendServer.Types;
 
 [MutationType]
 
-public class RecipeDescriptionMutation
+public static class RecipeDescriptionMutation
 {
  public static bool RemoveTextArea(AppDbContext dbContext, Guid id)
  {
@@ -17,6 +16,8 @@ public class RecipeDescriptionMutation
 
      dbContext.RecipeDescriptions.Remove(textarea);
      dbContext.SaveChanges();
+     
+     Descriptions.ReSetPositions(dbContext, textarea.RecipeId);
 
      return true;
  }

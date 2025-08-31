@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Routing.Constraints;
 
-namespace BackendServer.Models;
+namespace BackendServer.Models.ProductCategory;
 
-[Table("productCategories")]
 public class ProductCategory
 {
     public Guid Id { get; set; }

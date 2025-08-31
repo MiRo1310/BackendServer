@@ -20,7 +20,7 @@ public class ProductCreateDto
     
     public decimal Amount { get; set; }
     
-    public string? Unit { get; set; }
+    public string Unit { get; set; }
     
     public ICollection<ProductUnitCreateOrUpdateDto?>? ProductUnits { get; set; } = [];
 }

@@ -1,4 +1,4 @@
-﻿namespace BackendServer.Models;
+﻿namespace BackendServer.Models.RecipeProduct;
 
 public class RecipeProductsCreateDto
 {
@@ -17,6 +17,8 @@ public class RecipeProductsCreateDto
     public int ProductPosition { get; set; }
     
     public int GroupPosition { get; set; }
+    
+    public Guid ActiveUnitId { get; set; }
     
     public decimal? Factor { get; set; }
 }

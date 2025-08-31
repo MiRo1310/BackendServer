@@ -1,6 +1,6 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models;
 using BackendServer.Models.Recipe;
+using BackendServer.Models.RecipeProduct;
 
 namespace BackendServer.Types;
 
@@ -14,6 +14,8 @@ public static class RecipeProductsHelper
             if (recipeProduct is null) continue;
             if (recipeProduct.Id is null)
             {
+                
+                
                 var product = new RecipeProduct
                 {
                     CreatedAt = DateTime.UtcNow,
@@ -21,14 +23,18 @@ public static class RecipeProductsHelper
                     RecipeId = recipe.Id,
                     Amount = recipeProduct.Amount,
                     Unit = recipeProduct.Unit ?? "",
-                    Factor = recipeProduct.Factor,
                     Description = recipeProduct.Description ?? "",
                     ProductId = recipeProduct.ProductId,
                     ProductPosition = recipeProduct.ProductPosition,
-                    GroupPosition = recipeProduct.GroupPosition
+                    GroupPosition = recipeProduct.GroupPosition,
+                    ActiveUnitId = recipeProduct.ActiveUnitId,
+                    Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, recipeProduct.Amount??0)
+                    
                 };
 
                 dbContext.RecipeProducts.Add(product);
+                
+                ProductsHelper.SetActiveUnit(dbContext,recipeProduct.ActiveUnitId);
                 continue;
             }
 
@@ -37,12 +43,16 @@ public static class RecipeProductsHelper
 
             productUpdate.Amount = recipeProduct.Amount;
             productUpdate.Unit = recipeProduct.Unit ?? productUpdate.Unit;
-            productUpdate.Factor = recipeProduct.Factor;
             productUpdate.Description = recipeProduct.Description ?? productUpdate.Description;
             productUpdate.ProductId = recipeProduct.ProductId;
             productUpdate.ProductPosition = recipeProduct.ProductPosition;
             productUpdate.GroupPosition = recipeProduct.GroupPosition;
             productUpdate.ModifiedAt = DateTime.UtcNow;
+            productUpdate.ActiveUnitId = recipeProduct.ActiveUnitId;
+           
+            productUpdate.Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, productUpdate.Amount??0);
+            
+            ProductsHelper.SetActiveUnit(dbContext,recipeProduct.ActiveUnitId);
         }
     }
 }

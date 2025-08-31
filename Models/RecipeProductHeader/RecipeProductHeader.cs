@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models;
+namespace BackendServer.Models.RecipeProductHeader;
 
-[Table("recipesHeaderProducts")]
-public class RecipeHeaderProduct
+public class RecipeProductHeader
 {
     public Guid Id { get; set; }
 

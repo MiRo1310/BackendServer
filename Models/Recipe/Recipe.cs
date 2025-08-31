@@ -7,14 +7,18 @@ public class Recipe
     public string Name { get; set; }
 
     public int? Portions { get; set; }
+    
 
+    public int TotalKcal { get; set; } = 0;
+    
     public DateTime CreatedAt { get; set; }
 
     public DateTime? ModifiedAt { get; set; }
 
-    public ICollection<RecipeProduct> RecipeProducts { get; set; } = [];
+
+    public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; set; } = [];
 
     public ICollection<RecipeDescription.RecipeDescription> RecipeDescriptions { get; set; } = [];
 
-    public ICollection<RecipeHeaderProduct> RecipeHeaderProducts { get; set; } = [];
+    public ICollection<RecipeProductHeader.RecipeProductHeader> RecipeHeaderProducts { get; set; } = [];
 }

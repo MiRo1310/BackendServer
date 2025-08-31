@@ -5,22 +5,25 @@
 namespace BackendServer.Migrations
 {
     /// <inheritdoc />
-    public partial class RenameHundTable : Migration
+    public partial class AddKcal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameTable(
-                name: "Hund",
-                newName: "Hunde");
+            migrationBuilder.AddColumn<int>(
+                name: "Kcal",
+                table: "RecipeProducts",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameTable(
-                name: "Hunde",
-                newName: "Hund");
+            migrationBuilder.DropColumn(
+                name: "Kcal",
+                table: "RecipeProducts");
         }
     }
 }

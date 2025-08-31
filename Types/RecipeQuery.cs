@@ -11,6 +11,7 @@ public static class RecipeQuery
     {
         return dbContext.Recipes
             .Include(recipe => recipe.RecipeProducts)
+                .ThenInclude(rp=> rp.Product)
             .Include(recipe => recipe.RecipeDescriptions)
             .Include(recipe => recipe.RecipeHeaderProducts);
     }
@@ -19,6 +20,7 @@ public static class RecipeQuery
     {
         return dbContext.Recipes
             .Include(recipe => recipe.RecipeProducts)
+                .ThenInclude(rp=> rp.Product)
             .Include(recipe => recipe.RecipeDescriptions)
             .Include(recipe => recipe.RecipeHeaderProducts)
             .FirstOrDefault(recipe => recipe.Id == id);

@@ -1,4 +1,6 @@
-﻿namespace BackendServer.Models;
+﻿using BackendServer.Models.RecipeProduct;
+
+namespace BackendServer.Models.Recipe;
 
 public class RecipeCreateDto
 {

@@ -22,7 +22,9 @@ public static class ProductMutation
             Protein = dto.Protein,
             Salt = dto.Salt,
             Sugar = dto.Sugar,
-            Unit = dto.Unit
+            Unit = dto.Unit,
+            Amount = dto.Amount
+            
         };
         var defaultUnit = new ProductUnit()
         {
@@ -56,14 +58,15 @@ public static class ProductMutation
         product.Protein = dto.Protein;
         product.Salt = dto.Salt;
         product.Sugar = dto.Sugar;
-        product.Unit = dto.Unit;
+        product.Unit = dto.Unit??"";
+        product.Amount = dto.Amount??0;
         
         var defaultUnit = dbContext.ProductUnits.FirstOrDefault(unit =>
             unit.ProductId == product.Id && unit.IsDefault == true);
         if (defaultUnit is not null)
         {
             defaultUnit.Amount = dto.Amount;
-            defaultUnit.Unit = dto.Unit;
+            defaultUnit.Unit = dto.Unit??"";
         }
         
 // TODO unitVarianten dürfen nicht mehrfach vorkommen

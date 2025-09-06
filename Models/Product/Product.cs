@@ -13,6 +13,9 @@ public class  Product
     public string Unit { get; set; }
     
     [Column(TypeName = "decimal(10,2)")]
+    public decimal Amount { get; set; }
+    
+    [Column(TypeName = "decimal(10,2)")]
     public decimal? Kcal { get; set; }
     
     [Column(TypeName = "decimal(10,2)")]

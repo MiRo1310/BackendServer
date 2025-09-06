@@ -1,5 +1,0 @@
-﻿-  Wie füge ich neue Felder zur Datenbank? Einfach erstellen im Model und es wird automatisch angelegt?
--  Kann ich den Type und den Namen in der Tabelle ändern? Wenn ja was muss ich beachten und wie muss ich das machen?
--  Tabelle umbenennen? Kann ich das einfach in der Datenbank machen und meinen Code anpassen? Oder gibt es eine bessere Möglichkeit?
-
--  Docker auf Remote nutzen,wie? 

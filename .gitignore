@@ -2,3 +2,5 @@
 /obj
 /.idea
 appsettings.Development.json
+
+graphql.config.yml

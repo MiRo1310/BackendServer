@@ -2,7 +2,7 @@
 
 public class Recipe
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
 
     public string Name { get; set; }
 
@@ -11,14 +11,14 @@ public class Recipe
 
     public int TotalKcal { get; set; } = 0;
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; init; }
 
     public DateTime? ModifiedAt { get; set; }
 
 
-    public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; set; } = [];
+    public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; init; } = [];
 
-    public ICollection<RecipeDescription.RecipeDescription> RecipeDescriptions { get; set; } = [];
+    public ICollection<RecipeDescription.RecipeDescription> RecipeDescriptions { get; init; } = [];
 
-    public ICollection<RecipeProductHeader.RecipeProductHeader> RecipeHeaderProducts { get; set; } = [];
+    public ICollection<RecipeProductHeader.RecipeProductHeader> RecipeHeaderProducts { get; init; } = [];
 }

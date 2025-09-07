@@ -4,11 +4,12 @@ namespace BackendServer.Models.Unit;
 
 public class Unit
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
     
-    public string Name { get; set; }
+    [Column(TypeName = "varchar(36)")]
+    public required string Name { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; init; }
     
     public DateTime? ModifiedAt { get; set; }
     

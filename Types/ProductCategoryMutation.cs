@@ -14,11 +14,6 @@ public static class ProductCategoryMutation
         var category = dbContext.ProductCategories.FirstOrDefault(category => category.Name == dto.Name);
 
         if (category is not null)
-            // throw new GraphQLException(
-            //     ErrorBuilder.New()
-            //         .SetMessage("Kategorie existiert bereits.")
-            //         .SetCode("exist")
-            //         .Build());
             return new ResponseObject<ProductCategory>(null, ErrorCode.Exist, true);
 
         var productCategory = new ProductCategory

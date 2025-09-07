@@ -22,7 +22,7 @@ public static class RecipeDescriptionHelper
                     RecipeId = recipe.Id,
                     Position = textArea.Position,
                     Text = textArea.Text,
-                    Header = textArea.Header ?? ""
+                    Header = textArea.Header
                 };
                 
                 dbContext.RecipeDescriptions.Add(text);
@@ -33,7 +33,7 @@ public static class RecipeDescriptionHelper
             if (textAreaUpdate is null) continue;
 
             textAreaUpdate.Text = textArea.Text;
-            textAreaUpdate.Header = textArea.Header ?? "";
+            textAreaUpdate.Header = textArea.Header;
             textAreaUpdate.Position = textArea.Position;
             textAreaUpdate.ModifiedAt = DateTime.UtcNow;
         }

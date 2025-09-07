@@ -3,7 +3,6 @@ using BackendServer.Models.Finance;
 
 namespace BackendServer.Types.Finance;
 
-
 [MutationType]
 
 public static class DescriptionMutation

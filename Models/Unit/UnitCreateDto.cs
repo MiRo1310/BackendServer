@@ -1,6 +1,9 @@
-﻿namespace BackendServer.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class UnitCreateDto
+namespace BackendServer.Models.Unit;
+
+public abstract class UnitCreateDto
 {
-    public string Name { get; set; }
+    [Column(TypeName = "varchar(36)")]
+    public required string Name { get; set; }
 }

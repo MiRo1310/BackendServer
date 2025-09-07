@@ -19,6 +19,12 @@ public static class ProductUnitHelper
 
             if (dtoProductUnit.Id is null)
             {
+                var unitExist = dbContext.ProductUnits.Any(u => u.Unit == dtoProductUnit.Unit);
+                if (unitExist)
+                {
+                    continue;
+                }
+                
                 var newUnit = new ProductUnit
                 {
                     Amount = dtoProductUnit.Amount,

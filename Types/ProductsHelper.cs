@@ -1,5 +1,4 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models.RecipeProduct;
 
 namespace BackendServer.Types;
 

@@ -4,7 +4,7 @@ namespace BackendServer.Models.Finance;
 
 public class TravelCost
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
     
     public DateOnly? Date { get; set; }
     
@@ -16,7 +16,7 @@ public class TravelCost
     [Column(TypeName = "decimal(10,2)")]
     public decimal? Price { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; init; }
     
     public DateTime? ModifiedAt { get; set; }
     

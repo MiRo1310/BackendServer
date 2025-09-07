@@ -1,8 +1,11 @@
-﻿namespace BackendServer.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-public class UnitUpdateDto
+namespace BackendServer.Models.Unit;
+
+public abstract class UnitUpdateDto
 {
     public Guid Id { get; set; }
     
-    public string Name { get; set; }
+    [Column(TypeName = "varchar(36)")]
+    public required string Name { get; set; }
 }

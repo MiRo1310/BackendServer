@@ -2,7 +2,7 @@
 
 namespace BackendServer.Models.Unit;
 
-public abstract class UnitCreateDto
+public class UnitCreateDto
 {
     [Column(TypeName = "varchar(36)")]
     public required string Name { get; set; }

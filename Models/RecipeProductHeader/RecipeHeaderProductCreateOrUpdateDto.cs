@@ -1,6 +1,6 @@
 ﻿namespace BackendServer.Models.RecipeProductHeader;
 
-public abstract class RecipeHeaderProductCreateOrUpdateDto
+public class RecipeHeaderProductCreateOrUpdateDto
 {
     public Guid? Id { get; set; }
 

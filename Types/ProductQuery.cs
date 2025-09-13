@@ -1,7 +1,6 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models.Product;
 using Microsoft.EntityFrameworkCore;
-using BackendServer.Models;
 
 namespace BackendServer.Types;
 
@@ -12,8 +11,9 @@ public static class ProductQuery
     public static IQueryable<Product> GetProducts(AppDbContext dbContext)
     {
         return dbContext.Products
-        .Include(product => product.ProductUnits )
-        .Include(product =>product.RecipeProducts );
+        .Include(p => p.ProductUnits )
+        .Include(p =>p.RecipeProducts )
+        .Include(p=> p.ProductCategory);
     }
 
     public static Product? GetProduct(AppDbContext dbContext, Guid id)
@@ -21,6 +21,7 @@ public static class ProductQuery
         return dbContext.Products
             .Include(product => product.ProductUnits )
             .Include(product =>product.RecipeProducts )
-            .FirstOrDefault(product => product.Id == id);
+            .Include(p => p.ProductCategory)
+            .FirstOrDefault(p => p.Id == id);
     }
 }

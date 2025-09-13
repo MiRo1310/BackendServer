@@ -1,5 +1,4 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models.RecipeProduct;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Types;
@@ -16,7 +15,7 @@ public static class RecipeHelper
             return;
         }
 
-        recipe.TotalKcal = recipe.RecipeProducts.Sum(rp => rp!.Kcal);
+        recipe.TotalKcal = recipe.RecipeProducts.Sum(rp => rp.Kcal);
 
         dbContext.SaveChanges();
     }

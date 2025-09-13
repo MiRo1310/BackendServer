@@ -6,7 +6,6 @@ public  class ResponseObject<T>(T? value, ErrorCode errorCode, bool isError = fa
 {
 
     public  bool IsError { get; set; } = isError;
-    
 
     public T? Data { get; set; }= value;
 

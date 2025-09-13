@@ -4,13 +4,13 @@ namespace BackendServer.Models.Product;
 
 public class  Product
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
     
     [Column(TypeName = "varchar(36)")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
     
     [Column(TypeName = "varchar(36)")]
-    public string Unit { get; set; }
+    public required string Unit { get; set; }
     
     [Column(TypeName = "decimal(10,2)")]
     public decimal Amount { get; set; }
@@ -35,12 +35,15 @@ public class  Product
     
     public Guid? Category { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; init; }
     
     public DateTime? ModifiedAt { get; set; }
    
-    public ICollection<ProductUnit.ProductUnit> ProductUnits { get; set; } = [];
+    public ICollection<ProductUnit.ProductUnit> ProductUnits { get; init; } = [];
 
     [ForeignKey("ProductId")]
-    public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; set; } = [];
+    public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; init; } = [];
+    
+    [ForeignKey("Category")]
+    public ProductCategory.ProductCategory? ProductCategory { get; init; }
 }

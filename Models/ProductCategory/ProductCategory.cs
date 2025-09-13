@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Routing.Constraints;
-
-namespace BackendServer.Models.ProductCategory;
+﻿namespace BackendServer.Models.ProductCategory;
 
 public class ProductCategory
 {
@@ -10,4 +7,6 @@ public class ProductCategory
     public DateTime CreatedAt { get; set; }
     
     public DateTime? ModifiedAt { get; set; }
+    
+    public ICollection<Product.Product> Products { get; set; }
 }

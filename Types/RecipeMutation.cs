@@ -10,7 +10,9 @@ public static class RecipeMutation
     {
         var recipe = dbContext.Recipes.FirstOrDefault(recipe => recipe.Id == id);
         if (recipe is null) return false;
-//TODO alle RecipeProducte müssen entfernt werden 
+        
+        RecipeProductsHelper.RemoveByRecipeId(dbContext, recipe.Id);
+
         dbContext.Recipes.Remove(recipe);
         dbContext.SaveChanges();
         return true;

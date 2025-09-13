@@ -55,4 +55,15 @@ public static class RecipeProductsHelper
             ProductsHelper.SetActiveUnit(dbContext,recipeProduct.ActiveUnitId);
         }
     }
+
+    public static void RemoveByRecipeId(AppDbContext dbContext, Guid recipeId )
+    {
+        var products = dbContext.RecipeProducts.Where(p => p.RecipeId == recipeId);
+        foreach (var recipeProduct in products)
+        {
+            dbContext.RecipeProducts.Remove(recipeProduct);
+        }
+
+        dbContext.SaveChanges();
+    }
 }

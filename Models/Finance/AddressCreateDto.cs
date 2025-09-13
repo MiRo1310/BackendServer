@@ -1,6 +1,6 @@
 ﻿namespace BackendServer.Models.Finance;
 
-public class AddressCreateDto
+public abstract class AddressCreateDto
 {
     public string? Name { get; set; } = "";
     

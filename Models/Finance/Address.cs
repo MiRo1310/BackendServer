@@ -4,7 +4,7 @@ namespace BackendServer.Models.Finance;
 
 public class Address
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
 
     [Column(TypeName = "varchar(255)")]
     public string? Name { get; set; } = "";
@@ -15,9 +15,9 @@ public class Address
     [Column(TypeName = "varchar(255)")]
     public string? City { get; set; } = "";
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; init; }
     
     public DateTime? ModifiedAt { get; set; }
 
-    public ICollection<TravelCost> TravelCost { get; set; } = [];
+    public ICollection<TravelCost> TravelCost { get; init; } = [];
 }

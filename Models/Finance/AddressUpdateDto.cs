@@ -1,6 +1,6 @@
 ﻿namespace BackendServer.Models.Finance;
 
-public class AddressUpdateDto
+public abstract class AddressUpdateDto
 {
     public Guid Id { get; set; }
 

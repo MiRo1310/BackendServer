@@ -1,8 +1,8 @@
-﻿namespace BackendServer.Models;
+﻿namespace BackendServer.Models.Product;
 
-public class ProductCreateDto
+public abstract class ProductCreateDto
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
     
     public decimal? Kcal { get; set; }
     
@@ -20,7 +20,7 @@ public class ProductCreateDto
     
     public decimal Amount { get; set; }
     
-    public string Unit { get; set; }
+    public required string Unit { get; set; }
     
     public ICollection<ProductUnitCreateOrUpdateDto?>? ProductUnits { get; set; } = [];
 }

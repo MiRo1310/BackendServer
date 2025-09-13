@@ -1,6 +1,6 @@
 ﻿namespace BackendServer.Models.Product;
 
-public abstract class ProductCreateDto
+public class ProductCreateDto
 {
     public required string Name { get; set; }
     

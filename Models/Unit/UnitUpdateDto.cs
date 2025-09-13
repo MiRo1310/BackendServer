@@ -2,7 +2,7 @@
 
 namespace BackendServer.Models.Unit;
 
-public abstract class UnitUpdateDto
+public class UnitUpdateDto
 {
     public Guid Id { get; set; }
     

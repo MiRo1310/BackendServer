@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendServer.Migrations.FinanceDb
 {
     [DbContext(typeof(FinanceDbContext))]
-    [Migration("20250819064006_UpdateFinanceDateToString")]
-    partial class UpdateFinanceDateToString
+    [Migration("20250915163601_FixTravelCostRelation")]
+    partial class FixTravelCostRelation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,7 @@ namespace BackendServer.Migrations.FinanceDb
                         .HasColumnType("char(36)");
 
                     b.Property<string>("City")
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -41,19 +41,34 @@ namespace BackendServer.Migrations.FinanceDb
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Street")
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("BackendServer.Models.Finance.Description", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Descriptions");
+                });
+
             modelBuilder.Entity("BackendServer.Models.Finance.TravelCost", b =>
                 {
-                    b.Property<Guid?>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -63,22 +78,21 @@ namespace BackendServer.Migrations.FinanceDb
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Date")
-                        .HasColumnType("longtext");
+                    b.Property<DateOnly?>("Date")
+                        .HasColumnType("date");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId")
-                        .IsUnique();
+                    b.HasIndex("AddressId");
 
                     b.ToTable("TravelCost");
                 });
@@ -87,15 +101,14 @@ namespace BackendServer.Migrations.FinanceDb
                 {
                     b.HasOne("BackendServer.Models.Finance.Address", "Address")
                         .WithMany("TravelCost")
-                        .HasForeignKey("BackendServer.Models.Finance.TravelCost", "AddressId");
+                        .HasForeignKey("AddressId");
 
                     b.Navigation("Address");
                 });
 
             modelBuilder.Entity("BackendServer.Models.Finance.Address", b =>
                 {
-                    b.Navigation("TravelCost")
-                        .IsRequired();
+                    b.Navigation("TravelCost");
                 });
 #pragma warning restore 612, 618
         }

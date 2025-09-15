@@ -20,5 +20,5 @@ public class TravelCost
     
     public DateTime? ModifiedAt { get; set; }
     
-    public Address Address { get; set; }
+    public Address? Address { get; set; }
 }

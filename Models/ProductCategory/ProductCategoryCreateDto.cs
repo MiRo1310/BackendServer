@@ -1,6 +1,6 @@
-﻿namespace BackendServer.Models;
+﻿namespace BackendServer.Models.ProductCategory;
 
 public class ProductCategoryCreateDto
 {
-    public string Name { get; set; }
+    public string Name { get; set; } ="";
 }

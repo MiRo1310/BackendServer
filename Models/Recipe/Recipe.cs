@@ -1,10 +1,13 @@
-﻿namespace BackendServer.Models.Recipe;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BackendServer.Models.Recipe;
 
 public class Recipe
 {
     public Guid Id { get; init; }
 
-    public string Name { get; set; }
+    [Column(TypeName = "varchar(255)")] 
+    public string Name { get; set; } = "";
 
     public int? Portions { get; set; }
     

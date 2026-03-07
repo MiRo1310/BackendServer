@@ -14,8 +14,6 @@ public class RecipeProductsCreateDto
     
     public string? Unit { get; set; }
     
-    public int ProductPosition { get; set; }
-    
     public int GroupPosition { get; set; }
     
     public Guid ActiveUnitId { get; set; }

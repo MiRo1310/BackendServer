@@ -21,8 +21,6 @@ public class RecipeProduct
     
     public Guid ActiveUnitId { get; set; }
     
-    public int ProductPosition { get; set; }
-    
     public int GroupPosition { get; set; }
     
     public DateTime CreatedAt { get; set; }

@@ -25,7 +25,6 @@ public static class RecipeProductsHelper
                     Unit = recipeProduct.Unit ?? "",
                     Description = recipeProduct.Description ?? "",
                     ProductId = recipeProduct.ProductId,
-                    ProductPosition = recipeProduct.ProductPosition,
                     GroupPosition = recipeProduct.GroupPosition,
                     ActiveUnitId = recipeProduct.ActiveUnitId,
                     Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, recipeProduct.Amount??0)
@@ -45,7 +44,6 @@ public static class RecipeProductsHelper
             productUpdate.Unit = recipeProduct.Unit ?? productUpdate.Unit;
             productUpdate.Description = recipeProduct.Description ?? productUpdate.Description;
             productUpdate.ProductId = recipeProduct.ProductId;
-            productUpdate.ProductPosition = recipeProduct.ProductPosition;
             productUpdate.GroupPosition = recipeProduct.GroupPosition;
             productUpdate.ModifiedAt = DateTime.UtcNow;
             productUpdate.ActiveUnitId = recipeProduct.ActiveUnitId;

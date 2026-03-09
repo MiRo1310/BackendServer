@@ -1,4 +1,5 @@
 ﻿using BackendServer.Data;
+using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.ProductCategory;
 using Microsoft.EntityFrameworkCore;
 

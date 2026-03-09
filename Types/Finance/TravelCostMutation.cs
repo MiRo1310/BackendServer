@@ -1,4 +1,5 @@
 ﻿using BackendServer.Data;
+using BackendServer.Models.Entities.TravelCost;
 using BackendServer.Models.Finance;
 
 namespace BackendServer.Types.Finance;

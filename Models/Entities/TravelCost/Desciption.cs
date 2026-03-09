@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models.Finance;
+namespace BackendServer.Models.Entities.Recipes;
 
 public class Description
 {

@@ -10,9 +10,7 @@ public class RecipeProductsCreateDto
     
     public string? Description { get; set; }
     
-    public decimal? Amount { get; set; }
-    
-    public string? Unit { get; set; }
+    public decimal Amount { get; set; }
     
     public int GroupPosition { get; set; }
     

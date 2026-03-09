@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models.RecipeProduct;
+namespace BackendServer.Models.Entities.Recipes;
 
 public class RecipeProduct
 {
@@ -10,14 +10,16 @@ public class RecipeProduct
     
     public Guid ProductId { get; set; }
 
+    [Column(TypeName = "varchar(255)")]
     public string Description { get; set; } = "";
     
     [Column(TypeName = "decimal(10,2)")]
-    public decimal? Amount { get; set; }
+    public decimal Amount { get; set; }
     
     public int Kcal { get; set; }
     
-    public string Unit { get; set; }
+    [Column(TypeName = "varchar(36)")]
+    public required string Unit { get; set; }
     
     public Guid ActiveUnitId { get; set; }
     
@@ -28,7 +30,7 @@ public class RecipeProduct
     public DateTime? ModifiedAt { get; set; }
     
     
-    public Recipe.Recipe? Recipe { get; set; }
+    public Entities.Recipes.Recipe? Recipe { get; set; }
    
-    public Product.Product? Product { get; set; }
+    public Entities.Recipes.Product? Product { get; set; }
 }

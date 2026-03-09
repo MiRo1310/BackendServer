@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models.Product;
+namespace BackendServer.Models.Entities.Recipes;
 
 public class  Product
 {
@@ -39,11 +39,11 @@ public class  Product
     
     public DateTime? ModifiedAt { get; set; }
    
-    public ICollection<ProductUnit.ProductUnit> ProductUnits { get; init; } = [];
+    public ICollection<ProductUnit> ProductUnits { get; init; } = [];
 
     [ForeignKey("ProductId")]
-    public ICollection<RecipeProduct.RecipeProduct> RecipeProducts { get; init; } = [];
+    public ICollection<RecipeProduct> RecipeProducts { get; init; } = [];
     
     [ForeignKey("Category")]
-    public ProductCategory.ProductCategory? ProductCategory { get; init; }
+    public ProductCategory? ProductCategory { get; init; }
 }

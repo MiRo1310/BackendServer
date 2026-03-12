@@ -28,7 +28,8 @@ public static class RecipeProductsHelper
                     ProductId = recipeProduct.ProductId,
                     GroupPosition = recipeProduct.GroupPosition,
                     ActiveUnitId = recipeProduct.ActiveUnitId,
-                    Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, recipeProduct.Amount)
+                    Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, recipeProduct.Amount),
+                    SortOrder =  recipeProduct.SortOrder
                     
                 };
 
@@ -48,6 +49,7 @@ public static class RecipeProductsHelper
             productUpdate.GroupPosition = recipeProduct.GroupPosition;
             productUpdate.ModifiedAt = DateTime.UtcNow;
             productUpdate.ActiveUnitId = recipeProduct.ActiveUnitId;
+            productUpdate.SortOrder = recipeProduct.SortOrder;
            
             productUpdate.Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, productUpdate.Amount);
             

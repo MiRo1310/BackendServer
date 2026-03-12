@@ -17,4 +17,6 @@ public class RecipeProductsCreateDto
     public Guid ActiveUnitId { get; set; }
     
     public decimal? Factor { get; set; }
+    
+    public int SortOrder { get; set; }
 }

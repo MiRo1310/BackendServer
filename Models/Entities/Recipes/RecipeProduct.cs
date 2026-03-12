@@ -13,6 +13,8 @@ public class RecipeProduct
     [Column(TypeName = "varchar(255)")]
     public string Description { get; set; } = "";
     
+    public int SortOrder { get; set; }
+    
     [Column(TypeName = "decimal(10,2)")]
     public decimal Amount { get; set; }
     
@@ -28,7 +30,6 @@ public class RecipeProduct
     public DateTime CreatedAt { get; set; }
     
     public DateTime? ModifiedAt { get; set; }
-    
     
     public Entities.Recipes.Recipe? Recipe { get; set; }
    

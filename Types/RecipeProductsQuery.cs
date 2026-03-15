@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Types;
 
+[QueryType]
 public static class RecipeProductsQuery
 {
     public static IQueryable<RecipeProduct> GetRecipeProducts(AppDbContext dbContext)

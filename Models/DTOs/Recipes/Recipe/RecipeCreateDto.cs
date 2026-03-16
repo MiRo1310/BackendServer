@@ -1,4 +1,5 @@
-﻿using BackendServer.Models.RecipeProduct;
+﻿using BackendServer.Models.RecipeDescription;
+using BackendServer.Models.RecipeProduct;
 using BackendServer.Models.RecipeProductHeader;
 
 namespace BackendServer.Models.Recipe;

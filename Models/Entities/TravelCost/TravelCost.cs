@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using BackendServer.Models.Entities.Recipes;
 
-namespace BackendServer.Models.Finance;
+namespace BackendServer.Models.Entities.TravelCost;
 
 public class TravelCost
 {
@@ -20,5 +21,6 @@ public class TravelCost
     
     public DateTime? ModifiedAt { get; set; }
     
+    [Column(TypeName = "varchar(255)")]
     public Address Address { get; set; }
 }

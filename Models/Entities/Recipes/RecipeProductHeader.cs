@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models.RecipeProductHeader;
+namespace BackendServer.Models.Entities.Recipes;
 
 public class RecipeProductHeader
 {
@@ -8,7 +8,8 @@ public class RecipeProductHeader
 
     public Guid RecipeId { get; set; }
 
-    public string Text { get; set; }
+    [Column(TypeName = "varchar(255)")]
+    public string Text { get; set; } ="";
 
     public int Position { get; set; }
 
@@ -16,5 +17,5 @@ public class RecipeProductHeader
 
     public DateTime? ModifiedAt { get; set; }
 
-    public Recipe.Recipe Recipe { get; set; }
+    public Recipe? Recipe { get; set; }
 }

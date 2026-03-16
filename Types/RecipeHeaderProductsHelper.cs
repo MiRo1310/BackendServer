@@ -1,6 +1,5 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models;
-using BackendServer.Models.Recipe;
+using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.RecipeProductHeader;
 
 namespace BackendServer.Types;
@@ -15,13 +14,14 @@ public static class RecipeHeaderProductsHelper
             if (recipeHeaderProduct is null) continue;
             if (recipeHeaderProduct.Id is null)
             {
-                var productHeader = new RecipeProductHeader()
+                var productHeader = new RecipeProductHeader
                 {
                     CreatedAt = DateTime.UtcNow,
                     Id = Guid.NewGuid(),
                     RecipeId = recipe.Id,
                     Position = recipeHeaderProduct.Position,
-                    Text = recipeHeaderProduct.Text
+                    Text = recipeHeaderProduct.Text,
+                    Recipe = null
                 };
                 
                 dbContext.ProductHeaders.Add(productHeader);

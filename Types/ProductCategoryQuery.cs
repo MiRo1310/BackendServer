@@ -1,4 +1,5 @@
 ﻿using BackendServer.Data;
+using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.ProductCategory;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,8 @@ public static class ProductCategoryQuery
     public static IQueryable<ProductCategory> GetProductCategories(AppDbContext dbContext)
     {
         return dbContext.ProductCategories
-            .Include(c=>c.Products);
+            .Include(c=>c.Products)
+            .OrderBy(c=>c.Name);
     } 
     
     public static ProductCategory? GetProductCategoryById(AppDbContext dbContext, Guid id)

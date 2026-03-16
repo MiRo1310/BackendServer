@@ -10,15 +10,13 @@ public class RecipeProductsCreateDto
     
     public string? Description { get; set; }
     
-    public decimal? Amount { get; set; }
-    
-    public string? Unit { get; set; }
-    
-    public int ProductPosition { get; set; }
+    public decimal Amount { get; set; }
     
     public int GroupPosition { get; set; }
     
     public Guid ActiveUnitId { get; set; }
     
     public decimal? Factor { get; set; }
+    
+    public int SortOrder { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models.Unit;
+namespace BackendServer.Models.Entities.Recipes;
 
 public class Unit
 {

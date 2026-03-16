@@ -1,7 +1,7 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models;
+using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Product;
-using BackendServer.Models.ProductUnit;
 
 namespace BackendServer.Types;
 

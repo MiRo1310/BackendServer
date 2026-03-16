@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models.ProductUnit;
+namespace BackendServer.Models.Entities.Recipes;
 
 public class ProductUnit
 {
     public Guid Id { get; set; }
     
     [Column(TypeName = "varchar(20)")]
-    public string Unit { get; set; }
+    public required string Unit { get; set; }
     
     [Column(TypeName = "decimal(12,4)")]
     public decimal? Amount { get; set; }
@@ -16,7 +16,7 @@ public class ProductUnit
     
     public bool IsDefault { get; set; }
 
-    public bool Active { get; set; } = false;
+    public bool Active { get; set; }
     
     [Column(TypeName = "decimal(12,4)")]
     public decimal Faktor { get; set; }
@@ -25,5 +25,5 @@ public class ProductUnit
     
     public DateTime? ModifiedAt { get; set; }
     
-    public Product.Product? Product { get; set; }
+    public Product? Product { get; set; }
 }

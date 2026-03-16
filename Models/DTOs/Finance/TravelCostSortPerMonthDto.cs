@@ -1,4 +1,6 @@
-﻿namespace BackendServer.Models.Finance;
+﻿using BackendServer.Models.Entities.TravelCost;
+
+namespace BackendServer.Models.Finance;
 
 public class TravelCostSortPerMonthDto
 {

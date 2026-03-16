@@ -1,6 +1,6 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models;
-using BackendServer.Models.ProductUnit;
+using BackendServer.Models.Entities.Recipes;
 
 namespace BackendServer.Types;
 

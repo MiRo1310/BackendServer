@@ -1,4 +1,5 @@
 ﻿using BackendServer.Data;
+using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Recipe;
 using BackendServer.Models.RecipeProduct;
 
@@ -22,13 +23,13 @@ public static class RecipeProductsHelper
                     Id = Guid.NewGuid(),
                     RecipeId = recipe.Id,
                     Amount = recipeProduct.Amount,
-                    Unit = recipeProduct.Unit ?? "",
+                    Unit = GetUnitName(dbContext, recipeProduct.ActiveUnitId),
                     Description = recipeProduct.Description ?? "",
                     ProductId = recipeProduct.ProductId,
-                    ProductPosition = recipeProduct.ProductPosition,
                     GroupPosition = recipeProduct.GroupPosition,
                     ActiveUnitId = recipeProduct.ActiveUnitId,
-                    Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, recipeProduct.Amount??0)
+                    Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, recipeProduct.Amount),
+                    SortOrder =  recipeProduct.SortOrder
                     
                 };
 
@@ -42,18 +43,23 @@ public static class RecipeProductsHelper
             if (productUpdate is null) continue;
 
             productUpdate.Amount = recipeProduct.Amount;
-            productUpdate.Unit = recipeProduct.Unit ?? productUpdate.Unit;
+            productUpdate.Unit = GetUnitName(dbContext, recipeProduct.ActiveUnitId);
             productUpdate.Description = recipeProduct.Description ?? productUpdate.Description;
             productUpdate.ProductId = recipeProduct.ProductId;
-            productUpdate.ProductPosition = recipeProduct.ProductPosition;
             productUpdate.GroupPosition = recipeProduct.GroupPosition;
             productUpdate.ModifiedAt = DateTime.UtcNow;
             productUpdate.ActiveUnitId = recipeProduct.ActiveUnitId;
+            productUpdate.SortOrder = recipeProduct.SortOrder;
            
-            productUpdate.Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, productUpdate.Amount??0);
+            productUpdate.Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, productUpdate.Amount);
             
             ProductsHelper.SetActiveUnit(dbContext,recipeProduct.ActiveUnitId);
         }
+    }
+    
+    private static string GetUnitName(AppDbContext dbContext, Guid unitId)
+    {
+        return dbContext.ProductUnits.FirstOrDefault(u => u.Id == unitId)?.Unit ?? "Not found";
     }
 
     public static void RemoveByRecipeId(AppDbContext dbContext, Guid recipeId )

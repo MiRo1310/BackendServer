@@ -1,9 +1,7 @@
-﻿
-using BackendServer.Data;
+﻿using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
 
-
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [QueryType]
 public static class ProductUnitQuery

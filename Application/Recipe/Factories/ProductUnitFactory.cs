@@ -2,9 +2,9 @@
 using BackendServer.Models;
 using BackendServer.Models.Entities.Recipes;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.Factories;
 
-public static class ProductUnitHelper
+public static class ProductUnitFactory
 {
     public static void ProcessUnit(AppDbContext dbContext, ICollection<ProductUnitCreateOrUpdateDto?> productUnits,
         Guid productId, ProductUnit? defaultUnit)

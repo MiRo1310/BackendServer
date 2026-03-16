@@ -2,11 +2,11 @@
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.RecipeProductHeader;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.Factories;
 
-public static class RecipeHeaderProductsHelper
+public static class RecipeProductHeaderFactory
 {
-    public static void ProcessProductsHeader(AppDbContext dbContext, Recipe recipe,
+    public static void ProcessProductsHeader(AppDbContext dbContext, Models.Entities.Recipes.Recipe recipe,
         ICollection<RecipeHeaderProductCreateOrUpdateDto?> headerProducts)
     {
         foreach (var recipeHeaderProduct in headerProducts)
@@ -35,5 +35,16 @@ public static class RecipeHeaderProductsHelper
             headerProduct.Position = recipeHeaderProduct.Position;
             headerProduct.ModifiedAt = DateTime.UtcNow;
         }
+    }
+
+
+    public static void RemoveProductHeader(AppDbContext dbContext, Guid recipeId)
+    {
+        var productHeaders = dbContext.ProductHeaders.Where(d => d.RecipeId == recipeId);
+
+        if (!productHeaders.Any()) return;
+        
+        dbContext.ProductHeaders.RemoveRange(productHeaders);
+        dbContext.SaveChanges();
     }
 }

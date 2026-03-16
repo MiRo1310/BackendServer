@@ -1,7 +1,7 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models.RecipeGroup;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [MutationType]
 public static class RecipeGroupMutation

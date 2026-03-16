@@ -1,14 +1,12 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.Recipe;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [QueryType]
 public static class RecipeQuery
 {
-    public static IQueryable<Recipe> GetRecipes(AppDbContext dbContext)
+    public static IQueryable<Models.Entities.Recipes.Recipe> GetRecipes(AppDbContext dbContext)
     {
         return dbContext.Recipes
             .Include(recipe => recipe.RecipeProducts)
@@ -17,7 +15,7 @@ public static class RecipeQuery
             .Include(recipe => recipe.RecipeHeaderProducts);
     }
 
-    public static Recipe? GetRecipe(AppDbContext dbContext, Guid id)
+    public static Models.Entities.Recipes.Recipe? GetRecipe(AppDbContext dbContext, Guid id)
     {
         return dbContext.Recipes
             .Include(recipe => recipe.RecipeProducts)

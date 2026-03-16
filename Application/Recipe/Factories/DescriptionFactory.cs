@@ -1,10 +1,10 @@
 ﻿using BackendServer.Data;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.Factories;
 
-public static class Descriptions
+public static class DescriptionFactory
 {
-    public static void ReSetPositions(AppDbContext dbContext, Guid recipeId)
+    public static void ResetPositions(AppDbContext dbContext, Guid recipeId)
     {
         var descriptions = dbContext.RecipeDescriptions
             .Where(description => description.RecipeId == recipeId)

@@ -1,14 +1,12 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models;
 using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.Recipe;
 using BackendServer.Models.RecipeDescription;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.Factories;
 
-public static class RecipeDescriptionHelper
+public static class RecipeDescriptionFactory
 {
-    public static void ProcessDescription(AppDbContext dbContext, Recipe recipe,
+    public static void ProcessDescription(AppDbContext dbContext, Models.Entities.Recipes.Recipe recipe,
         ICollection<RecipeDescriptionCreateOrUpdateDto?> textAreas)
     {
         foreach (var textArea in textAreas)
@@ -38,5 +36,15 @@ public static class RecipeDescriptionHelper
             textAreaUpdate.Position = textArea.Position;
             textAreaUpdate.ModifiedAt = DateTime.UtcNow;
         }
+    }
+
+    public static void RemoveDescription(AppDbContext dbContext, Guid recipeId)
+    {
+        var recipeDescriptions = dbContext.RecipeDescriptions.Where(d => d.RecipeId == recipeId);
+
+        if (!recipeDescriptions.Any()) return;
+        
+        dbContext.RecipeDescriptions.RemoveRange(recipeDescriptions);
+        dbContext.SaveChanges();
     }
 }

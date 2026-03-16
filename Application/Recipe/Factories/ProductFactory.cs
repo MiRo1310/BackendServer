@@ -1,8 +1,8 @@
 ﻿using BackendServer.Data;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.Factories;
 
-public static class ProductsHelper
+public static class ProductFactory
 {
     public static void SetActiveUnit(AppDbContext dbContext, Guid id)
     {

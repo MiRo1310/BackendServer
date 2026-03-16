@@ -1,9 +1,9 @@
-﻿using BackendServer.Data;
-using BackendServer.Models;
+﻿using BackendServer.Application.Recipe.Factories;
+using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Product;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [MutationType]
 public static class ProductMutation
@@ -38,7 +38,7 @@ public static class ProductMutation
         };
         dbContext.ProductUnits.Add(defaultUnit);
 
-        if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
+        if (dto.ProductUnits is not null) ProductUnitFactory.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
 
         dbContext.Products.Add(product);
         dbContext.SaveChanges();
@@ -69,7 +69,7 @@ public static class ProductMutation
             defaultUnit.Unit = dto.Unit??"";
         }
 
-        if (dto.ProductUnits is not null) ProductUnitHelper.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
+        if (dto.ProductUnits is not null) ProductUnitFactory.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
 
         dbContext.SaveChanges();
         return product;

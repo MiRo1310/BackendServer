@@ -1,9 +1,8 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.RecipeProduct;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [QueryType]
 public static class RecipeProductsQuery

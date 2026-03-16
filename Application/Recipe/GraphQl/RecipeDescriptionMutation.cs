@@ -1,5 +1,7 @@
-﻿using BackendServer.Data;
-namespace BackendServer.Types;
+﻿using BackendServer.Application.Recipe.Factories;
+using BackendServer.Data;
+
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [MutationType]
 
@@ -17,7 +19,7 @@ public static class RecipeDescriptionMutation
      dbContext.RecipeDescriptions.Remove(textarea);
      dbContext.SaveChanges();
      
-     Descriptions.ReSetPositions(dbContext, textarea.RecipeId);
+     DescriptionFactory.ResetPositions(dbContext, textarea.RecipeId);
 
      return true;
  }

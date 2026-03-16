@@ -1,21 +1,22 @@
 ﻿using BackendServer.Data;
 using BackendServer.Enum;
 using BackendServer.Models;
+using BackendServer.Models.DTOs;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.ProductCategory;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [MutationType]
 public static class ProductCategoryMutation
 {
-    public static ResponseObject<ProductCategory> CreateProductCategory(AppDbContext dbContext,
+    public static Response<ProductCategory> CreateProductCategory(AppDbContext dbContext,
         ProductCategoryCreateDto dto)
     {
         var category = dbContext.ProductCategories.FirstOrDefault(category => category.Name == dto.Name);
 
         if (category is not null)
-            return new ResponseObject<ProductCategory>(null, ErrorCode.Exist, true);
+            return new Response<ProductCategory>(null, ErrorCode.Exist, true);
 
         var productCategory = new ProductCategory
         {
@@ -26,7 +27,7 @@ public static class ProductCategoryMutation
         dbContext.ProductCategories.Add(productCategory);
         dbContext.SaveChanges();
 
-        return new ResponseObject<ProductCategory>(productCategory, ErrorCode.Success);
+        return new Response<ProductCategory>(productCategory, ErrorCode.Success);
     }
 
     public static bool RemoveProductCategory(AppDbContext dbContext, Guid id)

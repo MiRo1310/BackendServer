@@ -1,13 +1,12 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.Recipe;
 using BackendServer.Models.RecipeProduct;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.Factories;
 
-public static class RecipeProductsHelper
+public static class RecipeProductsFactory
 {
-    public static void ProcessProducts(AppDbContext dbContext, Recipe recipe,
+    public static void ProcessProducts(AppDbContext dbContext, Models.Entities.Recipes.Recipe recipe,
         ICollection<RecipeProductsCreateDto?> products)
     {
         foreach (var recipeProduct in products)
@@ -28,14 +27,14 @@ public static class RecipeProductsHelper
                     ProductId = recipeProduct.ProductId,
                     GroupPosition = recipeProduct.GroupPosition,
                     ActiveUnitId = recipeProduct.ActiveUnitId,
-                    Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, recipeProduct.Amount),
+                    Kcal = ProductFactory.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, recipeProduct.Amount),
                     SortOrder =  recipeProduct.SortOrder
                     
                 };
 
                 dbContext.RecipeProducts.Add(product);
                 
-                ProductsHelper.SetActiveUnit(dbContext,recipeProduct.ActiveUnitId);
+                ProductFactory.SetActiveUnit(dbContext,recipeProduct.ActiveUnitId);
                 continue;
             }
 
@@ -51,9 +50,9 @@ public static class RecipeProductsHelper
             productUpdate.ActiveUnitId = recipeProduct.ActiveUnitId;
             productUpdate.SortOrder = recipeProduct.SortOrder;
            
-            productUpdate.Kcal = ProductsHelper.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, productUpdate.Amount);
+            productUpdate.Kcal = ProductFactory.CalculateKcal(dbContext, recipeProduct.ActiveUnitId, productUpdate.Amount);
             
-            ProductsHelper.SetActiveUnit(dbContext,recipeProduct.ActiveUnitId);
+            ProductFactory.SetActiveUnit(dbContext,recipeProduct.ActiveUnitId);
         }
     }
     

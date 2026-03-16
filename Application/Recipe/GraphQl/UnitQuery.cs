@@ -1,8 +1,7 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.Unit;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [QueryType]
 public static class UnitQuery

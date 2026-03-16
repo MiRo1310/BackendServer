@@ -1,6 +1,6 @@
 ﻿using BackendServer.Data;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.GraphQl;
 
 [MutationType]
 

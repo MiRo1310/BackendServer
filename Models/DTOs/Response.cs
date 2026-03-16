@@ -1,8 +1,8 @@
 ﻿using BackendServer.Enum;
 
-namespace BackendServer.Types;
+namespace BackendServer.Models.DTOs;
 
-public  class ResponseObject<T>(T? value, ErrorCode errorCode, bool isError = false  )
+public  class Response<T>(T? value, ErrorCode errorCode, bool isError = false  )
 {
 
     public  bool IsError { get; set; } = isError;

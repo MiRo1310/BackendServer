@@ -1,9 +1,9 @@
 ﻿using BackendServer.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackendServer.Types;
+namespace BackendServer.Application.Recipe.Factories;
 
-public static class RecipeHelper
+public static class RecipeFactory
 {
     public static void SetTotalKcalByRecipeId(AppDbContext dbContext, Guid recipeId)
     {

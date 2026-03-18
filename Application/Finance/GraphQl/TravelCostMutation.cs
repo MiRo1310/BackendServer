@@ -2,7 +2,7 @@
 using BackendServer.Models.Entities.TravelCost;
 using BackendServer.Models.Finance;
 
-namespace BackendServer.Types.Finance;
+namespace BackendServer.Application.Finance.GraphQl;
 
 [MutationType]
 public static class TravelCostMutation

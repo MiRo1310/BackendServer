@@ -21,5 +21,5 @@ public class TravelCost
     public DateTime? ModifiedAt { get; set; }
 
     [Column(TypeName = "varchar(255)")] 
-    public required Address Address { get; set; }
+    public Address? Address { get; set; }
 }

@@ -2,6 +2,7 @@
 
 namespace BackendServer.Models.Entities.Recipes;
 
+[Table("RecipeProductHeaders")]
 public class RecipeProductHeader
 {
     public Guid Id { get; set; }

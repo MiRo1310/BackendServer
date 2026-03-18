@@ -24,7 +24,7 @@ public class AppDbContext : DbContext
 
     public DbSet<ProductUnit> ProductUnits { get; set; }
 
-    public DbSet<RecipeProductHeader> ProductHeaders { get; set; }
+    public DbSet<RecipeProductHeader> RecipeProductHeaders { get; set; }
 
     public DbSet<RecipeProduct> RecipeProducts { get; set; }
 

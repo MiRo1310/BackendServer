@@ -24,11 +24,11 @@ public static class RecipeProductHeaderFactory
                     Recipe = null
                 };
                 
-                dbContext.ProductHeaders.Add(productHeader);
+                dbContext.RecipeProductHeaders.Add(productHeader);
                 continue;
             }
 
-            var headerProduct = dbContext.ProductHeaders.FirstOrDefault(header => header.Id == recipeHeaderProduct.Id);
+            var headerProduct = dbContext.RecipeProductHeaders.FirstOrDefault(header => header.Id == recipeHeaderProduct.Id);
             if (headerProduct is null) continue;
 
             headerProduct.Text = recipeHeaderProduct.Text;
@@ -40,11 +40,11 @@ public static class RecipeProductHeaderFactory
 
     public static void RemoveProductHeader(AppDbContext dbContext, Guid recipeId)
     {
-        var productHeaders = dbContext.ProductHeaders.Where(d => d.RecipeId == recipeId);
+        var productHeaders = dbContext.RecipeProductHeaders.Where(d => d.RecipeId == recipeId);
 
         if (!productHeaders.Any()) return;
         
-        dbContext.ProductHeaders.RemoveRange(productHeaders);
+        dbContext.RecipeProductHeaders.RemoveRange(productHeaders);
         dbContext.SaveChanges();
     }
 }

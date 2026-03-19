@@ -29,7 +29,7 @@ public static class RecipeMutation
             Id = Guid.NewGuid(),
             Name = dto.Name,
             Portions = dto.Portions,
-            RecipeCategory = dto.RecipeCategoryId,
+            RecipeCategoryId = dto.RecipeCategoryId,
             PreparationTimeMin = dto.PreparationTimeMin,
             TotalTimeMin = dto.TotalTimeMin,
         };
@@ -59,7 +59,7 @@ public static class RecipeMutation
         recipe.Name = dto.Name ?? recipe.Name;
         recipe.Portions = dto.Portions ?? recipe.Portions;
         recipe.ModifiedAt = DateTime.UtcNow;
-        recipe.RecipeCategory = dto.RecipeCategoryId ?? recipe.RecipeCategory;
+        recipe.RecipeCategoryId = dto.RecipeCategoryId ?? recipe.RecipeCategoryId;
         recipe.PreparationTimeMin = dto.PreparationTimeMin ?? recipe.PreparationTimeMin;
         recipe.TotalTimeMin = dto.TotalTimeMin ?? recipe.TotalTimeMin;
 

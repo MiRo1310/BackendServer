@@ -2,7 +2,6 @@
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Product;
 using BackendServer.Models.ProductCategory;
-using BackendServer.Models.Recipe;
 using BackendServer.Models.RecipeProduct;
 using BackendServer.Models.RecipeProductHeader;
 using BackendServer.Models.Unit;
@@ -31,4 +30,6 @@ public class AppDbContext : DbContext
     public DbSet<ProductCategory> ProductCategories { get; set; }
 
     public DbSet<RecipeDescription> RecipeDescriptions { get; set; }
+    
+    public DbSet<RecipeCategory> RecipeCategories { get; set; }
 }

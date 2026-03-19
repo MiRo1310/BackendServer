@@ -2,13 +2,19 @@
 using BackendServer.Models.RecipeProduct;
 using BackendServer.Models.RecipeProductHeader;
 
-namespace BackendServer.Models.Recipe;
+namespace BackendServer.Models.DTOs.Recipes.Recipe;
 
 public class RecipeCreateDto
 {
     public required string Name { get; set; }
 
     public int Portions { get; set; }
+    
+    public Guid? RecipeCategoryId { get; set; }
+    
+    public int? PreparationTimeMin { get; set; } = null;
+    
+    public int? TotalTimeMin { get; set; } = null;
 
     public ICollection<RecipeDescriptionCreateOrUpdateDto?>? RecipeDescriptions { get; set; }
 

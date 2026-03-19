@@ -12,7 +12,8 @@ public static class RecipeQuery
             .Include(recipe => recipe.RecipeProducts)
                 .ThenInclude(rp=> rp.Product)
             .Include(recipe => recipe.RecipeDescriptions)
-            .Include(recipe => recipe.RecipeHeaderProducts);
+            .Include(recipe => recipe.RecipeHeaderProducts)
+            .Include(recipe => recipe.RecipeCategory);
     }
 
     public static Models.Entities.Recipes.Recipe? GetRecipe(AppDbContext dbContext, Guid id)
@@ -22,6 +23,7 @@ public static class RecipeQuery
                 .ThenInclude(rp=> rp.Product)
             .Include(recipe => recipe.RecipeDescriptions)
             .Include(recipe => recipe.RecipeHeaderProducts)
+            .Include(recipe => recipe.RecipeCategory)
             .FirstOrDefault(recipe => recipe.Id == id);
     }
 }

@@ -6,8 +6,14 @@ public class Recipe
 {
     public Guid Id { get; init; }
 
+    public Guid? RecipeCategory { get; set; } = null;
+
     [Column(TypeName = "varchar(255)")] 
     public string Name { get; set; } = "";
+    
+    public int? PreparationTimeMin { get; set; } = null;
+    
+    public int? TotalTimeMin { get; set; } = null;
 
     public int? Portions { get; set; }
 
@@ -16,7 +22,6 @@ public class Recipe
     public DateTime CreatedAt { get; init; }
 
     public DateTime? ModifiedAt { get; set; }
-
 
     public ICollection<RecipeProduct> RecipeProducts { get; init; } = [];
 

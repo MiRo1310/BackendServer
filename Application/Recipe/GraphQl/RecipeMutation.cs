@@ -1,6 +1,6 @@
 ﻿using BackendServer.Application.Recipe.Factories;
 using BackendServer.Data;
-using BackendServer.Models.Recipe;
+using BackendServer.Models.DTOs.Recipes.Recipe;
 
 namespace BackendServer.Application.Recipe.GraphQl;
 
@@ -29,6 +29,9 @@ public static class RecipeMutation
             Id = Guid.NewGuid(),
             Name = dto.Name,
             Portions = dto.Portions,
+            RecipeCategory = dto.RecipeCategoryId,
+            PreparationTimeMin = dto.PreparationTimeMin,
+            TotalTimeMin = dto.TotalTimeMin,
         };
 
         if (dto.RecipeProducts != null)
@@ -56,6 +59,9 @@ public static class RecipeMutation
         recipe.Name = dto.Name ?? recipe.Name;
         recipe.Portions = dto.Portions ?? recipe.Portions;
         recipe.ModifiedAt = DateTime.UtcNow;
+        recipe.RecipeCategory = dto.RecipeCategoryId ?? recipe.RecipeCategory;
+        recipe.PreparationTimeMin = dto.PreparationTimeMin ?? recipe.PreparationTimeMin;
+        recipe.TotalTimeMin = dto.TotalTimeMin ?? recipe.TotalTimeMin;
 
         if (dto.RecipeProducts is not null)
             RecipeProductsFactory.ProcessProducts(dbContext, recipe, dto.RecipeProducts);

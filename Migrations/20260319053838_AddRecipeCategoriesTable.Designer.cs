@@ -4,6 +4,7 @@ using BackendServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260319053838_AddRecipeCategoriesTable")]
+    partial class AddRecipeCategoriesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,7 +157,7 @@ namespace BackendServer.Migrations
                     b.Property<int?>("PreparationTimeMin")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("RecipeCategoryId")
+                    b.Property<Guid?>("RecipeCategory")
                         .HasColumnType("char(36)");
 
                     b.Property<int>("TotalKcal")
@@ -164,8 +167,6 @@ namespace BackendServer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RecipeCategoryId");
 
                     b.ToTable("Recipes");
                 });
@@ -342,15 +343,6 @@ namespace BackendServer.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Recipe", b =>
-                {
-                    b.HasOne("BackendServer.Models.Entities.Recipes.RecipeCategory", "RecipeCategory")
-                        .WithMany()
-                        .HasForeignKey("RecipeCategoryId");
-
-                    b.Navigation("RecipeCategory");
                 });
 
             modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeDescription", b =>

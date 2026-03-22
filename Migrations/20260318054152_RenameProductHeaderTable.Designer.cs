@@ -4,6 +4,7 @@ using BackendServer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260318054152_RenameProductHeaderTable")]
+    partial class RenameProductHeaderTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,44 +154,12 @@ namespace BackendServer.Migrations
                     b.Property<int?>("Portions")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PreparationTimeMin")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("RecipeCategoryId")
-                        .HasColumnType("char(36)");
-
                     b.Property<int>("TotalKcal")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TotalTimeMin")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RecipeCategoryId");
 
                     b.ToTable("Recipes");
-                });
-
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeCategory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RecipeCategories");
                 });
 
             modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeDescription", b =>
@@ -342,15 +313,6 @@ namespace BackendServer.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Recipe", b =>
-                {
-                    b.HasOne("BackendServer.Models.Entities.Recipes.RecipeCategory", "RecipeCategory")
-                        .WithMany()
-                        .HasForeignKey("RecipeCategoryId");
-
-                    b.Navigation("RecipeCategory");
                 });
 
             modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeDescription", b =>

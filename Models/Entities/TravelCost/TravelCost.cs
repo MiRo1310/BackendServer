@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using BackendServer.Models.Entities.Recipes;
 
 namespace BackendServer.Models.Entities.TravelCost;
 
@@ -20,7 +19,6 @@ public class TravelCost
     public DateTime CreatedAt { get; init; }
     
     public DateTime? ModifiedAt { get; set; }
-    
-    [Column(TypeName = "varchar(255)")]
-    public Address Address { get; set; }
+
+    public Address? Address { get; set; }
 }

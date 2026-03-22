@@ -2,7 +2,7 @@
 
 ## Migration
 
-Create a migration
+Eine Migration erstellen
 
 DbContext options:
 - FinanceDbContext
@@ -12,8 +12,14 @@ DbContext options:
 dotnet ef migrations add {NAME} --context AppDbContext
 ```
 
-Apply the migration
+Die Migration anwenden
 
 ```
 dotnet ef database update --context AppDbContext
+```
+
+Eine SQL-Skript aus der Migration generieren, um die Migration manuell auf der Datenbank auszuführen, bzw zu sehen was die Migration macht.
+
+```
+ dotnet ef migrations script --context AppDbContext --output migration.sql
 ```

@@ -2,8 +2,8 @@
 using BackendServer.Enum;
 using BackendServer.Models;
 using BackendServer.Models.DTOs;
+using BackendServer.Models.DTOs.Recipes.RecipeCategory;
 using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.ProductCategory;
 
 namespace BackendServer.Application.Recipe.GraphQl;
 
@@ -11,7 +11,7 @@ namespace BackendServer.Application.Recipe.GraphQl;
 public static class RecipeCategoryMutation
 {
     public static Response<RecipeCategory> CreateRecipeCategory(AppDbContext dbContext,
-        ProductCategoryCreateDto dto)
+        RecipeCategoryCreateDto dto)
     {
         var category = dbContext.RecipeCategories.FirstOrDefault(category => category.Name == dto.Name);
 
@@ -42,7 +42,7 @@ public static class RecipeCategoryMutation
     }
 
 
-    public static RecipeCategory? UpdateRecipeCategory(AppDbContext dbContext, ProductCategoryUpdateDto dto)
+    public static RecipeCategory? UpdateRecipeCategory(AppDbContext dbContext, RecipeCategoryUpdateDto dto)
     {
         var recipeCategory = dbContext.RecipeCategories.FirstOrDefault(category => category.Id == dto.Id);
 

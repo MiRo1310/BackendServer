@@ -45,6 +45,5 @@ public static class RecipeDescriptionFactory
         if (!recipeDescriptions.Any()) return;
         
         dbContext.RecipeDescriptions.RemoveRange(recipeDescriptions);
-        dbContext.SaveChanges();
     }
 }

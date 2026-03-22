@@ -1,4 +1,4 @@
-﻿namespace BackendServer.Models.ProductCategory;
+﻿namespace BackendServer.Models.DTOs.Recipes.ProductCategory;
 
 public class ProductCategoryCreateDto
 {

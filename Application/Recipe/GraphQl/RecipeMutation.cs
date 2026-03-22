@@ -60,8 +60,8 @@ public static class RecipeMutation
         recipe.Portions = dto.Portions ?? recipe.Portions;
         recipe.ModifiedAt = DateTime.UtcNow;
         recipe.RecipeCategoryId = dto.RecipeCategoryId ?? recipe.RecipeCategoryId;
-        recipe.PreparationTimeMin = dto.PreparationTimeMin ?? recipe.PreparationTimeMin;
-        recipe.TotalTimeMin = dto.TotalTimeMin ?? recipe.TotalTimeMin;
+        recipe.PreparationTimeMin = dto.PreparationTimeMin;
+        recipe.TotalTimeMin = dto.TotalTimeMin;
 
         if (dto.RecipeProducts is not null)
             RecipeProductsFactory.ProcessProducts(dbContext, recipe, dto.RecipeProducts);

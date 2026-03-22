@@ -68,7 +68,5 @@ public static class RecipeProductsFactory
         {
             dbContext.RecipeProducts.Remove(recipeProduct);
         }
-
-        dbContext.SaveChanges();
     }
 }

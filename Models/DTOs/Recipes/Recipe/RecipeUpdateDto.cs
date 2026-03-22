@@ -12,7 +12,7 @@ public class RecipeUpdateDto
 
     public string? Name { get; set; }
 
-    public int? Portions { get; set; } = 0;
+    public int? Portions { get; set; } = 1;
     
     public int? PreparationTimeMin { get; set; } = null;
     

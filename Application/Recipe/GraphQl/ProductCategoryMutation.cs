@@ -2,8 +2,8 @@
 using BackendServer.Enum;
 using BackendServer.Models;
 using BackendServer.Models.DTOs;
+using BackendServer.Models.DTOs.Recipes.ProductCategory;
 using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.ProductCategory;
 
 namespace BackendServer.Application.Recipe.GraphQl;
 

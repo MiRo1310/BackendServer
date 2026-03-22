@@ -45,6 +45,5 @@ public static class RecipeProductHeaderFactory
         if (!productHeaders.Any()) return;
         
         dbContext.RecipeProductHeaders.RemoveRange(productHeaders);
-        dbContext.SaveChanges();
     }
 }

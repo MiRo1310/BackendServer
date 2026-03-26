@@ -19,7 +19,7 @@ public static class ProductUnitFactory
 
             if (dtoProductUnit.Id is null)
             {
-                var unitExist = dbContext.ProductUnits.Any(u => u.Unit == dtoProductUnit.Unit);
+                var unitExist = dbContext.ProductUnits.Any(u => u.Unit == dtoProductUnit.Unit && u.ProductId == productId);
                 if (unitExist)
                 {
                     continue;

@@ -6,6 +6,8 @@ namespace BackendServer.Application.Recipe.GraphQl;
 [QueryType]
 public static class UnitQuery
 {
+    [UseSorting]
+    [UseFiltering]
     public static IQueryable<Unit> GetUnits(AppDbContext dbContext)
     {
         return dbContext.Units;

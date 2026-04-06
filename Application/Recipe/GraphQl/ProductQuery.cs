@@ -7,6 +7,8 @@ namespace BackendServer.Application.Recipe.GraphQl;
 [QueryType]
 public static class ProductQuery
 {
+    [UseFiltering]
+    [UseSorting]
     public static IQueryable<Product> GetProducts(AppDbContext dbContext)
     {
         return dbContext.Products
@@ -15,6 +17,7 @@ public static class ProductQuery
             .Include(p => p.ProductCategory);
     }
     
+    [UseFiltering]
     public static Dictionary<string, List<Product>> GetProductsGrouped(AppDbContext dbContext)
     {
       return dbContext.Products

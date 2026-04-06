@@ -8,6 +8,8 @@ namespace BackendServer.Application.Recipe.GraphQl;
 
 public static class ProductCategoryQuery
 {
+    [UseSorting]
+    [UseFiltering]
     public static IQueryable<ProductCategory> GetProductCategories(AppDbContext dbContext)
     {
         return dbContext.ProductCategories

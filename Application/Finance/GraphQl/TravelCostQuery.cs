@@ -3,7 +3,7 @@ using BackendServer.Models.Entities.TravelCost;
 using BackendServer.Models.Finance;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackendServer.Types.Finance;
+namespace BackendServer.Application.Finance.GraphQl;
 
 [QueryType]
 public static class TravelCostQuery

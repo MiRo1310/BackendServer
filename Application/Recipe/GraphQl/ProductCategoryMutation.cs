@@ -30,15 +30,23 @@ public static class ProductCategoryMutation
         return new Response<ProductCategory>(productCategory, ErrorCode.Success);
     }
 
-    public static bool RemoveProductCategory(AppDbContext dbContext, Guid id)
+    public static Response<bool> RemoveProductCategory(AppDbContext dbContext, Guid id)
     {
         var productCategory = dbContext.ProductCategories.FirstOrDefault(category => category.Id == id);
 
-        if (productCategory is null) return false;
+        if (productCategory is null)
+        {
+            return new Response<bool>(false, ErrorCode.NotFound, true);
+        };
+        
+        if(dbContext.Products.Any(p => p.Category == id))
+        {
+            return new Response<bool>(false, ErrorCode.InUse, true);
+        }
 
         dbContext.ProductCategories.Remove(productCategory);
         dbContext.SaveChanges();
-        return true;
+        return new Response<bool>(true, ErrorCode.Success);
     }
 
 

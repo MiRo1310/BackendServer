@@ -30,15 +30,24 @@ public static class RecipeCategoryMutation
         return new Response<RecipeCategory>(recipeCategory, ErrorCode.Success);
     }
 
-    public static bool RemoveRecipeCategory(AppDbContext dbContext, Guid id)
+    public static Response<bool> RemoveRecipeCategory(AppDbContext dbContext, Guid id)
     {
         var recipeCategory = dbContext.RecipeCategories.FirstOrDefault(category => category.Id == id);
 
-        if (recipeCategory is null) return false;
+        if (recipeCategory is null)
+        {
+            return new Response<bool>(false, ErrorCode.NotFound, true);
+        }
+
+        if (dbContext.Recipes.Any(r => r.RecipeCategoryId == id))
+        {
+            return new Response<bool>(false, ErrorCode.InUse, true);
+        }
 
         dbContext.RecipeCategories.Remove(recipeCategory);
         dbContext.SaveChanges();
-        return true;
+
+        return new Response<bool>(true, ErrorCode.Success);
     }
 
 

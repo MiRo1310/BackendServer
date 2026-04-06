@@ -1,4 +1,6 @@
 ﻿using BackendServer.Data;
+using BackendServer.Enum;
+using BackendServer.Models.DTOs;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Unit;
 
@@ -38,18 +40,18 @@ public static class UnitMutation
         return unit;
     }
 
-    public static bool DeleteUnit(AppDbContext dbContext, Guid id)
+    public static Response<bool> DeleteUnit(AppDbContext dbContext, Guid id)
     {
         var unit = dbContext.Units.FirstOrDefault(unit => unit.Id == id);
 
         if (unit is null)
         {
-            return false;
+            return new Response<bool>(false, ErrorCode.NotFound, true);
         }
 
         dbContext.Units.Remove(unit);
         dbContext.SaveChanges();
 
-        return true;
+        return new  Response<bool>(true, ErrorCode.Success, true);
     }
 }

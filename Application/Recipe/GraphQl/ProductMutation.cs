@@ -1,5 +1,7 @@
 ﻿using BackendServer.Application.Recipe.Factories;
 using BackendServer.Data;
+using BackendServer.Enum;
+using BackendServer.Models.DTOs;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Product;
 
@@ -75,11 +77,20 @@ public static class ProductMutation
         return product;
     }
 
-    public static bool RemoveProduct(AppDbContext dbContext, Guid id)
+    public static Response<bool> RemoveProduct(AppDbContext dbContext, Guid id)
     {
 
         var product = dbContext.Products.FirstOrDefault(p => p.Id == id);
-        if (product is null) return false;
+        if (product is null)
+        {
+            return new Response<bool>(false, ErrorCode.NotFound, true);
+        };
+        
+        if(dbContext.RecipeProducts.Any(rp => rp.ProductId == id))
+        {
+            return new Response<bool>(false, ErrorCode.InUse, true);
+        }
+        
         var units = dbContext.ProductUnits.Where(unit => unit.ProductId == id);
        
             foreach (var productUnit in units)
@@ -89,6 +100,6 @@ public static class ProductMutation
         
         dbContext.Products.Remove(product);
         dbContext.SaveChanges();
-        return true;
+        return new Response<bool>(true, ErrorCode.Success);
     }
 }

@@ -10,6 +10,8 @@ namespace BackendServer.Types.Finance;
 [QueryType]
 public static class AddressQuery
 {
+    [UseFiltering]
+    [UseSorting]
     public static IQueryable<Address> Addresses(FinanceDbContext dbContext)
     {
         return dbContext.Addresses.Include(address=>address.TravelCost);

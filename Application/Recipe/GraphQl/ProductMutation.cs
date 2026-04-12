@@ -10,8 +10,14 @@ namespace BackendServer.Application.Recipe.GraphQl;
 [MutationType]
 public static class ProductMutation
 {
-    public static Product CreateProduct(AppDbContext dbContext, ProductCreateDto dto)
+    public static Response<Product> CreateProduct(AppDbContext dbContext, ProductCreateDto dto)
     {
+        var productNameExists = dbContext.Products.Any(p => p.Name == dto.Name);
+        if (productNameExists)
+        {
+            return new Response<Product>(null, ErrorCode.Exist, true);
+        }
+
         var product = new Product
         {
             CreatedAt = DateTime.UtcNow,
@@ -26,7 +32,6 @@ public static class ProductMutation
             Sugar = dto.Sugar,
             Unit = dto.Unit,
             Amount = dto.Amount
-            
         };
         var defaultUnit = new ProductUnit()
         {
@@ -40,17 +45,29 @@ public static class ProductMutation
         };
         dbContext.ProductUnits.Add(defaultUnit);
 
-        if (dto.ProductUnits is not null) ProductUnitFactory.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
+        if (dto.ProductUnits is not null)
+            ProductUnitFactory.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
 
         dbContext.Products.Add(product);
         dbContext.SaveChanges();
-        return product;
+
+        return new Response<Product>(product, ErrorCode.Success);
     }
 
-    public static Product? UpdateProduct(AppDbContext dbContext, ProductUpdateDto dto)
+    public static Response<Product?> UpdateProduct(AppDbContext dbContext, ProductUpdateDto dto)
     {
         var product = dbContext.Products.FirstOrDefault(p => p.Id == dto.Id);
-        if (product is null) return null;
+        if (product is null)
+        {
+            return new Response<Product?>(null, ErrorCode.NotFound, true);
+        }
+        
+        var productNameExists = dbContext.Products.Any(p => p.Name == dto.Name && p.Id != dto.Id);
+        if (productNameExists)
+        {
+            return new Response<Product?>(null, ErrorCode.Exist, true);
+        }
+
         product.ModifiedAt = DateTime.UtcNow;
         product.Name = dto.Name ?? product.Name;
         product.Carbs = dto.Carbs;
@@ -60,44 +77,45 @@ public static class ProductMutation
         product.Protein = dto.Protein;
         product.Salt = dto.Salt;
         product.Sugar = dto.Sugar;
-        product.Unit = dto.Unit??"";
-        product.Amount = dto.Amount??0;
-        
+        product.Unit = dto.Unit ?? "";
+        product.Amount = dto.Amount ?? 0;
+
         var defaultUnit = dbContext.ProductUnits.FirstOrDefault(unit =>
             unit.ProductId == product.Id && unit.IsDefault == true);
         if (defaultUnit is not null)
         {
             defaultUnit.Amount = dto.Amount;
-            defaultUnit.Unit = dto.Unit??"";
+            defaultUnit.Unit = dto.Unit ?? "";
         }
 
-        if (dto.ProductUnits is not null) ProductUnitFactory.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
+        if (dto.ProductUnits is not null)
+            ProductUnitFactory.ProcessUnit(dbContext, dto.ProductUnits, product.Id, defaultUnit);
 
         dbContext.SaveChanges();
-        return product;
+
+        return new Response<Product?>(product, ErrorCode.Success);
     }
 
     public static Response<bool> RemoveProduct(AppDbContext dbContext, Guid id)
     {
-
         var product = dbContext.Products.FirstOrDefault(p => p.Id == id);
         if (product is null)
         {
             return new Response<bool>(false, ErrorCode.NotFound, true);
-        };
-        
-        if(dbContext.RecipeProducts.Any(rp => rp.ProductId == id))
+        }
+
+        if (dbContext.RecipeProducts.Any(rp => rp.ProductId == id))
         {
             return new Response<bool>(false, ErrorCode.InUse, true);
         }
-        
+
         var units = dbContext.ProductUnits.Where(unit => unit.ProductId == id);
-       
-            foreach (var productUnit in units)
-            {
-                dbContext.ProductUnits.Remove(productUnit);
-            }
-        
+
+        foreach (var productUnit in units)
+        {
+            dbContext.ProductUnits.Remove(productUnit);
+        }
+
         dbContext.Products.Remove(product);
         dbContext.SaveChanges();
         return new Response<bool>(true, ErrorCode.Success);

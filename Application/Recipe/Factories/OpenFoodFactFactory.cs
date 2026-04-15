@@ -35,10 +35,24 @@ public class OpenFoodFactFactory
         var url = $"https://world.openfoodfacts.org/api/v0/product/{code}.json";
 
         var response = await Client.GetAsync(url);
+        GraphQlStatusCodeHandler.Check(response);
+
         response.EnsureSuccessStatusCode();
 
         var json = await response.Content.ReadAsStringAsync();
+        var result = JsonHelper.Deserialize<OpenFoodFactsProductResponse>(json);
 
-        return JsonHelper.Deserialize<OpenFoodFactsProductResponse>(json);
+        if (result?.OpenFoodFactProduct == null)
+        {
+            throw new GraphQLException(
+                ErrorBuilder.New()
+                    .SetMessage("Produkt nicht gefunden oder ungültige Antwort")
+                    .SetCode("NOT_FOUND")
+                    .Build());
+        }
+        
+        GraphQlStatusCodeHandler.CustomCode("Produkt gefunden", "FOUND");
+
+        return result;
     }
 }

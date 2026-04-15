@@ -4,6 +4,8 @@ public class ProductCreateDto
 {
     public required string Name { get; set; }
     
+    public string? Ean { get; set; }
+    
     public decimal? Kcal { get; set; }
     
     public decimal? Fat { get; set; }

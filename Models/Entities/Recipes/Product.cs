@@ -9,28 +9,31 @@ public class  Product
     [Column(TypeName = "varchar(36)")]
     public required string Name { get; set; }
     
+    [Column(TypeName = "varchar(14)")]
+    public string? Ean { get; set; } = null;
+    
     [Column(TypeName = "varchar(36)")]
     public required string Unit { get; set; }
     
-    [Column(TypeName = "decimal(10,2)")]
+    [Column(TypeName = "decimal(10,3)")]
     public decimal Amount { get; set; }
     
-    [Column(TypeName = "decimal(10,2)")]
+    [Column(TypeName = "decimal(10,3)")]
     public decimal? Kcal { get; set; }
     
-    [Column(TypeName = "decimal(10,2)")]
+    [Column(TypeName = "decimal(10,3)")]
     public decimal? Fat { get; set; }
     
-    [Column(TypeName = "decimal(10,2)")]
+    [Column(TypeName = "decimal(10,3)")]
     public decimal? Sugar { get; set; }
     
-    [Column(TypeName = "decimal(10,2)")]
+    [Column(TypeName = "decimal(10,3)")]
     public decimal? Carbs { get; set; }
     
-    [Column(TypeName = "decimal(10,2)")]
+    [Column(TypeName = "decimal(10,3)")]
     public decimal? Protein { get; set; }
     
-    [Column(TypeName = "decimal(10,2)")]
+    [Column(TypeName = "decimal(10,3)")]
     public decimal? Salt { get; set; }
     
     public Guid? Category { get; set; }

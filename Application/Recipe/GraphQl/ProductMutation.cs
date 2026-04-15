@@ -31,8 +31,10 @@ public static class ProductMutation
             Salt = dto.Salt,
             Sugar = dto.Sugar,
             Unit = dto.Unit,
-            Amount = dto.Amount
+            Amount = dto.Amount,
+            Ean = dto.Ean
         };
+        
         var defaultUnit = new ProductUnit()
         {
             Amount = dto.Amount,
@@ -79,6 +81,7 @@ public static class ProductMutation
         product.Sugar = dto.Sugar;
         product.Unit = dto.Unit ?? "";
         product.Amount = dto.Amount ?? 0;
+        product.Ean = dto.Ean ?? product.Ean;
 
         var defaultUnit = dbContext.ProductUnits.FirstOrDefault(unit =>
             unit.ProductId == product.Id && unit.IsDefault == true);

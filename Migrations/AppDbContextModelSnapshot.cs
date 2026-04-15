@@ -29,10 +29,10 @@ namespace BackendServer.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,3)");
 
                     b.Property<decimal?>("Carbs")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,3)");
 
                     b.Property<Guid?>("Category")
                         .HasColumnType("char(36)");
@@ -40,11 +40,14 @@ namespace BackendServer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Ean")
+                        .HasColumnType("varchar(14)");
+
                     b.Property<decimal?>("Fat")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,3)");
 
                     b.Property<decimal?>("Kcal")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,3)");
 
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime(6)");
@@ -54,13 +57,13 @@ namespace BackendServer.Migrations
                         .HasColumnType("varchar(36)");
 
                     b.Property<decimal?>("Protein")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,3)");
 
                     b.Property<decimal?>("Salt")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,3)");
 
                     b.Property<decimal?>("Sugar")
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(10,3)");
 
                     b.Property<string>("Unit")
                         .IsRequired()

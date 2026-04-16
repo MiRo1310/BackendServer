@@ -1,33 +1,34 @@
 using System.Net;
+using BackendServer.Enum;
 
 namespace BackendServer.Application.Common;
 
-public  class GraphQlStatusCodeHandler
+public static class GraphQlErrorHandler
 {
 
-    public static void CustomCode(string message, string code)
+    public static void CustomCode(string message, ErrorCode code)
     {
         throw new GraphQLException(
             ErrorBuilder.New()
                 .SetMessage(message)
-                .SetCode(code)
+                .SetCode(code.ToString())
                 .Build());
     }
     
-    public static void Check(HttpResponseMessage response)
+    public static void HttpResponse(HttpResponseMessage response)
     {
         switch (response.StatusCode)
         {
-            case System.Net.HttpStatusCode.NotFound:
+            case HttpStatusCode.NotFound:
                 throw new GraphQLException(
                     ErrorBuilder.New()
                         .SetMessage("Not found")
-                        .SetCode("NOT_FOUND")
+                        .SetCode(nameof(ErrorCode.NotFound))
                         .Build());
-            case System.Net.HttpStatusCode.GatewayTimeout:
+            case HttpStatusCode.GatewayTimeout:
                 throw new GraphQLException(
                     ErrorBuilder.New()
-                        .SetMessage("Gateway timeout").SetCode("GATEWAY_TIMEOUT").Build());
+                        .SetMessage("Gateway timeout").SetCode(nameof(HttpStatusCode.GatewayTimeout)).Build());
             case HttpStatusCode.Continue:
                 break;
             case HttpStatusCode.SwitchingProtocols:

@@ -1,6 +1,7 @@
 using System.Text.Json;
 using BackendServer.Application.Common;
 using BackendServer.Application.Recipe.Types;
+using BackendServer.Enum;
 
 namespace BackendServer.Application.Recipe.Factories;
 
@@ -35,7 +36,7 @@ public class OpenFoodFactFactory
         var url = $"https://world.openfoodfacts.org/api/v0/product/{code}.json";
 
         var response = await Client.GetAsync(url);
-        GraphQlStatusCodeHandler.Check(response);
+        GraphQlErrorHandler.HttpResponse(response);
 
         response.EnsureSuccessStatusCode();
 
@@ -44,14 +45,10 @@ public class OpenFoodFactFactory
 
         if (result?.OpenFoodFactProduct == null)
         {
-            throw new GraphQLException(
-                ErrorBuilder.New()
-                    .SetMessage("Produkt nicht gefunden oder ungültige Antwort")
-                    .SetCode("NOT_FOUND")
-                    .Build());
+            GraphQlErrorHandler.CustomCode("Produkt nicht gefunden oder ungültige Antwort", ErrorCode.NotFound);
+            
         }
-        
-        GraphQlStatusCodeHandler.CustomCode("Produkt gefunden", "FOUND");
+       
 
         return result;
     }

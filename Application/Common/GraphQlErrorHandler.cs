@@ -6,7 +6,7 @@ namespace BackendServer.Application.Common;
 public static class GraphQlErrorHandler
 {
 
-    public static void CustomCode(string message, ErrorCode code)
+    public static void Custom(string message, ErrorCode code)
     {
         throw new GraphQLException(
             ErrorBuilder.New()

@@ -45,7 +45,7 @@ public class OpenFoodFactFactory
 
         if (result?.OpenFoodFactProduct == null)
         {
-            GraphQlErrorHandler.CustomCode("Produkt nicht gefunden oder ungültige Antwort", ErrorCode.NotFound);
+            GraphQlErrorHandler.Custom("Produkt nicht gefunden oder ungültige Antwort", ErrorCode.NotFound);
             
         }
        

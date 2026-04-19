@@ -1,7 +1,7 @@
 using System.Text.Json;
 using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
 using BackendServer.Application.Recipe.Types;
-using BackendServer.Enum;
 
 namespace BackendServer.Application.Recipe.Factories;
 

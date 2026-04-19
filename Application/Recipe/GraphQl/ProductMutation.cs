@@ -1,7 +1,7 @@
 ﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
 using BackendServer.Application.Recipe.Factories;
 using BackendServer.Data;
-using BackendServer.Enum;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Product;
 
@@ -69,7 +69,7 @@ public static class ProductMutation
         var productNameExists = dbContext.Products.Any(p => p.Name == dto.Name && p.Id != dto.Id);
         if (productNameExists)
         {
-            GraphQlErrorHandler.Custom("Produkt existiert bereits", ErrorCode.Exist);
+            GraphQlErrorHandler.Custom("Produkt existiert bereits, und konnte daher nicht geupdated werden", ErrorCode.Exist);
             return null;
         }
 
@@ -113,7 +113,7 @@ public static class ProductMutation
 
         if (dbContext.RecipeProducts.Any(rp => rp.ProductId == id))
         {
-            GraphQlErrorHandler.Custom("Produkt kann nicht geglöscht werden", ErrorCode.InUse);
+            GraphQlErrorHandler.Custom("Produkt kann nicht geglöscht werden, da es bereits in Verwendung ist", ErrorCode.InUse);
             return false;
         }
 

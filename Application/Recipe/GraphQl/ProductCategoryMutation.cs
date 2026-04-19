@@ -1,6 +1,6 @@
 ﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
 using BackendServer.Data;
-using BackendServer.Enum;
 using BackendServer.Models;
 using BackendServer.Models.DTOs.Recipes.ProductCategory;
 using BackendServer.Models.Entities.Recipes;
@@ -17,7 +17,7 @@ public static class ProductCategoryMutation
 
         if (category is not null)
         {
-            GraphQlErrorHandler.Custom("Kategorie existiert", ErrorCode.Exist);
+            GraphQlErrorHandler.Custom("Kategorie existiert und kann daher nicht angelegt werden", ErrorCode.Exist);
             return null;
         }
 
@@ -45,7 +45,7 @@ public static class ProductCategoryMutation
         
         if(dbContext.Products.Any(p => p.Category == id))
         {
-            GraphQlErrorHandler.Custom("Kategorie wird schon genutzt", ErrorCode.InUse);
+            GraphQlErrorHandler.Custom("Kategorie wird schon genutzt, und kann daher nicht gelöscht werden", ErrorCode.InUse);
             return false;
         }
 

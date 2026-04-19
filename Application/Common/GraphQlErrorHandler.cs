@@ -1,5 +1,5 @@
 using System.Net;
-using BackendServer.Enum;
+using BackendServer.Application.Enum;
 
 namespace BackendServer.Application.Common;
 

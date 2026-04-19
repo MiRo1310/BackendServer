@@ -1,4 +1,6 @@
-﻿using BackendServer.Application.Recipe.Factories;
+﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
+using BackendServer.Application.Recipe.Factories;
 using BackendServer.Data;
 using BackendServer.Models.DTOs.Recipes.Recipe;
 
@@ -10,7 +12,11 @@ public static class RecipeMutation
     public static bool RemoveRecipe(AppDbContext dbContext, Guid id)
     {
         var recipe = dbContext.Recipes.FirstOrDefault(recipe => recipe.Id == id);
-        if (recipe is null) return false;
+        if (recipe is null)
+        {
+            GraphQlErrorHandler.Custom("Rezept wurde nicht gefunden", ErrorCode.NotFound);
+            return false;
+        }
         
         RecipeProductsFactory.RemoveByRecipeId(dbContext, recipe.Id);
         RecipeDescriptionFactory.RemoveDescription(dbContext, recipe.Id);
@@ -54,7 +60,11 @@ public static class RecipeMutation
     public static Models.Entities.Recipes.Recipe? UpdateRecipe(AppDbContext dbContext, RecipeUpdateDto dto)
     {
         var recipe = dbContext.Recipes.FirstOrDefault(recipe => recipe.Id == dto.Id);
-        if (recipe is null) return null;
+        if (recipe is null)
+        {
+            GraphQlErrorHandler.Custom("Rezept wurde nicht gefunden", ErrorCode.NotFound);
+            return null;
+        }
 
         recipe.Name = dto.Name ?? recipe.Name;
         recipe.Portions = dto.Portions ?? recipe.Portions;

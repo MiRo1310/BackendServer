@@ -1,6 +1,6 @@
 ﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
 using BackendServer.Data;
-using BackendServer.Enum;
 using BackendServer.Models.DTOs.Recipes.RecipeCategory;
 using BackendServer.Models.Entities.Recipes;
 
@@ -44,7 +44,7 @@ public static class RecipeCategoryMutation
 
         if (dbContext.Recipes.Any(r => r.RecipeCategoryId == id))
         {
-            GraphQlErrorHandler.Custom("Kategorie kann nicht gelöscht werden", ErrorCode.InUse);
+            GraphQlErrorHandler.Custom("Kategorie kann nicht gelöscht werden, da sie bereits verwendet wird", ErrorCode.InUse);
             return false;
         }
 
@@ -59,7 +59,11 @@ public static class RecipeCategoryMutation
     {
         var recipeCategory = dbContext.RecipeCategories.FirstOrDefault(category => category.Id == dto.Id);
 
-        if (recipeCategory is null) return null;
+        if (recipeCategory is null)
+        {
+            GraphQlErrorHandler.Custom("Kategorie wurde nicht gefunden", ErrorCode.NotFound);
+            return null;
+        };
 
         recipeCategory.Name = dto.Name;
 

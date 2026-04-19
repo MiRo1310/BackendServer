@@ -1,6 +1,6 @@
 ﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
 using BackendServer.Data;
-using BackendServer.Enum;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Unit;
 
@@ -30,6 +30,7 @@ public static class UnitMutation
 
         if (unit is null)
         {
+            GraphQlErrorHandler.Custom("Einheit wurde nicht gefunden", ErrorCode.NotFound);
             return null;
         }
 

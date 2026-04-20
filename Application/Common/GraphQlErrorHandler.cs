@@ -134,7 +134,9 @@ public static class GraphQlErrorHandler
             case HttpStatusCode.BadGateway:
                 break;
             case HttpStatusCode.ServiceUnavailable:
-                break;
+                throw new GraphQLException(
+                    ErrorBuilder.New()
+                        .SetMessage("Service not available").SetCode(nameof(HttpStatusCode.ServiceUnavailable)).Build());
             case HttpStatusCode.HttpVersionNotSupported:
                 break;
             case HttpStatusCode.VariantAlsoNegotiates:

@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using BackendServer.Data;
+using MongoDB.Driver;
+using ServerVersion = Microsoft.EntityFrameworkCore.ServerVersion;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,10 +29,23 @@ builder.Services.AddDbContext<FinanceDbContext>(options =>
     )
 );
 
+builder.Services.AddSingleton<IMongoClient>(sp =>
+    new MongoClient(builder.Configuration.GetConnectionString("MongoDbConnectionString"))
+);
+
+builder.Services.AddSingleton(sp =>
+{
+    var client = sp.GetRequiredService<IMongoClient>();
+    return client.GetDatabase(builder.Configuration["MongoDb:DatabaseName"]);
+});
+
+
 builder.Services
     .AddGraphQLServer()
     .AddFiltering()
     .AddSorting()
+    .AddMongoDbFiltering()
+    .AddMongoDbSorting()
     .AddTypes()
     .ModifyCostOptions(o => o.EnforceCostLimits = false)
     .ModifyRequestOptions(options => options.IncludeExceptionDetails = true);

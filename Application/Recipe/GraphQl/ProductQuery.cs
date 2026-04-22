@@ -1,4 +1,5 @@
 ﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
 using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
 using Microsoft.EntityFrameworkCore;
@@ -8,8 +9,8 @@ namespace BackendServer.Application.Recipe.GraphQl;
 [QueryType]
 public static class ProductQuery
 {
-    [UseFiltering]
-    [UseSorting]
+    [UseFiltering(Scope = nameof(GraphQlScope.MySql))]
+    [UseSorting(Scope = nameof(GraphQlScope.MySql))]
     public static IQueryable<Product> GetProducts(AppDbContext dbContext)
     {
         return dbContext.Products
@@ -18,7 +19,7 @@ public static class ProductQuery
             .Include(p => p.ProductCategory);
     }
     
-    [UseFiltering]
+    [UseFiltering(Scope = nameof(GraphQlScope.MySql))]
     public static Dictionary<string, List<Product>> GetProductsGrouped(AppDbContext dbContext)
     {
       return dbContext.Products

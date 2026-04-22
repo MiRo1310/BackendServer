@@ -1,5 +1,5 @@
-﻿using BackendServer.Application.Recipe.Factories;
-using BackendServer.Application.Recipe.Types;
+﻿using BackendServer.Application.Enum;
+using BackendServer.Application.Recipe.Factories;
 using BackendServer.Application.Recipe.Types.OpenFoodFacts;
 using MongoDB.Driver;
 
@@ -10,8 +10,11 @@ namespace BackendServer.Application.Recipe.GraphQl;
 public static class OpenFoodFactsQuery
 {
     
-    [UseFiltering]
-    [UseSorting]
+    [UseOffsetPaging]
+    [UseProjection(Scope = nameof(GraphQlScope.MongoDb))]
+    [UseFiltering(Scope = nameof(GraphQlScope.MongoDb))]
+    [UseSorting(Scope = nameof(GraphQlScope.MongoDb))]
+    
     public static IExecutable<LocalProduct> GetLocalProducts(IMongoDatabase database)
     {
         return database

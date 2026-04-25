@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace BackendServer.Application.Recipe.Types.OpenFoodFacts;
 
@@ -60,6 +59,9 @@ public class OpenFoodFactProduct
     [JsonPropertyName("ingredients_text")]
     public string IngredientsText { get; set; } = ""; 
     
+    [JsonPropertyName("nutriments")]
+    public Nutriments? Nutriments { get; set; } = null; 
+    
     [JsonExtensionData] 
     public Dictionary<string, JsonElement> AdditionalProductData { get; set; } = [];
 }
@@ -96,37 +98,3 @@ public class OpenFoodFactProductSearch
     [JsonExtensionData] 
     public Dictionary<string, JsonElement> AdditionalProductData { get; set; } = [];
 }
-
-[BsonIgnoreExtraElements]
-public class LocalProduct
-{
-    [BsonElement("brands")]
-    public string? Brands { get; set; }
-
-    [BsonElement("brands_tags")]
-    public string[]? BrandsTags { get; set; }
-    
-    [BsonElement("_id")]
-    public string Id { get; set; } = "";
-    
-    [BsonElement("code")]
-    public string Code { get; set; } = ""; 
-    
-    [BsonElement("categories_tags")]
-    public string[]? CategoriesTags { get; set; } = [];
-    
-    [BsonElement("generic_name_de")]
-    public string? GenericNameDe { get; set; } = ""; 
-    [BsonElement("image_url")]
-    public string? ImageUrl { get; set; } = "";
-    
-    [BsonElement("manufacturing_places_tags")]
-    public string[]? ManufacturingPlacesTags { get; set; } = [];
-    
-    [BsonElement("ingredients_text")]
-    public string IngredientsText { get; set; } = ""; 
-    
-    [BsonElement("nutriments")]
-    public Nutriments? Nutriments { get; set; }
-}
-

@@ -1,5 +1,4 @@
-﻿using BackendServer.Application.Enum;
-using BackendServer.Data;
+﻿using BackendServer.Data;
 using BackendServer.Models.Entities.TravelCost;
 using BackendServer.Models.Finance;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +9,8 @@ namespace BackendServer.Application.Finance.GraphQl;
 public static class TravelCostQuery
 {
     
-    [UseSorting(Scope = nameof(GraphQlScope.MySql))]
-    [UseFiltering(Scope = nameof(GraphQlScope.MySql))]
+    [UseSorting]
+    [UseFiltering]
     public static IQueryable<TravelCost> TravelCost(FinanceDbContext dbContext)
     {
         return  dbContext.TravelCost

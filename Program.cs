@@ -1,8 +1,5 @@
-using BackendServer.Application.Enum;
 using Microsoft.EntityFrameworkCore;
 using BackendServer.Data;
-using MongoDB.Driver;
-using MongoDB.Driver.Core.Events;
 using ServerVersion = Microsoft.EntityFrameworkCore.ServerVersion;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,41 +28,10 @@ builder.Services.AddDbContext<FinanceDbContext>(options =>
     )
 );
 
-var mongoSettings = MongoClientSettings.FromConnectionString(
-    builder.Configuration.GetConnectionString("MongoDbConnectionString"));
-mongoSettings.ClusterConfigurator = cb =>
-{
-    cb.Subscribe<CommandStartedEvent>(e =>
-    {
-        Console.WriteLine($"MongoDB Command: {e.CommandName} - {e.Command}");
-    });
-    cb.Subscribe<CommandSucceededEvent>(e =>
-    {
-        Console.WriteLine($"MongoDB Command {e.CommandName} succeeded in {e.Duration.TotalMilliseconds}ms");
-    });
-    cb.Subscribe<CommandFailedEvent>(e =>
-    {
-        Console.WriteLine($"MongoDB Command {e.CommandName} failed: {e.Failure}");
-    });
-};
-
-builder.Services.AddSingleton<IMongoClient>(sp => new MongoClient(mongoSettings));
-
-builder.Services.AddSingleton(sp =>
-{
-    var client = sp.GetRequiredService<IMongoClient>();
-    return client.GetDatabase(builder.Configuration["MongoDb:DatabaseName"]);
-});
-
-
 builder.Services
     .AddGraphQLServer()
-    .AddFiltering(nameof(GraphQlScope.MySql))
-    .AddSorting(nameof(GraphQlScope.MySql))
-    .AddMongoDbFiltering(nameof(GraphQlScope.MongoDb))
-    .AddMongoDbSorting(nameof(GraphQlScope.MongoDb))
-    .AddMongoDbPagingProviders(nameof(GraphQlScope.MongoDb))
-    .AddMongoDbProjections(nameof(GraphQlScope.MongoDb))
+    .AddFiltering()
+    .AddSorting()
     .AddTypes()
     .ModifyCostOptions(o => o.EnforceCostLimits = false)
     .ModifyRequestOptions(options => options.IncludeExceptionDetails = true);

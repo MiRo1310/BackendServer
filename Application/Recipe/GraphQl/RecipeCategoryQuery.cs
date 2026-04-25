@@ -1,7 +1,5 @@
-﻿using BackendServer.Application.Enum;
-using BackendServer.Data;
+﻿using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
-using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Application.Recipe.GraphQl;
 
@@ -9,8 +7,8 @@ namespace BackendServer.Application.Recipe.GraphQl;
 
 public static class RecipeCategoryQuery
 {
-    [UseSorting(Scope = nameof(GraphQlScope.MySql))]
-    [UseFiltering(Scope = nameof(GraphQlScope.MySql))]
+    [UseSorting]
+    [UseFiltering]
     public static IQueryable<RecipeCategory> GetRecipeCategories(AppDbContext dbContext)
     {
         return dbContext.RecipeCategories

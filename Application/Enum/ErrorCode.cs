@@ -1,8 +1,7 @@
-﻿namespace BackendServer.Enum;
+﻿namespace BackendServer.Application.Enum;
 
 public enum ErrorCode
 {
-    Success,
     Exist,
     NotFound,
     InUse,

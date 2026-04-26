@@ -1,4 +1,6 @@
-﻿using BackendServer.Application.Recipe.Factories;
+﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
+using BackendServer.Application.Recipe.Factories;
 using BackendServer.Data;
 
 namespace BackendServer.Application.Recipe.GraphQl;
@@ -13,6 +15,7 @@ public static class RecipeDescriptionMutation
 
      if (textarea is null)
      {
+         GraphQlErrorHandler.Custom("Beschreibung wurde nicht gefunden", ErrorCode.NotFound);
          return false;
      }
 

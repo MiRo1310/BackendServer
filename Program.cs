@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BackendServer.Data;
+using ServerVersion = Microsoft.EntityFrameworkCore.ServerVersion;
 
 var builder = WebApplication.CreateBuilder(args);
 

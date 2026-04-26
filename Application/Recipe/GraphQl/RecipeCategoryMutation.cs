@@ -1,7 +1,6 @@
-﻿using BackendServer.Data;
-using BackendServer.Enum;
-using BackendServer.Models;
-using BackendServer.Models.DTOs;
+﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
+using BackendServer.Data;
 using BackendServer.Models.DTOs.Recipes.RecipeCategory;
 using BackendServer.Models.Entities.Recipes;
 
@@ -10,13 +9,16 @@ namespace BackendServer.Application.Recipe.GraphQl;
 [MutationType]
 public static class RecipeCategoryMutation
 {
-    public static Response<RecipeCategory> CreateRecipeCategory(AppDbContext dbContext,
+    public static RecipeCategory? CreateRecipeCategory(AppDbContext dbContext,
         RecipeCategoryCreateDto dto)
     {
         var category = dbContext.RecipeCategories.FirstOrDefault(category => category.Name == dto.Name);
 
         if (category is not null)
-            return new Response<RecipeCategory>(null, ErrorCode.Exist, true);
+        {
+            GraphQlErrorHandler.Custom("Kategorie existiert bereits", ErrorCode.Exist);
+            return null;
+        }
 
         var recipeCategory = new RecipeCategory()
         {
@@ -27,27 +29,29 @@ public static class RecipeCategoryMutation
         dbContext.RecipeCategories.Add(recipeCategory);
         dbContext.SaveChanges();
 
-        return new Response<RecipeCategory>(recipeCategory, ErrorCode.Success);
+        return recipeCategory;
     }
 
-    public static Response<bool> RemoveRecipeCategory(AppDbContext dbContext, Guid id)
+    public static bool RemoveRecipeCategory(AppDbContext dbContext, Guid id)
     {
         var recipeCategory = dbContext.RecipeCategories.FirstOrDefault(category => category.Id == id);
 
         if (recipeCategory is null)
         {
-            return new Response<bool>(false, ErrorCode.NotFound, true);
+            GraphQlErrorHandler.Custom("Kategorie wurde nicht gefunden", ErrorCode.NotFound);
+            return false;
         }
 
         if (dbContext.Recipes.Any(r => r.RecipeCategoryId == id))
         {
-            return new Response<bool>(false, ErrorCode.InUse, true);
+            GraphQlErrorHandler.Custom("Kategorie kann nicht gelöscht werden, da sie bereits verwendet wird", ErrorCode.InUse);
+            return false;
         }
 
         dbContext.RecipeCategories.Remove(recipeCategory);
         dbContext.SaveChanges();
 
-        return new Response<bool>(true, ErrorCode.Success);
+        return true;
     }
 
 
@@ -55,7 +59,11 @@ public static class RecipeCategoryMutation
     {
         var recipeCategory = dbContext.RecipeCategories.FirstOrDefault(category => category.Id == dto.Id);
 
-        if (recipeCategory is null) return null;
+        if (recipeCategory is null)
+        {
+            GraphQlErrorHandler.Custom("Kategorie wurde nicht gefunden", ErrorCode.NotFound);
+            return null;
+        };
 
         recipeCategory.Name = dto.Name;
 

@@ -1,6 +1,5 @@
 ﻿using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
-using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Application.Recipe.GraphQl;
 

@@ -1,11 +1,8 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models.Entities;
-using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Entities.TravelCost;
-using BackendServer.Models.Finance;
 using Microsoft.EntityFrameworkCore;
 
-namespace BackendServer.Types.Finance;
+namespace BackendServer.Application.Finance.GraphQl;
 
 [QueryType]
 public static class AddressQuery

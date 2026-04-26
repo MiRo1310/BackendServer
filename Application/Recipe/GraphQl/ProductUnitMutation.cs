@@ -1,4 +1,6 @@
-﻿using BackendServer.Data;
+﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
+using BackendServer.Data;
 
 namespace BackendServer.Application.Recipe.GraphQl;
 
@@ -12,6 +14,7 @@ public static class ProductUnitMutation
 
           if (unit is null)
           {
+               GraphQlErrorHandler.Custom("Einheit wurde nicht gefunden", ErrorCode.NotFound);
                return false;
           }
 

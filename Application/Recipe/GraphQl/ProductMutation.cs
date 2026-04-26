@@ -1,7 +1,7 @@
-﻿using BackendServer.Application.Recipe.Factories;
+﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
+using BackendServer.Application.Recipe.Factories;
 using BackendServer.Data;
-using BackendServer.Enum;
-using BackendServer.Models.DTOs;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Product;
 
@@ -10,12 +10,13 @@ namespace BackendServer.Application.Recipe.GraphQl;
 [MutationType]
 public static class ProductMutation
 {
-    public static Response<Product> CreateProduct(AppDbContext dbContext, ProductCreateDto dto)
+    public static Product? CreateProduct(AppDbContext dbContext, ProductCreateDto dto)
     {
         var productNameExists = dbContext.Products.Any(p => p.Name == dto.Name);
         if (productNameExists)
         {
-            return new Response<Product>(null, ErrorCode.Exist, true);
+            GraphQlErrorHandler.Custom("Produktname existiert schon", ErrorCode.InUse);
+            return null;
         }
 
         var product = new Product
@@ -31,8 +32,10 @@ public static class ProductMutation
             Salt = dto.Salt,
             Sugar = dto.Sugar,
             Unit = dto.Unit,
-            Amount = dto.Amount
+            Amount = dto.Amount,
+            Ean = dto.Ean
         };
+        
         var defaultUnit = new ProductUnit()
         {
             Amount = dto.Amount,
@@ -51,21 +54,23 @@ public static class ProductMutation
         dbContext.Products.Add(product);
         dbContext.SaveChanges();
 
-        return new Response<Product>(product, ErrorCode.Success);
+        return product;
     }
 
-    public static Response<Product?> UpdateProduct(AppDbContext dbContext, ProductUpdateDto dto)
+    public static Product? UpdateProduct(AppDbContext dbContext, ProductUpdateDto dto)
     {
         var product = dbContext.Products.FirstOrDefault(p => p.Id == dto.Id);
         if (product is null)
         {
-            return new Response<Product?>(null, ErrorCode.NotFound, true);
+            GraphQlErrorHandler.Custom("Produkt wurde nicht gefunden", ErrorCode.NotFound);
+            return null;
         }
         
         var productNameExists = dbContext.Products.Any(p => p.Name == dto.Name && p.Id != dto.Id);
         if (productNameExists)
         {
-            return new Response<Product?>(null, ErrorCode.Exist, true);
+            GraphQlErrorHandler.Custom("Produkt existiert bereits, und konnte daher nicht geupdated werden", ErrorCode.Exist);
+            return null;
         }
 
         product.ModifiedAt = DateTime.UtcNow;
@@ -79,6 +84,7 @@ public static class ProductMutation
         product.Sugar = dto.Sugar;
         product.Unit = dto.Unit ?? "";
         product.Amount = dto.Amount ?? 0;
+        product.Ean = dto.Ean ?? product.Ean;
 
         var defaultUnit = dbContext.ProductUnits.FirstOrDefault(unit =>
             unit.ProductId == product.Id && unit.IsDefault == true);
@@ -93,20 +99,22 @@ public static class ProductMutation
 
         dbContext.SaveChanges();
 
-        return new Response<Product?>(product, ErrorCode.Success);
+        return product;
     }
 
-    public static Response<bool> RemoveProduct(AppDbContext dbContext, Guid id)
+    public static bool RemoveProduct (AppDbContext dbContext, Guid id)
     {
         var product = dbContext.Products.FirstOrDefault(p => p.Id == id);
         if (product is null)
         {
-            return new Response<bool>(false, ErrorCode.NotFound, true);
+            GraphQlErrorHandler.Custom("Produkt wurde nicht gefunden", ErrorCode.NotFound);
+            return false;
         }
 
         if (dbContext.RecipeProducts.Any(rp => rp.ProductId == id))
         {
-            return new Response<bool>(false, ErrorCode.InUse, true);
+            GraphQlErrorHandler.Custom("Produkt kann nicht geglöscht werden, da es bereits in Verwendung ist", ErrorCode.InUse);
+            return false;
         }
 
         var units = dbContext.ProductUnits.Where(unit => unit.ProductId == id);
@@ -118,6 +126,6 @@ public static class ProductMutation
 
         dbContext.Products.Remove(product);
         dbContext.SaveChanges();
-        return new Response<bool>(true, ErrorCode.Success);
+        return true;
     }
 }

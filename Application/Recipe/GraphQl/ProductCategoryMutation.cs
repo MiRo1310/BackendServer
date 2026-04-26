@@ -1,7 +1,7 @@
-﻿using BackendServer.Data;
-using BackendServer.Enum;
+﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
+using BackendServer.Data;
 using BackendServer.Models;
-using BackendServer.Models.DTOs;
 using BackendServer.Models.DTOs.Recipes.ProductCategory;
 using BackendServer.Models.Entities.Recipes;
 
@@ -10,13 +10,16 @@ namespace BackendServer.Application.Recipe.GraphQl;
 [MutationType]
 public static class ProductCategoryMutation
 {
-    public static Response<ProductCategory> CreateProductCategory(AppDbContext dbContext,
+    public static ProductCategory? CreateProductCategory(AppDbContext dbContext,
         ProductCategoryCreateDto dto)
     {
         var category = dbContext.ProductCategories.FirstOrDefault(category => category.Name == dto.Name);
 
         if (category is not null)
-            return new Response<ProductCategory>(null, ErrorCode.Exist, true);
+        {
+            GraphQlErrorHandler.Custom("Kategorie existiert und kann daher nicht angelegt werden", ErrorCode.Exist);
+            return null;
+        }
 
         var productCategory = new ProductCategory
         {
@@ -27,26 +30,28 @@ public static class ProductCategoryMutation
         dbContext.ProductCategories.Add(productCategory);
         dbContext.SaveChanges();
 
-        return new Response<ProductCategory>(productCategory, ErrorCode.Success);
+        return productCategory;
     }
 
-    public static Response<bool> RemoveProductCategory(AppDbContext dbContext, Guid id)
+    public static bool RemoveProductCategory(AppDbContext dbContext, Guid id)
     {
         var productCategory = dbContext.ProductCategories.FirstOrDefault(category => category.Id == id);
 
         if (productCategory is null)
         {
-            return new Response<bool>(false, ErrorCode.NotFound, true);
+            GraphQlErrorHandler.Custom("Kategorie wurde nicht gefunden", ErrorCode.NotFound);
+            return false;
         };
         
         if(dbContext.Products.Any(p => p.Category == id))
         {
-            return new Response<bool>(false, ErrorCode.InUse, true);
+            GraphQlErrorHandler.Custom("Kategorie wird schon genutzt, und kann daher nicht gelöscht werden", ErrorCode.InUse);
+            return false;
         }
 
         dbContext.ProductCategories.Remove(productCategory);
         dbContext.SaveChanges();
-        return new Response<bool>(true, ErrorCode.Success);
+        return true;
     }
 
 

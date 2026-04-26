@@ -1,9 +1,7 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models.Entities;
 using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.Finance;
 
-namespace BackendServer.Types.Finance;
+namespace BackendServer.Application.Finance.GraphQl;
 
 [QueryType]
 

@@ -1,6 +1,6 @@
-﻿using BackendServer.Data;
-using BackendServer.Enum;
-using BackendServer.Models.DTOs;
+﻿using BackendServer.Application.Common;
+using BackendServer.Application.Enum;
+using BackendServer.Data;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Unit;
 
@@ -30,6 +30,7 @@ public static class UnitMutation
 
         if (unit is null)
         {
+            GraphQlErrorHandler.Custom("Einheit wurde nicht gefunden", ErrorCode.NotFound);
             return null;
         }
 
@@ -40,18 +41,19 @@ public static class UnitMutation
         return unit;
     }
 
-    public static Response<bool> DeleteUnit(AppDbContext dbContext, Guid id)
+    public static bool DeleteUnit(AppDbContext dbContext, Guid id)
     {
         var unit = dbContext.Units.FirstOrDefault(unit => unit.Id == id);
 
         if (unit is null)
         {
-            return new Response<bool>(false, ErrorCode.NotFound, true);
+            GraphQlErrorHandler.Custom("Einheit wurde nicht gefunden", ErrorCode.NotFound);
+            return false;
         }
 
         dbContext.Units.Remove(unit);
         dbContext.SaveChanges();
 
-        return new  Response<bool>(true, ErrorCode.Success, true);
+        return true;
     }
 }

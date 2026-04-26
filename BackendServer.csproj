@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.8" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.14" />
     <PackageReference Include="HotChocolate.AspNetCore.CommandLine" Version="15.1.8" />
-    <PackageReference Include="HotChocolate.Data" Version="15.1.8" />
+    <PackageReference Include="HotChocolate.Data" Version="15.1.14" />
     <PackageReference Include="HotChocolate.Types.Analyzers" Version="15.1.8">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Application\Common\Factory\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

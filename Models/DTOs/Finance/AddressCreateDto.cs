@@ -1,4 +1,4 @@
-﻿namespace BackendServer.Models.Finance;
+﻿namespace BackendServer.Models.DTOs.Finance;
 
 public class AddressCreateDto
 {

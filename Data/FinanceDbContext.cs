@@ -1,7 +1,6 @@
 ﻿using BackendServer.Models.Entities;
 using BackendServer.Models.Entities.Recipes;
 using BackendServer.Models.Entities.TravelCost;
-using BackendServer.Models.Finance;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Data;

@@ -1,6 +1,6 @@
 ﻿using BackendServer.Models.Entities.TravelCost;
 
-namespace BackendServer.Models.Finance;
+namespace BackendServer.Models.DTOs.Finance;
 
 public class TravelCostSortPerMonthDto
 {

@@ -1,6 +1,6 @@
 ﻿using BackendServer.Data;
+using BackendServer.Models.DTOs.Finance;
 using BackendServer.Models.Entities.TravelCost;
-using BackendServer.Models.Finance;
 
 namespace BackendServer.Application.Finance.GraphQl;
 
@@ -16,7 +16,10 @@ public static class TravelCostMutation
             Date = dto.Date,
             Description = dto.Description,
             Price = dto.Price,
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow,
+            IsValidated = dto.IsValidated ?? false,
+            HasInvoice = dto.HasInvoice ?? false,
+            
         };
         dbContext.TravelCost.Add(travelCost);
         dbContext.SaveChanges();
@@ -34,10 +37,12 @@ public static class TravelCostMutation
         }
         
         travelCost.ModifiedAt = DateTime.UtcNow;
-        travelCost.Price = dto.Price;
-        travelCost.AddressId = dto.AddressId;
-        travelCost.Date = dto.Date;
-        travelCost.Description = dto.Description;
+        travelCost.Price = dto.Price ?? travelCost.Price;
+        travelCost.AddressId = dto.AddressId ?? travelCost.AddressId;
+        travelCost.Date = dto.Date ?? travelCost.Date;
+        travelCost.Description = dto.Description ?? travelCost.Description;
+        travelCost.HasInvoice = dto.HasInvoice ?? travelCost.HasInvoice;
+        travelCost.IsValidated = dto.IsValidated ?? travelCost.IsValidated;
 
         dbContext.SaveChanges();
         return travelCost;

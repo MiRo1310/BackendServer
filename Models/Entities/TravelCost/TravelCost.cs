@@ -21,4 +21,8 @@ public class TravelCost
     public DateTime? ModifiedAt { get; set; }
 
     public Address? Address { get; set; }
+    
+    public bool? IsValidated { get; set; }
+    
+    public bool? HasInvoice { get; set; }
 }

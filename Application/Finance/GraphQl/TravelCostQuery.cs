@@ -1,6 +1,6 @@
 ﻿using BackendServer.Data;
+using BackendServer.Models.DTOs.Finance;
 using BackendServer.Models.Entities.TravelCost;
-using BackendServer.Models.Finance;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Application.Finance.GraphQl;

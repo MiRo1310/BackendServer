@@ -8,7 +8,7 @@ public static class FrontendLogsQuery
 {
     [UseSorting]
     [UseFiltering]
-    public static IQueryable<FrontendLog> GetFrontedLogs(AppDbContext dbContext)
+    public static IQueryable<FrontendLog> GetFrontendLogs(AppDbContext dbContext)
     {
         return dbContext.FrontendLog;
     }

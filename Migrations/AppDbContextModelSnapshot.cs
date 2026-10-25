@@ -29,7 +29,7 @@ namespace BackendServer.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("AppVersion")
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
@@ -43,23 +43,27 @@ namespace BackendServer.Migrations
 
                     b.Property<string>("DeviceName")
                         .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(512)");
 
                     b.Property<string>("IP")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(45)");
 
                     b.Property<string>("Level")
                         .IsRequired()
                         .HasColumnType("varchar(14)");
 
                     b.Property<string>("Route")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("DeviceId", "CreatedAt");
 
                     b.ToTable("FrontendLog");
                 });

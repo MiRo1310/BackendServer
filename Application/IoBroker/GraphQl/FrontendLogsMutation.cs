@@ -10,18 +10,19 @@ namespace BackendServer.Application.IoBroker.GraphQl;
 
 public static class FrontendLogMutation
 {
-    public static FrontendLog CreateFrontendLog(AppDbContext dbContext, HttpContext httpContext, FrontendLogCreateDto dto)
+    public static FrontendLog CreateFrontendLog(AppDbContext dbContext, HttpContext httpContext,
+        FrontendLogCreateDto dto)
     {
         var log = new FrontendLog()
         {
             Id = Guid.NewGuid(),
-           Title = dto.Title,
-           Description = dto.Description,
-           DeviceId =  dto.DeviceId,
-           DeviceName =  dto.DeviceName,
-           AppVersion =  dto.AppVersion,
-           Level =  dto.Level,
-           Route =   dto.Route,
+            Title = dto.Title.Truncate(255),
+            Description = dto.Description,
+            DeviceId = dto.DeviceId.Truncate(50),
+            DeviceName = dto.DeviceName.Truncate(512),
+            AppVersion =  dto.AppVersion.Truncate(20),
+            Level = dto.Level,
+            Route =  dto.Route.Truncate(255),
             CreatedAt = DateTime.UtcNow,
             IP = httpContext.Connection.RemoteIpAddress?.ToString()
         };

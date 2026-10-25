@@ -1,5 +1,5 @@
 ﻿using BackendServer.Data;
-using BackendServer.Models.Entities.Recipes;
+using BackendServer.Models.Entities.TravelCost;
 
 namespace BackendServer.Application.Finance.GraphQl;
 

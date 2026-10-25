@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendServer.Models.Entities.Recipes;
+namespace BackendServer.Models.Entities.TravelCost;
 
 public class Description
 {

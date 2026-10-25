@@ -10,7 +10,7 @@ namespace BackendServer.Application.IoBroker.GraphQl;
 
 public static class FrontendLogMutation
 {
-    public static FrontendLog CreateFrontendLog(AppDbContext dbContext, FrontendLogCreateDto dto)
+    public static FrontendLog CreateFrontendLog(AppDbContext dbContext, HttpContext httpContext, FrontendLogCreateDto dto)
     {
         var log = new FrontendLog()
         {
@@ -23,6 +23,7 @@ public static class FrontendLogMutation
            Level =  dto.Level,
            Route =   dto.Route,
             CreatedAt = DateTime.UtcNow,
+            IP = httpContext.Connection.RemoteIpAddress?.ToString()
         };
 
         dbContext.FrontendLog.Add(log);

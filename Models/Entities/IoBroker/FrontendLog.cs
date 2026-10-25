@@ -22,6 +22,9 @@ public class  FrontendLog
     [Column(TypeName = "varchar(50)")]
     public string? Route { get; set; } = null;
 
+    [Column(TypeName = "varchar(50)")]
+    public string? IP { get; set; } = null;
+
     [Column(TypeName = "longtext")]
     public string? Description { get; set; } = null;
 

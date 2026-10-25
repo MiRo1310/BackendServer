@@ -45,6 +45,9 @@ namespace BackendServer.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("IP")
+                        .HasColumnType("varchar(50)");
+
                     b.Property<string>("Level")
                         .IsRequired()
                         .HasColumnType("varchar(14)");

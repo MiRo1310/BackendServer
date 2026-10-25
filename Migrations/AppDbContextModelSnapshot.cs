@@ -22,7 +22,46 @@ namespace BackendServer.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Product", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.FrontendLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("AppVersion")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DeviceId")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("DeviceName")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("varchar(14)");
+
+                    b.Property<string>("Route")
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FrontendLog");
+                });
+
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,7 +115,7 @@ namespace BackendServer.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.ProductCategory", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.ProductCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,7 +136,7 @@ namespace BackendServer.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.ProductUnit", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.ProductUnit", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,7 +174,7 @@ namespace BackendServer.Migrations
                     b.ToTable("ProductUnits");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Recipe", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.Recipe", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,7 +212,7 @@ namespace BackendServer.Migrations
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeCategory", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.RecipeCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,7 +233,7 @@ namespace BackendServer.Migrations
                     b.ToTable("RecipeCategories");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeDescription", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.RecipeDescription", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,7 +266,7 @@ namespace BackendServer.Migrations
                     b.ToTable("RecipeDescriptions");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeProduct", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.RecipeProduct", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -277,7 +316,7 @@ namespace BackendServer.Migrations
                     b.ToTable("RecipeProducts");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeProductHeader", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.RecipeProductHeader", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -306,7 +345,7 @@ namespace BackendServer.Migrations
                     b.ToTable("RecipeProductHeaders");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Unit", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.Unit", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -327,18 +366,18 @@ namespace BackendServer.Migrations
                     b.ToTable("Units");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Product", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.Product", b =>
                 {
-                    b.HasOne("BackendServer.Models.Entities.Recipes.ProductCategory", "ProductCategory")
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("Category");
 
                     b.Navigation("ProductCategory");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.ProductUnit", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.ProductUnit", b =>
                 {
-                    b.HasOne("BackendServer.Models.Entities.Recipes.Product", "Product")
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.Product", "Product")
                         .WithMany("ProductUnits")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -347,18 +386,18 @@ namespace BackendServer.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Recipe", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.Recipe", b =>
                 {
-                    b.HasOne("BackendServer.Models.Entities.Recipes.RecipeCategory", "RecipeCategory")
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.RecipeCategory", "RecipeCategory")
                         .WithMany()
                         .HasForeignKey("RecipeCategoryId");
 
                     b.Navigation("RecipeCategory");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeDescription", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.RecipeDescription", b =>
                 {
-                    b.HasOne("BackendServer.Models.Entities.Recipes.Recipe", "Recipe")
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.Recipe", "Recipe")
                         .WithMany("RecipeDescriptions")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -367,15 +406,15 @@ namespace BackendServer.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeProduct", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.RecipeProduct", b =>
                 {
-                    b.HasOne("BackendServer.Models.Entities.Recipes.Product", "Product")
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.Product", "Product")
                         .WithMany("RecipeProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BackendServer.Models.Entities.Recipes.Recipe", "Recipe")
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.Recipe", "Recipe")
                         .WithMany("RecipeProducts")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -386,9 +425,9 @@ namespace BackendServer.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.RecipeProductHeader", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.RecipeProductHeader", b =>
                 {
-                    b.HasOne("BackendServer.Models.Entities.Recipes.Recipe", "Recipe")
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.Recipe", "Recipe")
                         .WithMany("RecipeHeaderProducts")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -397,19 +436,19 @@ namespace BackendServer.Migrations
                     b.Navigation("Recipe");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Product", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.Product", b =>
                 {
                     b.Navigation("ProductUnits");
 
                     b.Navigation("RecipeProducts");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.ProductCategory", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.ProductCategory", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Recipe", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.Recipe", b =>
                 {
                     b.Navigation("RecipeDescriptions");
 

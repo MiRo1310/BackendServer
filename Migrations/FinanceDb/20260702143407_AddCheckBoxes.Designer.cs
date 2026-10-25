@@ -25,7 +25,7 @@ namespace BackendServer.Migrations.FinanceDb
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("BackendServer.Models.Entities.Recipes.Description", b =>
+            modelBuilder.Entity("BackendServer.Models.Entities.TravelCost.Description", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

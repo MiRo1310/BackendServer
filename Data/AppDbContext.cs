@@ -1,9 +1,4 @@
-﻿using BackendServer.Models;
-using BackendServer.Models.Entities.Recipes;
-using BackendServer.Models.Product;
-using BackendServer.Models.RecipeProduct;
-using BackendServer.Models.RecipeProductHeader;
-using BackendServer.Models.Unit;
+﻿using BackendServer.Models.Entities.IoBroker;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Data;
@@ -31,4 +26,6 @@ public class AppDbContext : DbContext
     public DbSet<RecipeDescription> RecipeDescriptions { get; set; }
     
     public DbSet<RecipeCategory> RecipeCategories { get; set; }
+
+    public DbSet<FrontendLog> FrontendLog { get; set; }
 }

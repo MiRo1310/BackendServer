@@ -7,6 +7,7 @@ namespace BackendServer.Application.IoBroker.GraphQl;
 [QueryType]
 public static class RecipeQuery
 {
+    [UsePaging]
     [UseFiltering]
     [UseSorting]
     public static IQueryable<Recipe> GetRecipes(AppDbContext dbContext)

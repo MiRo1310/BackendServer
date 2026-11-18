@@ -1,4 +1,5 @@
 ﻿using BackendServer.Data;
+using BackendServer.Models.Entities.IoBroker;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Application.IoBroker.GraphQl;
@@ -6,7 +7,9 @@ namespace BackendServer.Application.IoBroker.GraphQl;
 [QueryType]
 public static class RecipeQuery
 {
-    public static IQueryable<Models.Entities.IoBroker.Recipe> GetRecipes(AppDbContext dbContext)
+    [UseFiltering]
+    [UseSorting]
+    public static IQueryable<Recipe> GetRecipes(AppDbContext dbContext)
     {
         return dbContext.Recipes
             .Include(recipe => recipe.RecipeProducts)
@@ -16,7 +19,7 @@ public static class RecipeQuery
             .Include(recipe => recipe.RecipeCategory);
     }
 
-    public static Models.Entities.IoBroker.Recipe? GetRecipe(AppDbContext dbContext, Guid id)
+    public static Recipe? GetRecipe(AppDbContext dbContext, Guid id)
     {
         return dbContext.Recipes
             .Include(recipe => recipe.RecipeProducts)

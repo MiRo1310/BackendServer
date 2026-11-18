@@ -98,6 +98,23 @@ public static class RecipeMutation
         return recipe;
     }
 
+    public static Recipe? MarkRecipeCooked(AppDbContext dbContext, Guid recipeId)
+    {
+        var recipe = dbContext.Recipes.FirstOrDefault(recipe => recipe.Id == recipeId);
+        
+        if (recipe is null)
+        {
+            GraphQlErrorHandler.Custom("Rezept wurde nicht gefunden", ErrorCode.NotFound);
+            return null;
+        }
+        
+        recipe.LastCookedAt = DateTime.UtcNow;
+        recipe.CookedCount++;
+        
+        dbContext.SaveChanges();
+        return recipe;
+    }
+
     private static void RemoveTextarea(AppDbContext dbContext, List<Guid> removedStepIds, Guid recipeId)
     {
         foreach (var id in removedStepIds)

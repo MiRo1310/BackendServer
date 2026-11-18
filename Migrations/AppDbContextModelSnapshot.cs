@@ -195,6 +195,9 @@ namespace BackendServer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsFavorite")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime?>("LastCookedAt")
                         .HasColumnType("datetime(6)");
 

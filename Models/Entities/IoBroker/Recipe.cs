@@ -29,6 +29,8 @@ public class Recipe
     
     public int CookedCount { get; set; }
     
+    public bool IsFavorite { get; set; } = false;
+    
     public ICollection<RecipeProduct> RecipeProducts { get; init; } = [];
 
     public ICollection<RecipeDescription> RecipeDescriptions { get; init; } = [];

@@ -80,6 +80,8 @@ public static class RecipeMutation
         recipe.RecipeCategoryId = dto.RecipeCategoryId ?? recipe.RecipeCategoryId;
         recipe.PreparationTimeMin = dto.PreparationTimeMin;
         recipe.TotalTimeMin = dto.TotalTimeMin;
+        recipe.IsFavorite = dto.IsFavorite ?? recipe.IsFavorite;
+        
 
         if (dto.RecipeProducts is not null)
             RecipeProductsFactory.ProcessProducts(dbContext, recipe, dto.RecipeProducts);
@@ -89,7 +91,6 @@ public static class RecipeMutation
 
         if (dto.RecipeDescriptions is not null)
             RecipeDescriptionFactory.ProcessDescription(dbContext, recipe, dto.RecipeDescriptions);
-
 
         dbContext.SaveChanges();
 
@@ -110,6 +111,22 @@ public static class RecipeMutation
         
         recipe.LastCookedAt = DateTime.UtcNow;
         recipe.CookedCount++;
+        
+        dbContext.SaveChanges();
+        return recipe;
+    } 
+    
+    public static Recipe? ToggleRecipeFavorite(AppDbContext dbContext, Guid recipeId)
+    {
+        var recipe = dbContext.Recipes.FirstOrDefault(recipe => recipe.Id == recipeId);
+        
+        if (recipe is null)
+        {
+            GraphQlErrorHandler.Custom("Rezept wurde nicht gefunden", ErrorCode.NotFound);
+            return null;
+        }
+        
+        recipe.IsFavorite = !recipe.IsFavorite;
         
         dbContext.SaveChanges();
         return recipe;

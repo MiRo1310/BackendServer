@@ -15,6 +15,8 @@ public class RecipeUpdateDto
     
     public int? TotalTimeMin { get; set; } = null;
     
+    public bool? IsFavorite { get; set; }
+    
     public ICollection<RecipeDescriptionCreateOrUpdateDto?>? RecipeDescriptions { get; set; }
 
     public ICollection<RecipeHeaderProductCreateOrUpdateDto?>? RecipeHeaderProducts { get; set; }

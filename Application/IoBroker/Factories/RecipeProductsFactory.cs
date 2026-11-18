@@ -58,7 +58,10 @@ public static class RecipeProductsFactory
     
     private static string GetUnitName(AppDbContext dbContext, Guid unitId)
     {
-        return dbContext.ProductUnits.FirstOrDefault(u => u.Id == unitId)?.Unit ?? "Not found";
+        return dbContext.ProductUnits
+            .Where(u => u.Id == unitId)
+            .Select(u => u.Unit!.Name)
+            .FirstOrDefault() ?? "Not found";
     }
 
     public static void RemoveByRecipeId(AppDbContext dbContext, Guid recipeId )

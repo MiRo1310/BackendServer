@@ -14,6 +14,7 @@ public static class RecipeQuery
         return dbContext.Recipes
             .Include(recipe => recipe.RecipeProducts)
                 .ThenInclude(rp=> rp.Product)
+                .ThenInclude(p => p!.Unit)
             .Include(recipe => recipe.RecipeDescriptions)
             .Include(recipe => recipe.RecipeHeaderProducts)
             .Include(recipe => recipe.RecipeCategory);
@@ -24,6 +25,7 @@ public static class RecipeQuery
         return dbContext.Recipes
             .Include(recipe => recipe.RecipeProducts)
                 .ThenInclude(rp=> rp.Product)
+                .ThenInclude(p => p!.Unit)
             .Include(recipe => recipe.RecipeDescriptions)
             .Include(recipe => recipe.RecipeHeaderProducts)
             .Include(recipe => recipe.RecipeCategory)

@@ -17,9 +17,11 @@ public static class ProductUnitFactory
             
             if (dtoProductUnit is null) continue;
 
+            UnitFactory.EnsureExists(dbContext, dtoProductUnit.UnitId);
+
             if (dtoProductUnit.Id is null)
             {
-                var unitExist = dbContext.ProductUnits.Any(u => u.Unit == dtoProductUnit.Unit && u.ProductId == productId);
+                var unitExist = dbContext.ProductUnits.Any(u => u.UnitId == dtoProductUnit.UnitId && u.ProductId == productId);
                 if (unitExist)
                 {
                     continue;
@@ -31,7 +33,7 @@ public static class ProductUnitFactory
                     CreatedAt = DateTime.UtcNow,
                     Id = Guid.NewGuid(),
                     ProductId = productId,
-                    Unit = dtoProductUnit.Unit,
+                    UnitId = dtoProductUnit.UnitId,
                     Faktor = Math.Round(dtoProductUnit.Amount / defaultAmount,4)
                     
                 };
@@ -44,7 +46,7 @@ public static class ProductUnitFactory
 
             unit.Amount = dtoProductUnit.Amount;
             unit.ModifiedAt = DateTime.UtcNow;
-            unit.Unit = dtoProductUnit.Unit;
+            unit.UnitId = dtoProductUnit.UnitId;
             unit.Faktor = Math.Round(dtoProductUnit.Amount / defaultAmount, 4);
         }
     }

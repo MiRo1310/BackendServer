@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.Models.Entities.IoBroker;
 
@@ -6,8 +7,11 @@ public class ProductUnit
 {
     public Guid Id { get; set; }
     
-    [Column(TypeName = "varchar(20)")]
-    public required string Unit { get; set; }
+    public Guid UnitId { get; set; }
+
+    [ForeignKey(nameof(UnitId))]
+    [DeleteBehavior(DeleteBehavior.Restrict)]
+    public Unit? Unit { get; set; }
     
     [Column(TypeName = "decimal(12,4)")]
     public decimal? Amount { get; set; }

@@ -19,6 +19,8 @@ public static class ProductMutation
             return null;
         }
 
+        UnitFactory.EnsureExists(dbContext, dto.UnitId);
+
         var product = new Product
         {
             CreatedAt = DateTime.UtcNow,
@@ -31,7 +33,7 @@ public static class ProductMutation
             Protein = dto.Protein,
             Salt = dto.Salt,
             Sugar = dto.Sugar,
-            Unit = dto.Unit,
+            UnitId = dto.UnitId,
             Amount = dto.Amount,
             Ean = dto.Ean
         };
@@ -41,7 +43,7 @@ public static class ProductMutation
             Amount = dto.Amount,
             IsDefault = true,
             ProductId = product.Id,
-            Unit = dto.Unit,
+            UnitId = dto.UnitId,
             CreatedAt = DateTime.UtcNow,
             Id = Guid.NewGuid(),
             Faktor = 1
@@ -73,6 +75,9 @@ public static class ProductMutation
             return null;
         }
 
+        if (dto.UnitId is not null)
+            UnitFactory.EnsureExists(dbContext, dto.UnitId.Value);
+
         product.ModifiedAt = DateTime.UtcNow;
         product.Name = dto.Name ?? product.Name;
         product.Carbs = dto.Carbs;
@@ -82,7 +87,7 @@ public static class ProductMutation
         product.Protein = dto.Protein;
         product.Salt = dto.Salt;
         product.Sugar = dto.Sugar;
-        product.Unit = dto.Unit ?? "";
+        product.UnitId = dto.UnitId ?? product.UnitId;
         product.Amount = dto.Amount ?? 0;
         product.Ean = dto.Ean ?? product.Ean;
 
@@ -91,7 +96,7 @@ public static class ProductMutation
         if (defaultUnit is not null)
         {
             defaultUnit.Amount = dto.Amount;
-            defaultUnit.Unit = dto.Unit ?? "";
+            defaultUnit.UnitId = product.UnitId;
         }
 
         if (dto.ProductUnits is not null)

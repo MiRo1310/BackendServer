@@ -7,6 +7,6 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/out .
-ENV ASPNETCORE_URLS=http://0.0.0.0:5095
+ENV ASPNETCORE_HTTP_PORTS=5095
 EXPOSE 5095
 ENTRYPOINT ["dotnet", "BackendServer.dll"]

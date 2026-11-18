@@ -22,7 +22,7 @@ public class ProductCreateDto
     
     public decimal Amount { get; set; }
     
-    public required string Unit { get; set; }
+    public Guid UnitId { get; set; }
     
     public ICollection<ProductUnitCreateOrUpdateDto?>? ProductUnits { get; set; } = [];
 }

@@ -111,13 +111,14 @@ namespace BackendServer.Migrations
                     b.Property<decimal?>("Sugar")
                         .HasColumnType("decimal(10,3)");
 
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasColumnType("varchar(36)");
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Category");
+
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Products");
                 });
@@ -170,13 +171,14 @@ namespace BackendServer.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Unit")
-                        .IsRequired()
-                        .HasColumnType("varchar(20)");
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UnitId");
 
                     b.ToTable("ProductUnits");
                 });
@@ -385,7 +387,15 @@ namespace BackendServer.Migrations
                         .WithMany("Products")
                         .HasForeignKey("Category");
 
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("ProductCategory");
+
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.ProductUnit", b =>
@@ -396,7 +406,15 @@ namespace BackendServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BackendServer.Models.Entities.IoBroker.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Product");
+
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("BackendServer.Models.Entities.IoBroker.Recipe", b =>

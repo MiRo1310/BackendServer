@@ -24,7 +24,7 @@ public class ProductUpdateDto
     
     public decimal? Amount { get; set; }
     
-    public string? Unit { get; set; }
+    public Guid? UnitId { get; set; }
     
     public ICollection<ProductUnitCreateOrUpdateDto?>? ProductUnits { get; set; } = [];
 }

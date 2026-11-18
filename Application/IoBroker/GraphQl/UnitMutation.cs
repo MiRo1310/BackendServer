@@ -1,5 +1,6 @@
 ﻿using BackendServer.Application.Common;
 using BackendServer.Application.Enum;
+using BackendServer.Application.IoBroker.Factories;
 using BackendServer.Data;
 using BackendServer.Models.Entities.IoBroker;
 using BackendServer.Models.DTOs.IoBroker;
@@ -11,8 +12,14 @@ namespace BackendServer.Application.IoBroker.GraphQl;
 
 public static class UnitMutation
 {
-    public static Unit CreateUnit(AppDbContext dbContext, UnitCreateDto dto)
+    public static Unit? CreateUnit(AppDbContext dbContext, UnitCreateDto dto)
     {
+        if (UnitFactory.NameExists(dbContext, dto.Name))
+        {
+            GraphQlErrorHandler.Custom("Einheit existiert bereits", ErrorCode.Exist);
+            return null;
+        }
+
         var unit = new Unit()
         {
             Id = Guid.NewGuid(),
@@ -35,6 +42,12 @@ public static class UnitMutation
             return null;
         }
 
+        if (UnitFactory.NameExists(dbContext, dto.Name, dto.Id))
+        {
+            GraphQlErrorHandler.Custom("Einheit existiert bereits", ErrorCode.Exist);
+            return null;
+        }
+
         unit.Name = dto.Name;
         unit.ModifiedAt = DateTime.UtcNow;
 
@@ -49,6 +62,12 @@ public static class UnitMutation
         if (unit is null)
         {
             GraphQlErrorHandler.Custom("Einheit wurde nicht gefunden", ErrorCode.NotFound);
+            return false;
+        }
+
+        if (UnitFactory.IsInUse(dbContext, id))
+        {
+            GraphQlErrorHandler.Custom("Einheit wird schon genutzt, und kann daher nicht gelöscht werden", ErrorCode.InUse);
             return false;
         }
 

@@ -12,7 +12,8 @@ public static class ProductQuery
     public static IQueryable<Product> GetProducts(AppDbContext dbContext)
     {
         return dbContext.Products
-            .Include(p => p.ProductUnits)
+            .Include(p => p.ProductUnits).ThenInclude(pu => pu.Unit)
+            .Include(p => p.Unit)
             .Include(p => p.RecipeProducts)
             .Include(p => p.ProductCategory);
     }
@@ -21,7 +22,8 @@ public static class ProductQuery
     public static Dictionary<string, List<Product>> GetProductsGrouped(AppDbContext dbContext)
     {
       return dbContext.Products
-            .Include(p => p.ProductUnits)
+            .Include(p => p.ProductUnits).ThenInclude(pu => pu.Unit)
+            .Include(p => p.Unit)
             .Include(p => p.RecipeProducts)
             .Include(p => p.ProductCategory)
             .AsEnumerable()
@@ -32,7 +34,8 @@ public static class ProductQuery
     public static Product? GetProduct(AppDbContext dbContext, Guid id)
     {
         return dbContext.Products
-            .Include(product => product.ProductUnits)
+            .Include(product => product.ProductUnits).ThenInclude(pu => pu.Unit)
+            .Include(product => product.Unit)
             .Include(product => product.RecipeProducts)
             .Include(p => p.ProductCategory)
             .FirstOrDefault(p => p.Id == id);

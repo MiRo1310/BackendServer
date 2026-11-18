@@ -49,10 +49,31 @@ public class OpenFoodFactProduct
 
     [JsonPropertyName("brands_tags")]
     public string[]? BrandsTags { get; set; }
-    
+
+    [JsonPropertyName("product_name")]
+    public string? ProductName { get; set; }
+
+    [JsonPropertyName("product_name_de")]
+    public string? ProductNameDe { get; set; }
+
+    /// <summary>
+    /// German product name, falls back to the generic product name if no German one is set.
+    /// </summary>
+    [JsonIgnore]
+    public string? DisplayName =>
+        !string.IsNullOrWhiteSpace(ProductNameDe) ? ProductNameDe
+        : !string.IsNullOrWhiteSpace(ProductName) ? ProductName
+        : null;
+
+    [JsonPropertyName("quantity")]
+    public string? Quantity { get; set; }
+
+    [JsonPropertyName("image_front_small_url")]
+    public string? ImageFrontSmallUrl { get; set; }
+
     [JsonPropertyName("code")]
-    public string Code { get; set; } = ""; 
-    
+    public string Code { get; set; } = "";
+
     [JsonPropertyName("id")]
     public string Id { get; set; } = "";
     

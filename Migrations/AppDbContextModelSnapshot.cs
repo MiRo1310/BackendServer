@@ -187,7 +187,13 @@ namespace BackendServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<int>("CookedCount")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("LastCookedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("ModifiedAt")

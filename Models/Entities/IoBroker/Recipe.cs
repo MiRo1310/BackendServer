@@ -24,7 +24,10 @@ public class Recipe
     public DateTime CreatedAt { get; init; }
 
     public DateTime? ModifiedAt { get; set; }
-   
+    
+    public DateTime? LastCookedAt { get; set; }
+    
+    public int CookedCount { get; set; }
     
     public ICollection<RecipeProduct> RecipeProducts { get; init; } = [];
 

@@ -3,6 +3,8 @@ using BackendServer.Application.Enum;
 using BackendServer.Application.IoBroker.Factories;
 using BackendServer.Data;
 using BackendServer.Models.DTOs.IoBroker;
+using BackendServer.Models.DTOs.IoBroker.Recipe;
+using BackendServer.Models.Entities.IoBroker;
 
 namespace BackendServer.Application.IoBroker.GraphQl;
 
@@ -17,19 +19,19 @@ public static class RecipeMutation
             GraphQlErrorHandler.Custom("Rezept wurde nicht gefunden", ErrorCode.NotFound);
             return false;
         }
-        
+
         RecipeProductsFactory.RemoveByRecipeId(dbContext, recipe.Id);
         RecipeDescriptionFactory.RemoveDescription(dbContext, recipe.Id);
         RecipeProductHeaderFactory.RemoveProductHeader(dbContext, recipe.Id);
-        
+
         dbContext.Recipes.Remove(recipe);
         dbContext.SaveChanges();
         return true;
     }
 
-    public static Models.Entities.IoBroker.Recipe CreateRecipe(AppDbContext dbContext, RecipeCreateDto dto)
+    public static Recipe CreateRecipe(AppDbContext dbContext, RecipeCreateDto dto)
     {
-        var recipe = new Models.Entities.IoBroker.Recipe
+        var recipe = new Recipe
         {
             CreatedAt = DateTime.UtcNow,
             Id = Guid.NewGuid(),
@@ -48,23 +50,29 @@ public static class RecipeMutation
 
         if (dto.RecipeHeaderProducts != null)
             RecipeProductHeaderFactory.ProcessProductsHeader(dbContext, recipe, dto.RecipeHeaderProducts);
-        
+
         dbContext.Recipes.Add(recipe);
-        
+
         dbContext.SaveChanges();
-        
+
         RecipeFactory.SetTotalKcalByRecipeId(dbContext, recipe.Id);
         return recipe;
     }
 
-    public static Models.Entities.IoBroker.Recipe? UpdateRecipe(AppDbContext dbContext, RecipeUpdateDto dto)
+    public static Recipe? UpdateRecipe(AppDbContext dbContext, RecipeUpdateDto dto)
     {
+        using var transaction = dbContext.Database.BeginTransaction();
         var recipe = dbContext.Recipes.FirstOrDefault(recipe => recipe.Id == dto.Id);
+
         if (recipe is null)
         {
             GraphQlErrorHandler.Custom("Rezept wurde nicht gefunden", ErrorCode.NotFound);
             return null;
         }
+
+        RemoveTextarea(dbContext, dto.RemovedStepIds ?? [], dto.Id);
+        RemoveRecipeProduct(dbContext, dto.RemovedRecipeProductIds ?? [], dto.Id);
+        RemoveRecipeProductGroup(dbContext, dto.RemovedGroupPositions ?? [], dto.Id);
 
         recipe.Name = dto.Name ?? recipe.Name;
         recipe.Portions = dto.Portions ?? recipe.Portions;
@@ -82,11 +90,37 @@ public static class RecipeMutation
         if (dto.RecipeDescriptions is not null)
             RecipeDescriptionFactory.ProcessDescription(dbContext, recipe, dto.RecipeDescriptions);
 
-        
+
         dbContext.SaveChanges();
-        
+
         RecipeFactory.SetTotalKcalByRecipeId(dbContext, dto.Id);
-        
+        transaction.Commit();
         return recipe;
+    }
+
+    private static void RemoveTextarea(AppDbContext dbContext, List<Guid> removedStepIds, Guid recipeId)
+    {
+        foreach (var id in removedStepIds)
+        {
+            RecipeMutationHelper.RemoveTextarea(dbContext, id, recipeId);
+        }
+    }
+
+    private static void RemoveRecipeProduct(AppDbContext dbContext, List<Guid> removedProductRecipeIds, Guid recipeId)
+    {
+        foreach (var id in removedProductRecipeIds)
+        {
+            RecipeMutationHelper.RemoveRecipeProduct(dbContext, id, recipeId);
+        }
+    }
+
+    private static void RemoveRecipeProductGroup(AppDbContext dbContext, List<int> removedRecipeProductGroups,
+        Guid recipeId)
+    {
+        foreach (var position in removedRecipeProductGroups)
+        {
+            RecipeMutationHelper.RemoveProductGroup(dbContext,
+                new RecipeGroupRemoveDto { RecipeId = recipeId, Position = position });
+        }
     }
 }

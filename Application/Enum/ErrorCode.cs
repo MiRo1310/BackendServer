@@ -5,4 +5,5 @@ public enum ErrorCode
     Exist,
     NotFound,
     InUse,
+    NotContains
 }

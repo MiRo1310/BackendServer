@@ -1,4 +1,4 @@
-﻿namespace BackendServer.Models.DTOs.IoBroker;
+﻿namespace BackendServer.Models.DTOs.IoBroker.RecipeCategory;
 
 public class RecipeCategoryUpdateDto
 {

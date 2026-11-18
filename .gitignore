@@ -4,3 +4,5 @@
 appsettings.Development.json
 
 graphql.config.yml
+# Rider user-specific settings
+*.DotSettings.user

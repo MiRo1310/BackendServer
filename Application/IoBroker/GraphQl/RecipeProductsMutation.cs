@@ -8,19 +8,9 @@ namespace BackendServer.Application.IoBroker.GraphQl;
 
 public static class RecipeProductsMutation
 {
+     [GraphQLDeprecated(deprecationReason:"Use recipeMutation")]
      public static bool RemoveRecipeProduct(AppDbContext dbContext, Guid id)
      {
-          var recipeProduct = dbContext.RecipeProducts.FirstOrDefault(product => product.Id == id);
-          
-          if(recipeProduct is null)
-          {
-               GraphQlErrorHandler.Custom("Rezeptprodukt wurde nicht gefunden", ErrorCode.NotFound);
-               return false;
-          }
-
-          dbContext.RecipeProducts.Remove(recipeProduct);
-          dbContext.SaveChanges();
-
-          return true;
+          return RecipeMutationHelper.RemoveRecipeProduct(dbContext, id);
      }
 }

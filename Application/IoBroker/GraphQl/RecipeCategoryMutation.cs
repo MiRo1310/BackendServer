@@ -2,6 +2,7 @@
 using BackendServer.Application.Enum;
 using BackendServer.Data;
 using BackendServer.Models.DTOs.IoBroker;
+using BackendServer.Models.DTOs.IoBroker.RecipeCategory;
 using BackendServer.Models.Entities.IoBroker;
 
 namespace BackendServer.Application.IoBroker.GraphQl;

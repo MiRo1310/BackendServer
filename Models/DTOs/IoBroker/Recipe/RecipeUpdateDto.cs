@@ -1,5 +1,5 @@
 
-namespace BackendServer.Models.DTOs.IoBroker;
+namespace BackendServer.Models.DTOs.IoBroker.Recipe;
 
 public class RecipeUpdateDto
 {
@@ -20,4 +20,10 @@ public class RecipeUpdateDto
     public ICollection<RecipeHeaderProductCreateOrUpdateDto?>? RecipeHeaderProducts { get; set; }
 
     public ICollection<RecipeProductsCreateDto?>? RecipeProducts { get; set; }
+    
+    public List<Guid>? RemovedStepIds { get; set; }
+    
+    public List<Guid>? RemovedRecipeProductIds { get; set; }
+    
+    public List<int>? RemovedGroupPositions { get; set; }
 }
